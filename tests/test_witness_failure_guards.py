@@ -312,6 +312,48 @@ def test_shred_deletion_attack_is_dead_with_the_merge():
     assert any(f.n_tokens >= 3 for f in unsupported)
 
 
+def test_partial_blindness_is_hedged_not_accused():
+    """MinerU-run regression (2026-08-17): the witness half-reads a degraded
+    page — its matched words are heavily near-miss ('comission', 'partis'),
+    its confidence is low, and it never read the page's tail at all. The
+    engine's correct tail text must not be called fabrication."""
+    head = (
+        "the comission dispached three partis to survye the northem coastal "
+        "stasions during the sumer season and each party carried a theodolite"
+    )
+    shreds = "ur an im"
+    tail = (
+        "two chronometers and a barometer of the aneroid pattern compared at "
+        "the observatory before departure and again upon return"
+    )
+    truth_head = (
+        "the commission dispatched three parties to survey the northern coastal "
+        "stations during the summer season and each party carried a theodolite"
+    )
+    result = compare_page(witness(head + " " + shreds, conf=70.0), vlm(truth_head + " " + tail))
+    assert result.witness_quality == "low"
+    assert not kinds(result) & ACCUSATORY_KINDS
+    assert kinds(result) == {WHOLESALE_DISAGREEMENT}
+    assert result.verified is False
+
+
+def test_misspelling_engine_cannot_buy_a_hedge():
+    """The evasion the conf ceiling exists to block: an engine emits misspelled
+    versions of real words (inflating the witness's apparent misread rate) plus
+    a fabricated run. The witness read the page cleanly at high confidence, so
+    the partial-blindness signal must NOT fire and the accusation must stand."""
+    misspelled = (
+        "the comission dispached three partis to survye the northem coastal "
+        "stasions during the sumer season and each party carried a theodolite "
+        "two chronometers and a barometer of the aneroid pattern"
+    )
+    fabrication = "officials quietly reconstructed the vandalised gauge records afterwards"
+    result = compare_page(witness(PROSE, conf=93.0), vlm(misspelled + " " + fabrication))
+    assert result.witness_quality == "ok"
+    assert kinds(result) & ACCUSATORY_KINDS
+    assert result.verified is True
+
+
 # ---------------------------------------------------------------------------
 # Hedge severity / note sanity
 # ---------------------------------------------------------------------------

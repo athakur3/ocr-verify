@@ -1,0 +1,1248 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "The Survey of Coastal Stations"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                92,
+                364,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                135,
+                728,
+                219
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                241,
+                727,
+                325
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                348,
+                740,
+                410
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The northern division comprised four stations, of which two were established during the previous season and two were newly built upon the recommendation of the committee. Supplies were landed by tender at each site before the onset of the winter gales, and the parties wintered ashore under canvas."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                92,
+                442,
+                262
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The southern division comprised only three stations, the fourth having been abandoned after the landslip of the preceding autumn destroyed the hut and the greater part of the stores. The rebuilding was postponed until the commission could examine the stability of the slope above the landing."
+                    }
+                ]
+            },
+            "bbox": [
+                513,
+                92,
+                836,
+                263
+            ]
+        }
+    ],
+    [],
+    [],
+    [
+        {
+            "type": "chart",
+            "content": {
+                "image_source": {
+                    "path": "images/61394ff95fd0eca1ae61bf3a857573e89b21606044fcc9309201869cb31394a4.jpg"
+                },
+                "content": "",
+                "chart_caption": [],
+                "chart_footnote": []
+            },
+            "bbox": [
+                0,
+                0,
+                1000,
+                1000
+            ]
+        }
+    ],
+    [],
+    [],
+    [],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Observations of the Tide"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                92,
+                315,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                135,
+                751,
+                219
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                241,
+                743,
+                305
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                325,
+                733,
+                388
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Observations of the Tide"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                92,
+                315,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                133,
+                753,
+                220
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                241,
+                743,
+                305
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                325,
+                733,
+                388
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Observations of the Tide"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                90,
+                315,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                133,
+                751,
+                220
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                239,
+                743,
+                305
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                325,
+                733,
+                390
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Notes upon the Instruments"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                93,
+                336,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The barometric readings were corrected for temperature by the standard tables. Each observer recorded the dry-bulb and the wet-bulb temperature at the moment of reading, and the corrections were applied during the reduction of the data."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                135,
+                759,
+                198
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Errors of the aneroid barometer were found to be systematic rather than random. A correction curve was constructed for each instrument by comparison with the mercurial standard kept at the observatory, and the curves are reproduced in the appendix to this report."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                220,
+                750,
+                304
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Two chronometers were carried by each party. The rates were determined before departure and verified upon return, and the mean of the two was adopted for all longitude determinations."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                325,
+                754,
+                388
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Notes upon the Instruments"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                111,
+                90,
+                336,
+                113
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The barometric readings were corrected for temperature by the standard tables. Each observer recorded the dry-bulb and the wet-bulb temperature at the moment of reading, and the corrections were applied during the reduction of the data."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                133,
+                759,
+                200
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Errors of the aneroid barometer were found to be systematic rather than random. A correction curve was constructed for each instrument by comparison with the mercurial standard kept at the observatory, and the curves are reproduced in the appendix to this report."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                219,
+                751,
+                306
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Two chronometers were carried by each party. The rates were determined before departure and verified upon return, and the mean of the two was adopted for all longitude determinations."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                325,
+                754,
+                390
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Conclusions of the Commission"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                111,
+                92,
+                372,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                133,
+                733,
+                198
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                219,
+                758,
+                304
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                325,
+                753,
+                388
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Conclusions of the Commission"
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                90,
+                372,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                133,
+                733,
+                199
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                215,
+                759,
+                305
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns."
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                324,
+                754,
+                388
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "The Survey of Coastal Stations"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                92,
+                364,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                135,
+                730,
+                219
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                241,
+                727,
+                325
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                348,
+                740,
+                410
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "The Survey of Coastal Stations"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                92,
+                364,
+                111
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                135,
+                730,
+                219
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                241,
+                727,
+                325
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                347,
+                740,
+                411
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Observations of the Tide"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                94,
+                99,
+                297,
+                119
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+                    }
+                ]
+            },
+            "bbox": [
+                96,
+                131,
+                735,
+                226
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+                    }
+                ]
+            },
+            "bbox": [
+                101,
+                238,
+                730,
+                311
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+                    }
+                ]
+            },
+            "bbox": [
+                104,
+                324,
+                727,
+                396
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Observations of the Tide"
+                    }
+                ]
+            },
+            "bbox": [
+                60,
+                111,
+                263,
+                141
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Observations of the Tide\nTidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+                    }
+                ]
+            },
+            "bbox": [
+                65,
+                119,
+                697,
+                248
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+                    }
+                ]
+            },
+            "bbox": [
+                78,
+                227,
+                705,
+                330
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+                    }
+                ]
+            },
+            "bbox": [
+                89,
+                315,
+                714,
+                416
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Notes upon the Instruments"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                92,
+                336,
+                112
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The barometric readings were corrected for temperature by the standard tables. Each observer recorded the dry-bulb and the wet-bulb temperature at the moment of reading, and the corrections were applied during the reduction of the data."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                135,
+                759,
+                199
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Errors of the aneroid barometer were found to be systematic rather than random. A correction curve was constructed for each instrument by comparison with the mercurial standard kept at the observatory, and the curves are reproduced in the appendix to this report."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                219,
+                750,
+                305
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Two chronometers were carried by each party. The rates were determined before departure and verified upon return, and the mean of the two was adopted for all longitude determinations."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                325,
+                754,
+                388
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                133,
+                735,
+                196
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                219,
+                756,
+                304
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                325,
+                885,
+                409
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Conclusions of the Commission"
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                92,
+                370,
+                109
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Lye Source of Catalyst Solutions"
+                    }
+                ]
+            },
+            "bbox": [
+                633,
+                92,
+                883,
+                109
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "The Survey of Coastal Stations"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                98,
+                97,
+                351,
+                117
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return."
+                    }
+                ]
+            },
+            "bbox": [
+                99,
+                133,
+                717,
+                224
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better."
+                    }
+                ]
+            },
+            "bbox": [
+                104,
+                239,
+                718,
+                330
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive."
+                    }
+                ]
+            },
+            "bbox": [
+                107,
+                344,
+                732,
+                417
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Observations of the Tide"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                111,
+                90,
+                316,
+                112
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+                    }
+                ]
+            },
+            "bbox": [
+                107,
+                133,
+                753,
+                220
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The self-registering apparatus failed twice during December, on both occasions owing in the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+                    }
+                ]
+            },
+            "bbox": [
+                107,
+                239,
+                745,
+                306
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+                    }
+                ]
+            },
+            "bbox": [
+                107,
+                324,
+                735,
+                392
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The northern division comprised four stations, of which two were established during the previous season and two were newly built upon the recommendation of the committee. Supplies were landed by tender at each site before the onset of the winter gales, and the parties wintered ashore under canvas."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                92,
+                441,
+                262
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The southern division comprised only three stations, the fourth having been abandoned after the landslip of the preceding autumn destroyed the hut and the greater part of the stores. The rebuilding was postponed until the commission could examine the stability of the slope above the landing."
+                    }
+                ]
+            },
+            "bbox": [
+                513,
+                90,
+                836,
+                263
+            ]
+        }
+    ]
+]

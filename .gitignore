@@ -9,3 +9,8 @@ build/
 ocr-verify-report.html
 .marker-venv/
 study/corpus/_render/
+study/mineru_out/corpus/hybrid_auto/*_model.json
+study/mineru_out/corpus/hybrid_auto/*_middle.json
+study/mineru_out/corpus/hybrid_auto/*_layout.pdf
+study/mineru_out/corpus/hybrid_auto/*_origin.pdf
+study/mineru_out/corpus/hybrid_auto/images/

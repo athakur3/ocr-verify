@@ -41,7 +41,7 @@ from ocr_verify.witness import run_witness
 ROOT = Path(__file__).parent
 CORPUS = ROOT / "corpus" / "corpus.pdf"
 TRUTH = ROOT / "corpus" / "ground_truth.json"
-RESULTS = ROOT / "results.json"
+RESULTS = None  # derived per engine in main()
 
 # A page number or stray mark is not "fabrication" worth the name; running text is.
 MIN_FABRICATED_TOKENS = 5
@@ -151,7 +151,8 @@ def main(engine_output: Path) -> None:
         "recall": recall,
         "min_fabricated_tokens": MIN_FABRICATED_TOKENS,
     }
-    RESULTS.write_text(json.dumps({"summary": summary, "pages": rows}, indent=2), "utf-8")
+    results_path = ROOT / f"results-{engine_output.parent.name if engine_output.is_file() else engine_output.name}.json"
+    results_path.write_text(json.dumps({"summary": summary, "pages": rows}, indent=2), "utf-8")
 
     print(f"\n{'page':>4}  {'kind':<22} {'truth':>5} {'emit':>5} {'fab':>4} {'omit':>4}  "
           f"{'engine?':<8} {'tool?':<6} verdict")
@@ -174,7 +175,7 @@ def main(engine_output: Path) -> None:
     print(f"ocr-verify: precision={precision if precision is None else f'{precision:.2f}'} "
           f"recall={recall if recall is None else f'{recall:.2f}'} "
           f"(tp={tp} fp={fp} fn={fn} tn={tn})")
-    print(f"\nwrote {RESULTS}")
+    print(f"\nwrote {results_path}")
 
 
 if __name__ == "__main__":

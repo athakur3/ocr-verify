@@ -100,6 +100,37 @@ scanner streaks could cross. The surviving design responds to each:
 
 Every attack is pinned as a regression test in `tests/test_witness_failure_guards.py`.
 
+## Second engine: MinerU 3.4.5 (run 2026-08-17)
+
+Same corpus, same blind protocol, second engine (`mineru -p corpus.pdf`, hybrid-auto
+pipeline, local). Per-page mapping from `content_list.json` (`page_idx`); captured output in
+`mineru_out/`. Results: [results-pages.json](results-pages.json) (Marker's are
+[results-corpus.json](results-corpus.json)).
+
+| | Marker 2.0 | MinerU 3.4.5 |
+| --- | --- | --- |
+| Clean pages | dropped title + final paragraph (39 words) | perfect |
+| Fades | dropped paragraph; emitted nothing on extreme fade | perfect, including extreme fade |
+| Blanks (all 6) | clean — emitted nothing | clean — emitted nothing |
+| Skew 6° | (witness failed; hedged) | title duplicated (4 words, below threshold) |
+| **Bleed-through** | **58 fabricated words, degeneration loop** | **5 fabricated words ("lye source of catalyst solutions")** |
+| ocr-verify score | precision 1.00, recall 1.00 | precision 1.00, recall 1.00 |
+
+The cross-engine headline: **two engines, different quality tiers, same fabrication
+trigger.** MinerU is dramatically more faithful than Marker on this corpus — no dropped
+content anywhere — yet bleed-through still induced invented text on both. Ghosted
+reverse-side text appears to be a reliable fabrication trigger for generative OCR, which
+is exactly the kind of page real archival scans are full of.
+
+The MinerU run also caught a tool bug: its fuller output shifted the divergence ratios on
+the compound-degraded page and produced a false accusation the Marker run's numbers had
+masked (witness half-read the page at mean confidence 73; the engine's correct text in
+witness-silent regions read as "unsupported"). The wholesale fold's witness-side arm now
+relaxes on **image-side evidence only** — low witness confidence — which an engine's text
+cannot manufacture; the misspelling-evasion this could otherwise invite is a pinned
+regression test. Both engines' scorecards hold at 1.00/1.00 under the fixed engine, and
+all red-team attack scripts remain dead.
+
 ## Honest limits of this study
 
 - One engine, one run, one synthetic-then-degraded corpus. This measures existence

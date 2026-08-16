@@ -66,6 +66,15 @@ class Settings:
     # (<=3 chars). Red-team measurement on the study corpus: genuine witness
     # failures shred (0.44 / 0.55); fabrications leave clean words (0.07 / 0.26).
     fold_frag_share: float = 0.38
+    # Partial-blindness signal (added after the MinerU run, 2026-08-17): a
+    # witness that is misreading a page leaves a measurable trace — a large
+    # share of its own words match the engine only as near-misses, AND its mean
+    # confidence is low. Both halves are image-derived, which is what makes the
+    # signal safe: an engine can inflate the near-miss share by emitting
+    # misspellings, but it cannot lower Tesseract's confidence in a page it
+    # never touches, so the pair cannot be manufactured from the text side.
+    misread_rate_low: float = 0.20
+    misread_conf_ceiling: float = 80.0
 
 
 LOW_QUALITY_NOTE = (
@@ -201,6 +210,22 @@ def compare_page(witness: WitnessPage, vlm: VlmPage, cfg: Settings | None = None
     base.witness_only = sum(1 for c in w_class if c == _UNSUPPORTED)
     base.divergence = base.vlm_only / len(v_norms) if v_norms else 0.0
 
+    # Partial blindness: the witness read the page, but badly — a large share of
+    # its own words only match the engine as near-misses, and its confidence is
+    # low. Its silences on the rest of the page are then not evidence of absence,
+    # so findings built on those silences get the low-quality hedge. The conf
+    # ceiling is what keeps this un-gameable: an engine emitting misspellings can
+    # inflate the near-miss share, but cannot lower Tesseract's confidence.
+    if base.witness_quality == "ok" and usable:
+        witness_noise = sum(1 for c in w_class if c == _NOISE)
+        mean_conf = sum(w.conf for w in usable) / len(usable)
+        if (
+            witness_noise / len(usable) >= cfg.misread_rate_low
+            and mean_conf < cfg.misread_conf_ceiling
+        ):
+            base.witness_quality = "low"
+            note = LOW_QUALITY_NOTE
+
     findings: list[Finding] = []
     for start, end, count in _runs(v_class, _UNSUPPORTED, cfg.min_run, cfg.gap):
         findings.append(
@@ -230,13 +255,29 @@ def compare_page(witness: WitnessPage, vlm: VlmPage, cfg: Settings | None = None
         if unmatched_w_norms
         else 0.0
     )
+    # The witness-side ratio arm demands substantial witness-side divergence
+    # before a fold — it is what stops an engine from buying a hedge by omitting
+    # a sprinkle of short real words (red-team case 2). But it also blocks the
+    # honest partial-blindness case (MinerU run, combo_severe): a low-confidence
+    # witness that half-read the page leaves few leftovers of its own while the
+    # engine's correct text goes unsupported. The arm therefore relaxes only on
+    # image-side evidence the engine cannot manufacture: low witness confidence,
+    # or a quality flag that is itself image-derived.
+    mean_conf = sum(w.conf for w in usable) / len(usable) if usable else 0.0
+    witness_side_diverges = (
+        base.witness_only / len(usable) >= cfg.wholesale_each if usable else False
+    )
+    if base.witness_only >= cfg.min_run and (
+        mean_conf < cfg.misread_conf_ceiling or base.witness_quality != "ok"
+    ):
+        witness_side_diverges = True
     if (
         len(usable) >= 10
         and len(v_norms) >= 10
         and base.vlm_only >= cfg.min_run
         and base.witness_only >= cfg.min_run
         and base.vlm_only / len(v_norms) >= cfg.wholesale_each
-        and base.witness_only / len(usable) >= cfg.wholesale_each
+        and witness_side_diverges
         and frag_share >= cfg.fold_frag_share
     ):
         base.verified = False
