@@ -19,6 +19,8 @@ from .model import (
     KIND_LABELS,
     SUBSTITUTION,
     UNSUPPORTED_TEXT,
+    UNVERIFIABLE_PAGE,
+    WHOLESALE_DISAGREEMENT,
     Finding,
     PageResult,
     Report,
@@ -27,7 +29,14 @@ from .model import (
 MAX_CROP_WIDTH = 1100
 MAX_PAGE_HEIGHT = 620
 
-KIND_ORDER = [BLANK_PAGE_FABRICATION, UNSUPPORTED_TEXT, DROPPED_TEXT, SUBSTITUTION]
+KIND_ORDER = [
+    BLANK_PAGE_FABRICATION,
+    UNSUPPORTED_TEXT,
+    DROPPED_TEXT,
+    SUBSTITUTION,
+    WHOLESALE_DISAGREEMENT,
+    UNVERIFIABLE_PAGE,
+]
 
 
 def write_report(report: Report, out: Path) -> Path:
@@ -77,8 +86,9 @@ def _render(report: Report) -> str:
     )
     findings = report.findings
     counts = {k: sum(1 for f in findings if f.kind == k) for k in KIND_ORDER}
-    total_vlm_words = sum(p.vlm_words for p in pages)
-    total_unsupported = sum(p.vlm_only for p in pages)
+    verified = [p for p in pages if p.verified]
+    total_vlm_words = sum(p.vlm_words for p in verified)
+    total_unsupported = sum(p.vlm_only for p in verified)
     overall = (total_unsupported / total_vlm_words) if total_vlm_words else 0.0
 
     parts: list[str] = [
@@ -132,10 +142,12 @@ def _summary(
     unsupported: int,
     total_words: int,
 ) -> str:
+    n_unverified = sum(1 for p in report.pages if not p.verified)
+    scope = f"on {len(report.pages) - n_unverified} verified pages" if n_unverified else "AI words the witness cannot place"
     tiles = [
         ("Pages flagged", f"{len(flagged)}", f"of {len(report.pages)}"),
         ("Unsupported words", f"{unsupported:,}", f"of {total_words:,} emitted"),
-        ("Divergence", f"{overall * 100:.2f}%", "AI words the witness cannot place"),
+        ("Divergence", f"{overall * 100:.2f}%", scope),
     ]
     tile_html = "".join(
         f'<div class="tile"><div class="tile-v">{_e(v)}</div>'
@@ -166,6 +178,8 @@ def _method(report: Report) -> str:
     <li><b>{KIND_LABELS[UNSUPPORTED_TEXT]}</b> &mdash; {KIND_BLURBS[UNSUPPORTED_TEXT]}</li>
     <li><b>{KIND_LABELS[DROPPED_TEXT]}</b> &mdash; {KIND_BLURBS[DROPPED_TEXT]}</li>
     <li><b>{KIND_LABELS[SUBSTITUTION]}</b> &mdash; {KIND_BLURBS[SUBSTITUTION]}</li>
+    <li><b>{KIND_LABELS[WHOLESALE_DISAGREEMENT]}</b> &mdash; {KIND_BLURBS[WHOLESALE_DISAGREEMENT]}</li>
+    <li><b>{KIND_LABELS[UNVERIFIABLE_PAGE]}</b> &mdash; {KIND_BLURBS[UNVERIFIABLE_PAGE]}</li>
   </ul>
   <p class="caveat">
     Text merely <em>moved</em> on the page &mdash; reordered columns, floated captions, table
@@ -179,10 +193,12 @@ def _method(report: Report) -> str:
 
 def _page_block(page: PageResult, report: Report) -> str:
     quality = (
-        '<span class="badge badge-low">witness quality: low</span>'
-        if page.witness_quality == "low"
+        f'<span class="badge badge-low">witness quality: {_e(page.witness_quality)}</span>'
+        if page.witness_quality != "ok"
         else ""
     )
+    if not page.verified:
+        quality += ' <span class="badge badge-low">excluded from gate</span>'
     head = f"""
   <div class="page-head">
     <h3>Page {page.index + 1}</h3>
@@ -251,6 +267,7 @@ def _page_table(pages: list[PageResult]) -> str:
             f"<td>{p.vlm_only:,}</td><td>{p.witness_only:,}</td>"
             f"<td>{p.ink_ratio * 100:.2f}%</td>"
             f"<td>{_e(p.witness_quality)}</td>"
+            f"<td>{'yes' if p.verified else 'no'}</td>"
             f"<td>{len(p.findings)}</td></tr>"
         )
     return f"""
@@ -260,7 +277,9 @@ def _page_table(pages: list[PageResult]) -> str:
   <table>
     <thead><tr>
       <th>Page</th><th>Divergence</th><th>AI words</th><th>Witness words</th>
-      <th>Unsupported</th><th>Dropped</th><th>Ink</th><th>Witness</th><th>Findings</th>
+      <th>Unsupported</th><th>Dropped</th><th>Ink</th><th>Witness</th>
+      <th title="Pages the witness could not cover are excluded from the gate metric">In gate</th>
+      <th>Findings</th>
     </tr></thead>
     <tbody>{"".join(rows)}</tbody>
   </table>
@@ -330,6 +349,9 @@ _HEAD = """<!doctype html>
   .chip-blank_page_fabrication {{ border-color: var(--accent); color: var(--accent); }}
   .chip-unsupported_text {{ border-color: var(--accent); }}
   .chip-dropped_text {{ border-color: var(--warn); }}
+  /* Hedges are deliberately muted: they are prompts to look, not accusations. */
+  .chip-wholesale_disagreement, .chip-unverifiable_page {{ color: var(--muted); }}
+  .f-wholesale_disagreement .kind, .f-unverifiable_page .kind {{ color: var(--muted); }}
   .method p, .method li {{ color: var(--ink); }}
   .method ul {{ padding-left: 20px; }}
   .method li {{ margin-bottom: 6px; }}

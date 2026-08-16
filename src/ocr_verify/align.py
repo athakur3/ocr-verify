@@ -28,6 +28,8 @@ from .model import (
     DROPPED_TEXT,
     SUBSTITUTION,
     UNSUPPORTED_TEXT,
+    UNVERIFIABLE_PAGE,
+    WHOLESALE_DISAGREEMENT,
     BBox,
     Finding,
     PageResult,
@@ -55,11 +57,33 @@ class Settings:
     context: int = 8  # context tokens shown either side of a run
     low_conf_mean: float = 65.0  # mean witness confidence under which findings are hedged
     pad: int = 8  # pixels of padding around a crop
+    # Witness-failure guards, added after the first real-engine study (2026-08-16),
+    # where all three false positives were pages the witness could not read.
+    blind_ratio: float = 0.05  # usable witness words below max(3, ratio*vlm) = blind
+    wholesale_each: float = 0.15  # both-direction divergence above this = wholesale
+    # The wholesale fold additionally demands positive evidence that the witness
+    # failed: the share of unmatched witness tokens that are short shreds
+    # (<=3 chars). Red-team measurement on the study corpus: genuine witness
+    # failures shred (0.44 / 0.55); fabrications leave clean words (0.07 / 0.26).
+    fold_frag_share: float = 0.38
 
 
 LOW_QUALITY_NOTE = (
     "Witness confidence is low on this page, so this is a prompt to look, not a verdict."
 )
+
+
+def _robust_ink(witness: WitnessPage) -> float | None:
+    """Lazily measure noise-robust ink for a page, caching on the WitnessPage."""
+    if witness.ink_robust is not None:
+        return witness.ink_robust
+    try:
+        from .render import robust_ink_ratio
+
+        witness.ink_robust = robust_ink_ratio(witness.image)
+    except (OSError, ValueError):
+        return None
+    return witness.ink_robust
 
 
 def compare_page(witness: WitnessPage, vlm: VlmPage, cfg: Settings | None = None) -> PageResult:
@@ -117,10 +141,60 @@ def compare_page(witness: WitnessPage, vlm: VlmPage, cfg: Settings | None = None
     if not v_norms and not w_norms:
         return base  # genuinely blank on both sides
 
+    # The inverse of the blank-page case: ink on the page, but the witness read
+    # essentially none of it while the AI engine read plenty. The witness has no
+    # standing to accuse here — the honest verdict is "cannot verify", not
+    # "fabricated". (Study page noise_heavy, 2026-08-16: Tesseract read 0 of 104
+    # words Marker got right; the old behaviour called all 104 fabricated.)
+    if (
+        witness.ink_ratio >= cfg.blank_ink
+        and len(v_norms) >= cfg.blank_min_vlm_words
+        and len(usable) < max(3, cfg.blind_ratio * len(v_norms))
+    ):
+        base.witness_quality = "blind"
+        base.verified = False
+        # Grade the hedge by whether the ink has text-scale structure. A robust
+        # (noise/speckle/streak/shadow-insensitive) ink measure near zero means
+        # the page is effectively a dirty blank — on those, engine output is far
+        # more suspect than on a page with structured ink the witness merely
+        # failed to read. We still do not *accuse*: faint real text also measures
+        # near zero (fade_heavy in the study corpus scores 0.000), so a blind
+        # accusation here would false-flag degraded-but-real pages. The severity
+        # and note carry the distinction instead.
+        robust = _robust_ink(witness)
+        if robust is not None and robust < cfg.blank_ink:
+            severity = 0.45
+            structure = (
+                f"The ink shows no text-scale structure (robust ink {robust * 100:.3f}% vs raw "
+                f"{witness.ink_ratio * 100:.2f}%): this page is likely a dirty blank, and the "
+                f"{len(v_norms)} words the AI engine emitted deserve real suspicion. It could "
+                "also be very faint text, which measures the same — hence a strong prompt to "
+                "look, not a verdict."
+            )
+        else:
+            severity = 0.15
+            structure = (
+                f"The witness read only {len(usable)} usable words against the AI engine's "
+                f"{len(v_norms)}. Nothing on this page was verified."
+            )
+        base.findings.append(
+            Finding(
+                page=witness.index,
+                kind=UNVERIFIABLE_PAGE,
+                severity=severity,
+                vlm_text=" ".join(v_raw[:60]) + (" …" if len(v_raw) > 60 else ""),
+                witness_text=" ".join(w.text for w in usable),
+                bbox=None,
+                note=f"Ink coverage is {witness.ink_ratio * 100:.2f}%. {structure}",
+                n_tokens=len(v_norms),
+            )
+        )
+        return base
+
     matcher = SequenceMatcher(None, w_norms, v_norms, autojunk=False)
     opcodes = matcher.get_opcodes()
 
-    w_class, v_class, pairs = _classify(w_norms, v_norms, opcodes)
+    w_class, v_class, pairs = _classify(w_norms, v_norms, opcodes, usable, cfg)
 
     base.matched = sum(1 for c in v_class if c == _SUPPORTED)
     base.vlm_only = sum(1 for c in v_class if c == _UNSUPPORTED)
@@ -138,6 +212,59 @@ def compare_page(witness: WitnessPage, vlm: VlmPage, cfg: Settings | None = None
         findings.append(
             _substitution_finding(start, end, count, v_raw, pairs, usable, witness, cfg, note)
         )
+
+    # Wholesale disagreement: both directions diverge heavily at once, AND the
+    # unmatched witness tokens are dominated by short shreds. The shred share is
+    # the load-bearing condition, added after a red team showed the two-sided
+    # ratio alone lets an engine hide a full-page rewrite: a rewrite pushes both
+    # ratios up, but it leaves the witness's unmatched words *clean* (the witness
+    # read the real text fine), while a genuine witness failure leaves fragments
+    # ('th', 'nter', 'wi'). Without shred evidence the itemized accusations stand
+    # and count toward the CI gate — a confident witness contradicted wholesale
+    # is exactly what a rewrite looks like, and it must fail the build.
+    unmatched_w_norms = [
+        w.norm for w, cls in zip(usable, w_class) if cls == _UNSUPPORTED
+    ]
+    frag_share = (
+        sum(1 for n in unmatched_w_norms if len(n) <= 3) / len(unmatched_w_norms)
+        if unmatched_w_norms
+        else 0.0
+    )
+    if (
+        len(usable) >= 10
+        and len(v_norms) >= 10
+        and base.vlm_only >= cfg.min_run
+        and base.witness_only >= cfg.min_run
+        and base.vlm_only / len(v_norms) >= cfg.wholesale_each
+        and base.witness_only / len(usable) >= cfg.wholesale_each
+        and frag_share >= cfg.fold_frag_share
+    ):
+        base.verified = False
+        unmatched_v = " ".join(
+            raw for raw, cls in zip(v_raw, v_class) if cls == _UNSUPPORTED
+        )
+        unmatched_w = " ".join(
+            w.text for w, cls in zip(usable, w_class) if cls == _UNSUPPORTED
+        )
+        base.findings = [
+            Finding(
+                page=witness.index,
+                kind=WHOLESALE_DISAGREEMENT,
+                severity=0.5,
+                vlm_text=unmatched_v[:600],
+                witness_text=unmatched_w[:600],
+                bbox=None,
+                note=(
+                    f"{base.vlm_only} of {len(v_norms)} AI words lack witness support and "
+                    f"{base.witness_only} of {len(usable)} witness words lack AI support, and "
+                    f"{frag_share * 100:.0f}% of the unmatched witness words are short shreds — "
+                    "the witness likely could not handle this page. Review the page image "
+                    "rather than trusting either reading."
+                ),
+                n_tokens=base.vlm_only + base.witness_only,
+            )
+        ]
+        return base
 
     findings.sort(key=lambda f: (-f.severity, f.kind))
     base.findings = findings
@@ -158,15 +285,27 @@ def _witness_quality(witness: WitnessPage, usable: list[Word], cfg: Settings) ->
 
 
 def _classify(
-    w_norms: list[str], v_norms: list[str], opcodes
+    w_norms: list[str],
+    v_norms: list[str],
+    opcodes,
+    usable: list[Word],
+    cfg: Settings,
 ) -> tuple[list[str], list[str], list[tuple[int, int]]]:
-    """Label every token on both sides and collect the matched index pairs."""
+    """Label every token on both sides and collect the matched index pairs.
+
+    Note there is deliberately NO fragment-repair pass here. An earlier version
+    merged shredded witness words ('wi' + 'nter') back into the AI engine's
+    tokens; a red team showed the merge could silently delete an accusation
+    (legit 'in to' on one line supporting a fabricated 'into' elsewhere), and
+    ablation showed it changed zero verdicts on the real study corpus. Shredded
+    witnesses are instead handled at page level by the wholesale-disagreement
+    fold, which uses the shreds as *evidence of witness failure* rather than
+    trying to repair them. A repair pass that can delete accusations has to buy
+    more than a rounding error.
+    """
     w_class = [""] * len(w_norms)
     v_class = [""] * len(v_norms)
     pairs: list[tuple[int, int]] = []
-
-    residual_w: Counter[str] = Counter()
-    residual_v: Counter[str] = Counter()
 
     for tag, i1, i2, j1, j2 in opcodes:
         if tag == "equal":
@@ -174,14 +313,11 @@ def _classify(
                 w_class[i1 + k] = _SUPPORTED
                 v_class[j1 + k] = _SUPPORTED
                 pairs.append((i1 + k, j1 + k))
-            continue
-        for i in range(i1, i2):
-            residual_w[w_norms[i]] += 1
-        for j in range(j1, j2):
-            residual_v[v_norms[j]] += 1
 
-    # Each side's leftovers are matched against the other side's leftovers,
+    # Each side's remaining leftovers are matched against the other side's,
     # ignoring position entirely — this is the reordering-tolerant step.
+    residual_w = Counter(w_norms[i] for i in range(len(w_norms)) if not w_class[i])
+    residual_v = Counter(v_norms[j] for j in range(len(v_norms)) if not v_class[j])
     avail_w = Counter(residual_w)
     avail_v = Counter(residual_v)
     w_buckets = _length_buckets(avail_w)

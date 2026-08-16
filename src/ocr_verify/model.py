@@ -32,6 +32,9 @@ class WitnessPage:
     words: list[Word]
     ink_ratio: float  # fraction of non-white pixels; drives blank-page detection
     image: Path  # rendered page PNG on disk
+    # Noise-robust ink fraction; computed lazily, only for pages where the
+    # blind-witness hedge needs grading. None = not yet measured.
+    ink_robust: float | None = None
 
     def confident_words(self, min_conf: float) -> list[Word]:
         return [w for w in self.words if w.conf >= min_conf]
@@ -44,17 +47,28 @@ class VlmPage:
     source: str  # where this page's text came from, for the report's provenance line
 
 
-# Finding kinds, ordered by how strongly they indicate fabrication.
+# Finding kinds. The first four are verdicts, ordered by how strongly they
+# indicate fabrication. The last two are confessions: places where the witness
+# cannot support a verdict either way, reported as prompts to look rather than
+# as accusations — because an accusation the evidence cannot carry is precisely
+# the false positive that gets a verification tool uninstalled.
 BLANK_PAGE_FABRICATION = "blank_page_fabrication"
 UNSUPPORTED_TEXT = "unsupported_text"
 DROPPED_TEXT = "dropped_text"
 SUBSTITUTION = "substitution"
+WHOLESALE_DISAGREEMENT = "wholesale_disagreement"
+UNVERIFIABLE_PAGE = "unverifiable_page"
+
+# Kinds that assert the AI engine emitted text the page cannot support.
+ACCUSATORY_KINDS = frozenset({BLANK_PAGE_FABRICATION, UNSUPPORTED_TEXT})
 
 KIND_LABELS = {
     BLANK_PAGE_FABRICATION: "Blank-page fabrication",
     UNSUPPORTED_TEXT: "Unsupported text",
     DROPPED_TEXT: "Dropped text",
     SUBSTITUTION: "Disagreement",
+    WHOLESALE_DISAGREEMENT: "Wholesale disagreement",
+    UNVERIFIABLE_PAGE: "Unverifiable page",
 }
 
 KIND_BLURBS = {
@@ -73,6 +87,17 @@ KIND_BLURBS = {
     SUBSTITUTION: (
         "Both engines read text here but disagree on the words. Often ordinary OCR "
         "noise on hard glyphs; occasionally a rewritten passage."
+    ),
+    WHOLESALE_DISAGREEMENT: (
+        "The two readings diverge heavily in both directions at once. That pattern "
+        "usually means the witness could not handle the page (severe skew, noise, or "
+        "degradation) — but it is also what a wholesale rewrite would look like, so "
+        "the page deserves a human glance. No itemized accusations are made."
+    ),
+    UNVERIFIABLE_PAGE: (
+        "There is ink on this page but the witness engine could not read it, so the AI "
+        "engine's output here can be neither supported nor disputed. Not an accusation — "
+        "a gap in coverage."
     ),
 }
 
@@ -105,7 +130,11 @@ class PageResult:
     vlm_only: int  # AI words with no witness support anywhere on the page
     witness_only: int  # witness words absent from the AI output
     ink_ratio: float
-    witness_quality: str  # "ok" | "low" — low means findings here are weaker evidence
+    witness_quality: str  # "ok" | "low" | "blind" — how far to trust the witness here
+    # False when the witness could not cover this page well enough for its numbers
+    # to serve as fabrication evidence (blind or wholesale-disagreement pages).
+    # Such pages are excluded from the overall divergence used by --fail-on.
+    verified: bool = True
     findings: list[Finding] = field(default_factory=list)
     image: Path | None = None
     width: int = 0

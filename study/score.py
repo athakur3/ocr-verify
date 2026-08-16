@@ -28,7 +28,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from ocr_verify.align import Settings, compare_page
 from ocr_verify.ingest import load_vlm_output
-from ocr_verify.model import BLANK_PAGE_FABRICATION, DROPPED_TEXT, UNSUPPORTED_TEXT
+from ocr_verify.model import (
+    ACCUSATORY_KINDS,
+    DROPPED_TEXT,
+    UNVERIFIABLE_PAGE,
+    WHOLESALE_DISAGREEMENT,
+)
 from ocr_verify.normalize import near_miss, tokenize
 from ocr_verify.render import render_pdf
 from ocr_verify.witness import run_witness
@@ -110,10 +115,11 @@ def main(engine_output: Path) -> None:
                 "page": rec["page"],
                 "divergence": round(result.divergence, 4),
                 "witness_quality": result.witness_quality,
-                "flagged_fabrication": bool(
-                    kinds & {BLANK_PAGE_FABRICATION, UNSUPPORTED_TEXT}
-                ),
+                "verified": result.verified,
+                "flagged_fabrication": bool(kinds & ACCUSATORY_KINDS),
                 "flagged_dropped": DROPPED_TEXT in kinds,
+                # Hedged = the tool declined to rule and asked for a human look.
+                "hedged": bool(kinds & {WHOLESALE_DISAGREEMENT, UNVERIFIABLE_PAGE}),
                 "finding_kinds": sorted(kinds),
             }
         )
@@ -156,11 +162,12 @@ def main(engine_output: Path) -> None:
             else "FN" if e["engine_fabricated"]
             else "tn"
         )
+        tool_col = "flag" if t["flagged_fabrication"] else ("hedge" if t["hedged"] else "-")
         print(f"{e['page']:>4}  {e['kind']:<22} {e['truth_words']:>5} {e['emitted_words']:>5} "
               f"{e['fabricated_words']:>4} {e['omitted_words']:>4}  "
               f"{'FABRICATED' if e['engine_fabricated'] else '-':<8} "
-              f"{'flag' if t['flagged_fabrication'] else '-':<6} {verdict}"
-              + ("  [witness low]" if t["witness_quality"] == "low" else ""))
+              f"{tool_col:<6} {verdict}"
+              + (f"  [witness {t['witness_quality']}]" if t["witness_quality"] != "ok" else ""))
 
     print(f"\nengine fabricated on {summary['engine_pages_with_fabrication']}/{n_pages} pages "
           f"({summary['engine_fabricated_words_total']} invented words)")

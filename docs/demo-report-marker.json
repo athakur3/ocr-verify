@@ -1,0 +1,591 @@
+{
+  "tool": "ocr-verify",
+  "version": "0.1.0",
+  "generated": "2026-08-16 17:01 UTC",
+  "pdf": "study/corpus/corpus.pdf",
+  "engine_output": "study/marker_out/corpus/corpus.md",
+  "engine_label": "Marker (balanced VLM mode, real run 2026-08-16)",
+  "dpi": 200,
+  "min_conf": 40.0,
+  "pages": [
+    {
+      "page": 1,
+      "divergence": 0.0,
+      "vlm_words": 85,
+      "witness_words": 124,
+      "unsupported_words": 0,
+      "dropped_words": 39,
+      "ink_ratio": 0.025541,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 34,
+          "bbox": [
+            193,
+            766,
+            1260,
+            906
+          ],
+          "vlm_text": "",
+          "witness_text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.4,
+          "tokens": 5,
+          "bbox": [
+            193,
+            204,
+            622,
+            250
+          ],
+          "vlm_text": "",
+          "witness_text": "The Survey of Coastal Stations",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "divergence": 0.0,
+      "vlm_words": 94,
+      "witness_words": 94,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.018287,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 3,
+      "divergence": 0.0,
+      "vlm_words": 0,
+      "witness_words": 0,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.0,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 4,
+      "divergence": 0.0,
+      "vlm_words": 0,
+      "witness_words": 0,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.002256,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 5,
+      "divergence": 0.0,
+      "vlm_words": 0,
+      "witness_words": 0,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.0,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 6,
+      "divergence": 0.0,
+      "vlm_words": 0,
+      "witness_words": 0,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.0,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 7,
+      "divergence": 0.0,
+      "vlm_words": 0,
+      "witness_words": 0,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.0,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 8,
+      "divergence": 0.0,
+      "vlm_words": 0,
+      "witness_words": 0,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.0036,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 9,
+      "divergence": 0.0,
+      "vlm_words": 78,
+      "witness_words": 115,
+      "unsupported_words": 0,
+      "dropped_words": 37,
+      "ink_ratio": 0.015213,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 33,
+          "bbox": [
+            192,
+            719,
+            1249,
+            859
+          ],
+          "vlm_text": "",
+          "witness_text": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory.",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.36,
+          "tokens": 4,
+          "bbox": [
+            193,
+            204,
+            537,
+            243
+          ],
+          "vlm_text": "",
+          "witness_text": "Observations of the Tide",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 10,
+      "divergence": 0.0,
+      "vlm_words": 78,
+      "witness_words": 115,
+      "unsupported_words": 0,
+      "dropped_words": 37,
+      "ink_ratio": 0.002856,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 33,
+          "bbox": [
+            192,
+            719,
+            1249,
+            859
+          ],
+          "vlm_text": "",
+          "witness_text": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory.",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.36,
+          "tokens": 4,
+          "bbox": [
+            193,
+            204,
+            537,
+            243
+          ],
+          "vlm_text": "",
+          "witness_text": "Observations of the Tide",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 11,
+      "divergence": 0.0,
+      "vlm_words": 0,
+      "witness_words": 115,
+      "unsupported_words": 0,
+      "dropped_words": 115,
+      "ink_ratio": 0.0,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 115,
+          "bbox": [
+            192,
+            204,
+            1281,
+            859
+          ],
+          "vlm_text": "",
+          "witness_text": "Observations of the Tide Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening. The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables. A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory.",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 12,
+      "divergence": 0.0,
+      "vlm_words": 111,
+      "witness_words": 111,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.025836,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 13,
+      "divergence": 0.099099,
+      "vlm_words": 111,
+      "witness_words": 109,
+      "unsupported_words": 11,
+      "dropped_words": 9,
+      "ink_ratio": 0.032235,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 14,
+      "divergence": 0.0,
+      "vlm_words": 104,
+      "witness_words": 104,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.021816,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 15,
+      "divergence": 0.0,
+      "vlm_words": 104,
+      "witness_words": 0,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.025043,
+      "witness_quality": "blind",
+      "verified": false,
+      "findings": [
+        {
+          "kind": "unverifiable_page",
+          "severity": 0.15,
+          "tokens": 104,
+          "bbox": null,
+          "vlm_text": "Conclusions of the Commission The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven. The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post \u2026",
+          "witness_text": "",
+          "note": "Ink coverage is 2.50%. The witness read only 0 usable words against the AI engine's 104. Nothing on this page was verified."
+        }
+      ]
+    },
+    {
+      "page": 16,
+      "divergence": 0.0,
+      "vlm_words": 85,
+      "witness_words": 124,
+      "unsupported_words": 0,
+      "dropped_words": 39,
+      "ink_ratio": 0.026444,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 34,
+          "bbox": [
+            192,
+            766,
+            1260,
+            906
+          ],
+          "vlm_text": "",
+          "witness_text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.4,
+          "tokens": 5,
+          "bbox": [
+            192,
+            204,
+            622,
+            250
+          ],
+          "vlm_text": "",
+          "witness_text": "The Survey of Coastal Stations",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 17,
+      "divergence": 0.0,
+      "vlm_words": 85,
+      "witness_words": 124,
+      "unsupported_words": 0,
+      "dropped_words": 39,
+      "ink_ratio": 0.027347,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 34,
+          "bbox": [
+            192,
+            766,
+            1260,
+            907
+          ],
+          "vlm_text": "",
+          "witness_text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.4,
+          "tokens": 5,
+          "bbox": [
+            192,
+            204,
+            622,
+            250
+          ],
+          "vlm_text": "",
+          "witness_text": "The Survey of Coastal Stations",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 18,
+      "divergence": 0.0,
+      "vlm_words": 78,
+      "witness_words": 115,
+      "unsupported_words": 0,
+      "dropped_words": 37,
+      "ink_ratio": 0.024237,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 33,
+          "bbox": [
+            181,
+            709,
+            1238,
+            875
+          ],
+          "vlm_text": "",
+          "witness_text": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory.",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.36,
+          "tokens": 4,
+          "bbox": [
+            163,
+            217,
+            507,
+            266
+          ],
+          "vlm_text": "",
+          "witness_text": "Observations of the Tide",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 19,
+      "divergence": 0.24359,
+      "vlm_words": 78,
+      "witness_words": 88,
+      "unsupported_words": 19,
+      "dropped_words": 29,
+      "ink_ratio": 0.024264,
+      "witness_quality": "ok",
+      "verified": false,
+      "findings": [
+        {
+          "kind": "wholesale_disagreement",
+          "severity": 0.5,
+          "tokens": 48,
+          "bbox": null,
+          "vlm_text": "continued winter housed in timber recorded taken hourly by evening. The self-registering readings were intervals accordingly in published tables.",
+          "witness_text": "e Tide of th nter ed wi ng continu ded Readin: d observatio recor\u2019 s istering W self-reg M interv als ace preceding year shows a water level, which",
+          "note": "19 of 78 AI words lack witness support and 29 of 88 witness words lack AI support, and 48% of the unmatched witness words are short shreds \u2014 the witness likely could not handle this page. Review the page image rather than trusting either reading."
+        }
+      ]
+    },
+    {
+      "page": 20,
+      "divergence": 0.0,
+      "vlm_words": 111,
+      "witness_words": 111,
+      "unsupported_words": 0,
+      "dropped_words": 0,
+      "ink_ratio": 0.029495,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 21,
+      "divergence": 0.379085,
+      "vlm_words": 153,
+      "witness_words": 104,
+      "unsupported_words": 58,
+      "dropped_words": 9,
+      "ink_ratio": 0.02126,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "unsupported_text",
+          "severity": 1.0,
+          "tokens": 48,
+          "bbox": [
+            192,
+            817,
+            307,
+            852
+          ],
+          "vlm_text": "resident observers. The summary telegrams tension in the commission striping the subply vessel tourists off the shorts in each season and only was the subply vessel tourists off the shorts in each season and only was the subply vessel tourists off the shorts in each season and only",
+          "witness_text": "returns.",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.75,
+          "tokens": 10,
+          "bbox": [
+            193,
+            345,
+            1235,
+            391
+          ],
+          "vlm_text": "the summer of the summer of the coastal stations and particularly",
+          "witness_text": "its stated objectives. Positions were fixed for eleven of",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.52,
+          "tokens": 8,
+          "bbox": [
+            193,
+            345,
+            1235,
+            391
+          ],
+          "vlm_text": "",
+          "witness_text": "its stated objectives. Positions were fixed for eleven",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 22,
+      "divergence": 0.023529,
+      "vlm_words": 85,
+      "witness_words": 121,
+      "unsupported_words": 2,
+      "dropped_words": 38,
+      "ink_ratio": 0.013938,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.9,
+          "tokens": 33,
+          "bbox": [
+            184,
+            757,
+            1253,
+            920
+          ],
+          "vlm_text": "",
+          "witness_text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the telegrams remain in the commission archive.",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.4,
+          "tokens": 5,
+          "bbox": [
+            169,
+            213,
+            599,
+            264
+          ],
+          "vlm_text": "",
+          "witness_text": "The Survey of Coastal Stations",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 23,
+      "divergence": 0.435897,
+      "vlm_words": 78,
+      "witness_words": 77,
+      "unsupported_words": 34,
+      "dropped_words": 33,
+      "ink_ratio": 0.0,
+      "witness_quality": "ok",
+      "verified": false,
+      "findings": [
+        {
+          "kind": "wholesale_disagreement",
+          "severity": 0.5,
+          "tokens": 67,
+          "bbox": null,
+          "vlm_text": "at were continued through without interruption. gange pattern, in lowest recorded taken observer transcribed self-registering failed December, on occasions owing to float chamber. readings were substituted intervals and are marked accordingly in published tables.",
+          "witness_text": "Tide of ma ine oto bet oat ured ane im of with the sence from the Preceding year shows two hundredths of a foot for the meat water level, which Mie regarded os",
+          "note": "34 of 78 AI words lack witness support and 33 of 77 witness words lack AI support, and 55% of the unmatched witness words are short shreds \u2014 the witness likely could not handle this page. Review the page image rather than trusting either reading."
+        }
+      ]
+    },
+    {
+      "page": 24,
+      "divergence": 0.010638,
+      "vlm_words": 94,
+      "witness_words": 94,
+      "unsupported_words": 1,
+      "dropped_words": 1,
+      "ink_ratio": 0.011226,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    }
+  ]
+}

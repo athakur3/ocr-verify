@@ -36,10 +36,10 @@ brew install tesseract          # macOS
 apt-get install tesseract-ocr   # Debian/Ubuntu
 ```
 
-Then:
+Then (PyPI release lands with the public launch; from source until then):
 
 ```bash
-pip install ocr-verify
+git clone https://github.com/athakur3/ocr-verify && cd ocr-verify && uv sync
 ```
 
 ## Usage
@@ -70,6 +70,15 @@ ocr-verify book.pdf out/ -o report.html --json findings.json
 ocr-verify book.pdf out/ -o report.html --fail-on 0.02   # fail above 2% divergence
 ```
 
+Two gate semantics worth knowing:
+
+- The divergence ratio counts only pages the witness could verify. Pages where the witness
+  failed (severe noise, skew, degradation) are hedged and excluded — Tesseract's weakness
+  must not fail your build.
+- Exclusion is not a free pass: if more than `--max-unverified` (default 25%) of the AI
+  engine's words sit on unverifiable pages, the gate fails anyway. An engine cannot pass
+  by being unverifiable.
+
 ```yaml
 - name: Verify OCR output
   run: ocr-verify corpus/doc.pdf ocr-out/ -o report.html --fail-on 0.02
@@ -80,12 +89,23 @@ ocr-verify book.pdf out/ -o report.html --fail-on 0.02   # fail above 2% diverge
 
 ## What it reports
 
+Four **accusations** — claims the evidence can carry:
+
 | Finding | Meaning |
 | --- | --- |
 | **Blank-page fabrication** | Effectively no ink on the page, yet the engine emitted running text. The clearest signature there is. |
 | **Unsupported text** | The engine emitted words absent from the witness reading of the whole page — not moved, absent. |
 | **Dropped text** | The witness read words the engine never emitted. Usually a skipped line, column, or caption. |
 | **Disagreement** | Both engines read text here and disagree on the words. Mostly OCR noise; occasionally a rewrite. |
+
+And two **hedges** — confessions that the witness could not cover the page. Hedged pages are
+marked `verified: false`, excluded from the gate divergence, and counted against a separate
+CI budget (below):
+
+| Finding | Meaning |
+| --- | --- |
+| **Unverifiable page** | Ink on the page but the witness read essentially none of it. When the ink also shows no text-scale structure (a robust measure that ignores noise, speckle, streaks, and shadow), the page is likely a dirty blank and the hedge says so at higher severity — but it never becomes an accusation, because very faint real text measures the same. |
+| **Wholesale disagreement** | Both readings diverge heavily at once *and* the witness's unmatched words are dominated by short shreds — the signature of Tesseract losing the page. Without the shred evidence, the itemized accusations stand instead: a confident witness contradicted wholesale is exactly what a rewrite looks like. |
 
 ## How the comparison works
 
@@ -103,21 +123,30 @@ Two levels, in this order — the order is what keeps the false-positive rate su
    Fabricated text has no coordinates of its own, so it is anchored between the nearest
    agreed-upon words on either side.
 
-Two more rules keep the signal clean:
+Three more rules keep the signal clean:
 
 - Witness words below `--min-conf` (default 40) are excluded from the comparison entirely —
   the tool never argues from evidence the witness itself does not believe.
-- Glyph-level misreads are folded before comparison: `m`/`rn`, `vv`/`w`, `cl`/`d`, `0`/`o`,
-  `1`/`l`. `barorneter` and `barometer` are one word seen by two recognizers, and counting
-  that as a fabrication would bury the real findings.
+- Glyph-level misreads are folded before comparison: `m`/`rn`, `vv`/`w`, `cl`/`d`, and the
+  digit/letter confusions `0`/`o`, `1`/`l`/`i`, `5`/`s`, `8`/`b`. `barorneter` and
+  `barometer` are one word seen by two recognizers, and counting that as a fabrication
+  would bury the real findings.
+- Pages the witness cannot testify about produce hedges, not accusations (see the table
+  above). These guards were shaped by an adversarial study against a real engine and then
+  red-teamed; the design notes live in [study/README.md](study/README.md). One deliberate
+  absence: there is no "repair" pass that reassembles shredded witness words — a red team
+  showed such a pass can silently delete an accusation, and ablation showed it changed zero
+  verdicts on the study corpus.
 
 ## Limitations — read these before quoting a number
 
 - **Agreement is not correctness.** Both engines can be wrong together, most easily on the
   degraded pages where the witness is also weak. A clean report is evidence, not proof.
 - **The witness is weak on handwriting, dense layout, tables, and low-contrast scans.** Pages
-  where Tesseract struggled are labelled `witness quality: low` and their findings are hedged
-  in the score. On a fully handwritten corpus this tool has little to say.
+  the witness cannot read at all are labelled `blind`, produce a single unverifiable-page
+  hedge instead of accusations, and are excluded from the gate (but budgeted — see CI above).
+  Readable-but-shaky pages are labelled `low` and their findings are damped. On a fully
+  handwritten corpus this tool has little to say.
 - **Non-Latin scripts** need the matching Tesseract language pack via `--lang`, and the
   glyph-confusion folding above is Latin-specific.
 - **Findings are prompts to look, not verdicts.** That is why every one ships with a crop.
@@ -136,20 +165,21 @@ The fixture corpus is five pages, each isolating one behaviour: a clean page, a 
 engine fills with invented prose, a page with a dropped paragraph, a two-column page emitted in
 reverse order, and a page with a fabricated sentence spliced into real text.
 
-> **Note on the sample report:** the fixture corpus *simulates* engine output rather than being
-> produced by a live run of DeepSeek-OCR or Marker. It demonstrates the mechanism honestly, but
-> it is not a captured real-world fabrication. Replacing it with a real one is the next task —
-> see [HANDOFF.md](HANDOFF.md).
+> **Note on the sample report:** the fixture corpus *simulates* engine output to demonstrate
+> the mechanism. For a **real** captured fabrication — Marker inventing 58 words on a
+> bleed-through page, caught by this tool — see the adversarial study in
+> [study/README.md](study/README.md) and the [real-run demo report](docs/demo-report-marker.html).
 
 ## Development
 
 ```bash
 uv sync
-uv run pytest          # 74 tests
+uv run pytest
 ```
 
-The suite includes golden fixture tests that pin each documented behaviour, and dispute-drill
-tests for the non-detections — the cases where the tool must stay quiet.
+The suite includes golden fixture tests that pin each documented behaviour, dispute-drill
+tests for the non-detections — the cases where the tool must stay quiet — and regression
+tests for every evasion a red team demonstrated against the witness-failure guards.
 
 ## License
 

@@ -1,0 +1,141 @@
+
+
+{0}------------------------------------------------
+
+In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.
+
+The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.
+
+{1}------------------------------------------------
+
+The northern division comprised four stations, of which two were established during the previous season and two were newly built upon the recommendation of the committee. Supplies were landed by tender at each site before the onset of the winter gales, and the parties wintered ashore under canvas.
+
+The southern division comprised only three stations, the fourth having been abandoned after the landslip of the preceding autumn destroyed the hut and the greater part of the stores. The rebuilding was postponed until the commission could examine the stability of the slope above the landing.
+
+{2}------------------------------------------------
+
+{3}------------------------------------------------
+
+{4}------------------------------------------------
+
+{5}------------------------------------------------
+
+{6}------------------------------------------------
+
+{7}------------------------------------------------
+
+{8}------------------------------------------------
+
+Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.
+
+The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.
+
+{9}------------------------------------------------
+
+Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.
+
+The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.
+
+{10}------------------------------------------------
+
+{11}------------------------------------------------
+
+## Notes upon the Instruments
+
+The barometric readings were corrected for temperature by the standard tables. Each observer recorded the dry-bulb and the wet-bulb temperature at the moment of reading, and the corrections were applied during the reduction of the data.
+
+Errors of the aneroid barometer were found to be systematic rather than random. A correction curve was constructed for each instrument by comparison with the mercurial standard kept at the observatory, and the curves are reproduced in the appendix to this report.
+
+Two chronometers were carried by each party. The rates were determined before departure and verified upon return, and the mean of the two was adopted for all longitude determinations.
+
+{12}------------------------------------------------
+
+## Notes upon the Instruments
+
+The barometric readings were corrected for temperature by the standard tables. Each observer recorded the dry-bulb and the wet-bulb temperature at the moment of reading, and the corrections were applied during the reduction of the data.
+
+Errors of the aneroid barometer were found to be systematic rather than random. A correction curve was constructed for each instrument by comparison with the mercurial standard kept at the observatory, and the curves are reproduced in the appendix to this report.
+
+Two chronometers were carried by each party. The rates were determined before departure and verified upon return, and the mean of the two was adopted for all longitude determinations.
+
+{13}------------------------------------------------
+
+## Conclusions of the Commission
+
+The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.
+
+The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.
+
+The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns.
+
+{14}------------------------------------------------
+
+## Conclusions of the Commission
+
+The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.
+
+The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.
+
+The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns.
+
+{15}------------------------------------------------
+
+In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.
+
+The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.
+
+{16}------------------------------------------------
+
+In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.
+
+The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.
+
+{17}------------------------------------------------
+
+Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.
+
+The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.
+
+{18}------------------------------------------------
+
+Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.
+
+The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.
+
+{19}------------------------------------------------
+
+## Notes upon the Instruments
+
+The barometric readings were corrected for temperature by the standard tables. Each observer recorded the dry-bulb and the wet-bulb temperature at the moment of reading, and the corrections were applied during the reduction of the data.
+
+Errors of the aneroid barometer were found to be systematic rather than random. A correction curve was constructed for each instrument by comparison with the mercurial standard kept at the observatory, and the curves are reproduced in the appendix to this report.
+
+Two chronometers were carried by each party. The rates were determined before departure and verified upon return, and the mean of the two was adopted for all longitude determinations.
+
+{20}------------------------------------------------
+
+## Conclusions of the Commission
+
+The commission concludes that the coastal survey achieved the greater part of the summer of the summer of the coastal stations and particularly the fourteen proposed stations, and tidal series of at least six months were obtained at seven. The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.
+
+The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the resident observers.
+
+The summary telegrams tension in the commission striping the subply vessel tourists off the shorts in each season and only was the subply vessel tourists off the shorts in each season and only was the subply vessel tourists off the shorts in each season and only
+
+{21}------------------------------------------------
+
+In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.
+
+The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.
+
+{22}------------------------------------------------
+
+Tidal observations at Station Marlow were continued through the winter without interruption. The gange was of the float pattern, housed in a timber well sink four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.
+
+The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.
+
+{23}------------------------------------------------
+
+The northern division comprised four stations, of which two were established during the previous season and two were newly built upon the recommendation of the committee. Supplies were landed by tender at each site before the onset of the winter gales, and the parties wintered ashore under canvas.
+
+The southern division comprised only three stations, the fourth having been abandoned after the landslip of the preceding autumn destroyed the hut and the greater part of the stores. The rebuilding was postponed until the commission could examine the stability of the slope above the landing.

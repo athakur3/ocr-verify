@@ -58,6 +58,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--pages", default=None, help="subset to check, e.g. 1,4,7-9")
     p.add_argument("--fail-on", type=float, default=None, metavar="RATIO",
                    help="exit 1 if overall divergence exceeds this (e.g. 0.02)")
+    p.add_argument("--max-unverified", type=float, default=0.25, metavar="RATIO",
+                   help="with --fail-on: also exit 1 if more than this share of AI words "
+                   "sits on pages the witness could not verify (default: 0.25). Hedged "
+                   "pages must never be a free pass.")
     p.add_argument("--workers", type=int, default=4, help="parallel Tesseract workers (default: 4)")
     p.add_argument("--keep-images", type=Path, default=None, help="save rendered page PNGs here")
     p.add_argument("-q", "--quiet", action="store_true", help="suppress progress output")
@@ -163,21 +167,42 @@ def main(argv: list[str] | None = None) -> int:
             args.json.parent.mkdir(parents=True, exist_ok=True)
             args.json.write_text(json.dumps(_as_dict(report), indent=2), encoding="utf-8")
 
-        total_words = sum(p.vlm_words for p in results)
-        unsupported = sum(p.vlm_only for p in results)
+        # Only pages the witness could actually cover count toward the gate:
+        # failing a build because the witness went blind on a noisy page would
+        # punish the AI engine for Tesseract's weakness.
+        verified = [p for p in results if p.verified]
+        unverified = [p for p in results if not p.verified]
+        total_words = sum(p.vlm_words for p in verified)
+        unsupported = sum(p.vlm_only for p in verified)
         overall = unsupported / total_words if total_words else 0.0
         flagged = [p for p in results if p.findings]
 
         log("")
         log(f"{len(flagged)} of {len(results)} page(s) flagged; "
-            f"{unsupported:,} of {total_words:,} AI words unsupported ({overall * 100:.2f}%)")
+            f"{unsupported:,} of {total_words:,} AI words unsupported ({overall * 100:.2f}%) "
+            f"across {len(verified)} verified page(s)")
+        if unverified:
+            log(f"{len(unverified)} page(s) could not be verified (witness failed) — "
+                f"excluded from the gate, listed in the report")
         log(f"report: {args.out}")
         if args.json:
             log(f"json:   {args.json}")
 
-        if args.fail_on is not None and overall > args.fail_on:
-            log(f"FAIL: divergence {overall * 100:.2f}% exceeds --fail-on {args.fail_on * 100:.2f}%")
-            return EXIT_FLAGGED
+        if args.fail_on is not None:
+            if overall > args.fail_on:
+                log(f"FAIL: divergence {overall * 100:.2f}% exceeds --fail-on "
+                    f"{args.fail_on * 100:.2f}%")
+                return EXIT_FLAGGED
+            # Unverified pages are excluded from the divergence metric, so they
+            # need their own budget — otherwise an engine could pass the gate by
+            # being unverifiable, which is exactly backwards.
+            all_words = total_words + sum(p.vlm_words for p in unverified)
+            unverified_words = sum(p.vlm_words for p in unverified)
+            unverified_share = unverified_words / all_words if all_words else 0.0
+            if unverified_share > args.max_unverified:
+                log(f"FAIL: {unverified_share * 100:.1f}% of AI words sit on unverifiable "
+                    f"pages (limit {args.max_unverified * 100:.0f}%, --max-unverified)")
+                return EXIT_FLAGGED
         return EXIT_OK
 
     except (TesseractMissing, IngestError, FileNotFoundError, ValueError) as exc:
@@ -208,6 +233,7 @@ def _as_dict(report: Report) -> dict:
                 "dropped_words": p.witness_only,
                 "ink_ratio": round(p.ink_ratio, 6),
                 "witness_quality": p.witness_quality,
+                "verified": p.verified,
                 "findings": [
                     {
                         "kind": f.kind,
