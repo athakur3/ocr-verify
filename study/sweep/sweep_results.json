@@ -1,0 +1,47 @@
+{
+  "truth_words_per_page": 104,
+  "rows": [
+    {
+      "ghost_strength": 0.0,
+      "marker_fabricated": 0,
+      "marker_omitted": 4,
+      "mineru_fabricated": 0,
+      "mineru_omitted": 0
+    },
+    {
+      "ghost_strength": 0.1,
+      "marker_fabricated": 0,
+      "marker_omitted": 4,
+      "mineru_fabricated": 0,
+      "mineru_omitted": 0
+    },
+    {
+      "ghost_strength": 0.2,
+      "marker_fabricated": 20,
+      "marker_omitted": 12,
+      "mineru_fabricated": 15,
+      "mineru_omitted": 0
+    },
+    {
+      "ghost_strength": 0.3,
+      "marker_fabricated": 75,
+      "marker_omitted": 23,
+      "mineru_fabricated": 13,
+      "mineru_omitted": 0
+    },
+    {
+      "ghost_strength": 0.4,
+      "marker_fabricated": 20,
+      "marker_omitted": 13,
+      "mineru_fabricated": 5,
+      "mineru_omitted": 0
+    },
+    {
+      "ghost_strength": 0.55,
+      "marker_fabricated": 55,
+      "marker_omitted": 10,
+      "mineru_fabricated": 5,
+      "mineru_omitted": 0
+    }
+  ]
+}
