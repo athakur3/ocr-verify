@@ -1,0 +1,19 @@
+{
+  "rows": [
+    {
+      "ghost_strength": 0.125,
+      "marker_fabricated": 0,
+      "mineru_fabricated": 5
+    },
+    {
+      "ghost_strength": 0.15,
+      "marker_fabricated": 0,
+      "mineru_fabricated": 5
+    },
+    {
+      "ghost_strength": 0.175,
+      "marker_fabricated": 24,
+      "mineru_fabricated": 15
+    }
+  ]
+}

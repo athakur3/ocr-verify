@@ -18,5 +18,7 @@ study/sweep/*_out/sweep/hybrid_auto/*_model.json
 study/sweep/*_out/sweep/hybrid_auto/*_middle.json
 study/sweep/*_out/sweep/hybrid_auto/*_layout.pdf
 study/sweep/*_out/sweep/hybrid_auto/*_origin.pdf
-study/sweep/mineru_bisect/
-study/sweep/marker_bisect/
+study/sweep/mineru_bisect/bisect/hybrid_auto/*_model.json
+study/sweep/mineru_bisect/bisect/hybrid_auto/*_middle.json
+study/sweep/mineru_bisect/bisect/hybrid_auto/*_layout.pdf
+study/sweep/mineru_bisect/bisect/hybrid_auto/*_origin.pdf
