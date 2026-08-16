@@ -131,6 +131,62 @@ cannot manufacture; the misspelling-evasion this could otherwise invite is a pin
 regression test. Both engines' scorecards hold at 1.00/1.00 under the fixed engine, and
 all red-team attack scripts remain dead.
 
+## Ghost-contrast sweep: where fabrication begins (runs 2026-08-17)
+
+Both engines fabricated on the study's single bleed-through page, which carries its ghost
+at strength 0.55. One point per engine says *it happens*; a sweep asks *when*. The sweep
+corpus ([sweep/make_sweep.py](sweep/make_sweep.py)) is six pages with identical real text
+(the conclusions passage, 104 words) over a mirrored ghost of the survey passage at
+strengths 0.0 / 0.10 / 0.20 / 0.30 / 0.40 / 0.55 — ground truth is identical on every
+page, so any emitted word outside it is fabricated, and the count as a function of ghost
+strength is each engine's failure curve. Scoring is the same bag-delta measurement as the
+main study ([sweep/score_sweep.py](sweep/score_sweep.py)); the first pass placed both
+onsets in the same coarse bin (0.10–0.20), so a follow-up bisect added pages at
+0.125 / 0.15 / 0.175. Full numbers: [sweep/sweep_results.json](sweep/sweep_results.json),
+[sweep/bisect_results.json](sweep/bisect_results.json); captured engine outputs alongside.
+
+| Ghost strength | Marker fabricated | Marker omitted | MinerU fabricated | MinerU omitted |
+| --- | --- | --- | --- | --- |
+| 0.00 | 0 | 4 | 0 | 0 |
+| 0.10 | 0 | 4 | 0 | 0 |
+| 0.125 † | 0 | — | **5** | — |
+| 0.15 † | 0 | — | 5 | — |
+| 0.175 † | **24** | — | 15 | — |
+| 0.20 | 20 | 12 | 15 | 0 |
+| 0.30 | 75 | 23 | 13 | 0 |
+| 0.40 | 20 | 13 | 5 | 0 |
+| 0.55 | 55 | 10 | 5 | 0 |
+
+*† bisect pages (same construction, separate build; omissions not recorded in the bisect
+scorer). Bold marks each engine's onset.*
+
+What the curves show — on this corpus, with one seed and one run per level, so these are
+observations about these runs, not laws:
+
+- **The onsets are distinct, and the failure styles are opposite.** MinerU is
+  hair-trigger, low-amplitude: it starts inventing between 0.10 and 0.125 — a ghost
+  barely visible on screen — but the damage stays small (5–15 words) at every strength
+  tested. Marker is high-threshold, catastrophic: clean through 0.15, then 24 fabricated
+  words at 0.175 and a peak of 75 at 0.30.
+- **MinerU improves as the ghost gets stronger** (15 → 13 → 5 → 5 across 0.20 → 0.55). A
+  plausible reading is that it suppresses interference it can recognize as such, and is
+  fooled mainly by *faint* ghosts — which is the regime real bleed-through occupies. Its
+  worst case here is a barely-there ghost, not a flagrant one.
+- **Neither curve is monotonic above onset** (Marker: 20 → 75 → 20 → 55). Run-to-run
+  variance at a fixed strength is unmeasured; the main study saw Marker reproduce its
+  bleed-through fabrication byte-identically across two runs, so determinism is
+  plausible, but a multi-seed pass is the obvious next step before reading shape into
+  these curves.
+- **Marker's title omission is ghost-independent** — the 4-word title is dropped even at
+  strength 0.0, consistent with the content-loss behaviour in the main study — and its
+  omissions grow once the ghost passes its onset.
+
+The practical consequence for verification: a detector tuned to one engine's failure
+regime misses the other's. MinerU's 5-word inventions sit below any alarm threshold sized
+for Marker's 75-word collapses, and Marker is perfectly clean at strengths where MinerU
+is already fabricating. There is no universal "safe" ghost level to test at — which is an
+argument for witnessing every page rather than spot-checking known-bad conditions.
+
 ## Honest limits of this study
 
 - One engine, one run, one synthetic-then-degraded corpus. This measures existence
@@ -140,3 +196,7 @@ all red-team attack scripts remain dead.
   have layouts and typefaces this corpus does not attempt.
 - Degradations are real image operations, but the *pages* are born digital. A physically
   scanned test target would be stronger and is future work.
+- The sweep and bisect run one seed and one engine pass per strength level, on a single
+  passage pair. The onset locations and curve shapes are observations about these runs;
+  a multi-seed, multi-passage robustness pass is future work before treating either
+  number as a property of the engine.
