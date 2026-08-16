@@ -8,5 +8,4 @@ build/
 .DS_Store
 ocr-verify-report.html
 .marker-venv/
-study/marker_out/
 study/corpus/_render/
