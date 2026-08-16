@@ -36,10 +36,10 @@ brew install tesseract          # macOS
 apt-get install tesseract-ocr   # Debian/Ubuntu
 ```
 
-Then (PyPI release lands with the public launch; from source until then):
+Then:
 
 ```bash
-git clone https://github.com/athakur3/ocr-verify && cd ocr-verify && uv sync
+pip install ocr-verify
 ```
 
 ## Usage
