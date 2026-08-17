@@ -179,6 +179,51 @@ precise diagnosis than the previous block reached, and changes what "the fix" lo
    matching each other; loosening it needs its own red-team pass, not just the existing
    `tests/test_witness_failure_guards.py` suite.
 
+## Follow-up: witness fix (a) landed — tight local-confidence window (`context=1`)
+
+Picked up the (a)/(b) split proposed above. Measured, rather than guessed, the right
+window size first (`study/wild/local_window_probe.py`, committed, read-only — renders the
+actual PDF at the CLI's own DPI 200 rather than reusing the lower-resolution preview PNGs,
+which was the reason the previous block's `context=8` probe and this one don't
+numerically match: the preview render gives Tesseract a different, unrepresentative
+read). Result for both page-1 false positives, mean confidence of `usable[lo-context :
+hi+context]` around each finding's own witness span:
+
+```
+                                context=0  context=1  context=2  context=3  context=8
+"FAR EAST SPOTLIGHT..."           62.2       77.1       79.5       82.9       88.1
+"aggression against Tibet..."     71.5       79.7       80.8       81.0       83.3
+```
+
+`misread_conf_ceiling` is 80.0. `context=1` clears it for both cases; `context=2` clears
+it for the first but not the second (80.8, a near-miss of the near-miss). `context=8` (the
+report's existing display-context constant, and what the previous block tested) clears
+neither — confirming that block's finding, and confirming the fix genuinely needed a
+tighter window, not just "a window" of any size.
+
+Implemented as `Settings.local_context = 1` and a new `_local_hedge()` helper in
+`align.py`, applied inside `_unsupported_finding`/`_dropped_finding`/`_substitution_finding`
+alongside (not replacing) the existing page-level hedge: if the finding's own local window
+looks unreliable, that finding gets the low-quality note and its severity cut, even on a
+page whose page-mean confidence looks fine. Re-ran the real document: both motivating
+page-1 findings are now hedged (severity 0.75→0.45 and 0.5→0.3); the page-2 "as"/"ae" case
+is correctly untouched (still fails earlier, at `near_miss()`'s short-token floor — that's
+backlog item (b), a different fix). Pages 2–4's other unsupported-text findings are also
+still unhedged and not yet individually diagnosed — this fix targets the single-word,
+confidently-misread-but-diluted pattern specifically, not every false positive on this
+document.
+
+One clarification worth recording: this hedge changes a finding's `note`/`severity`, not
+its `kind` — `study/score.py`'s precision/recall is computed purely from
+`kinds & ACCUSATORY_KINDS` (see `align.py`'s `ACCUSATORY_KINDS`), which a hedge never
+touches, by design (a page-level hedge already worked the same way). So the ablation gate
+(precision=1.00 recall=1.00 held, byte-identical output) is a true regression check, not a
+side effect of the fix being invisible to the metric — but it also means this fix cannot,
+by construction, move the synthetic-corpus number; its effect is only visible in report
+tone on documents like this one. A future change to *remove* an accusation on low local
+confidence (rather than hedge it) would be a materially different, riskier design and is
+not what was implemented here.
+
 ## Next steps (not done this block)
 
 - More wild documents, especially ones with confirmed bleed-through (the original target
@@ -190,9 +235,10 @@ precise diagnosis than the previous block reached, and changes what "the fix" lo
   word-level scoring; no download spent, all screening was via archive.org's page-preview
   JPEGs) and ones with cleaner typefaces to isolate whether the false-positive driver here
   is specifically stylized/hand-lettered text, ink degradation, or both.
-- Witness-quality fix, now split into two independent candidates per the diagnosis above:
-  (a) a much tighter local-confidence window (`context=1`–2) for the single-unconfident-
-  word case, ablated against the synthetic corpus; (b) a `near_miss()` short-token floor
-  relaxation for the confident-short-misread case, which needs its own red-team pass
-  since it touches the floor that guards against short words matching spuriously. Treat
-  these as separate backlog items — a fix for one will not touch the other.
+- Witness fix (b): the `near_miss()` short-token floor relaxation for the confident-
+  short-misread case ("as"→"ae"). Riskier than (a) — the floor exists to stop short words
+  matching spuriously — and needs its own red-team pass, not just the existing
+  `tests/test_witness_failure_guards.py` suite.
+- Pages 2–4's remaining unhedged false positives on this same document are not yet
+  individually diagnosed; worth a look before assuming (a) and (b) are the whole story for
+  this document.

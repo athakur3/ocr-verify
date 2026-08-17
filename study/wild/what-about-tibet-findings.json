@@ -1,7 +1,7 @@
 {
   "tool": "ocr-verify",
   "version": "0.1.0",
-  "generated": "2026-08-17 05:37 UTC",
+  "generated": "2026-08-17 13:32 UTC",
   "pdf": "study/wild/downloads/what-about-tibet.pdf",
   "engine_output": "study/wild/marker_out/what-about-tibet/what-about-tibet.md",
   "engine_label": "marker",
@@ -21,7 +21,7 @@
       "findings": [
         {
           "kind": "unsupported_text",
-          "severity": 0.75,
+          "severity": 0.45,
           "tokens": 10,
           "bbox": [
             231,
@@ -31,11 +31,11 @@
           ],
           "vlm_text": "\"aggression against Tibet\" by Peopled Republic of China. Price 5c Issued",
           "witness_text": "ar e's cof Ching",
-          "note": ""
+          "note": "Witness confidence is low on this page, so this is a prompt to look, not a verdict."
         },
         {
           "kind": "unsupported_text",
-          "severity": 0.5,
+          "severity": 0.3,
           "tokens": 5,
           "bbox": [
             573,
@@ -45,11 +45,11 @@
           ],
           "vlm_text": "FAR EAST SPOTLIGHT WHAT ABOUT TIBET?",
           "witness_text": "DOTLOIGHT",
-          "note": ""
+          "note": "Witness confidence is low on this page, so this is a prompt to look, not a verdict."
         },
         {
           "kind": "dropped_text",
-          "severity": 0.32,
+          "severity": 0.192,
           "tokens": 3,
           "bbox": [
             231,
@@ -59,7 +59,7 @@
           ],
           "vlm_text": "",
           "witness_text": "ar e's cof",
-          "note": ""
+          "note": "Witness confidence is low on this page, so this is a prompt to look, not a verdict."
         }
       ]
     },

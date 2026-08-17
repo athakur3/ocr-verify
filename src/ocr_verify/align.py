@@ -75,6 +75,19 @@ class Settings:
     # never touches, so the pair cannot be manufactured from the text side.
     misread_rate_low: float = 0.20
     misread_conf_ceiling: float = 80.0
+    # Per-finding local-confidence hedge (added after the Tibet-pamphlet wild-hunt
+    # false positive, 2026-08-17): the page-mean confidence checks above are blind
+    # to a single confident-but-wrong word ('SPOTLIGHT' misread as 'DOTLOIGHT' at
+    # 62.2%) once diluted by the rest of a mostly-correct page. A page-uniform
+    # window doesn't fix it either — even a per-finding window at the report's
+    # context=8 still averages in enough clean neighbors to clear the ceiling
+    # (measured: ~88%). Only a tight window (empirically 1-2 words either side of
+    # the finding's own witness span) stays close enough to the misread word to
+    # trip the same misread_conf_ceiling. This hedges the individual finding
+    # (note + severity), not the page's witness_quality — it does not change
+    # whether a page is flagged, only whether that specific finding reads as a
+    # confident accusation or a prompt to look.
+    local_context: int = 1
 
 
 LOW_QUALITY_NOTE = (
@@ -434,6 +447,22 @@ def _runs(classes: list[str], target: str, min_run: int, gap: int) -> list[tuple
     return runs
 
 
+def _local_hedge(usable: list[Word], lo: int | None, hi: int | None, cfg: Settings) -> str:
+    """Hedge one finding if witness confidence right around its own span is low.
+
+    Distinct from the page-level checks in compare_page(): those average over
+    the whole page and miss a lone confident misread. This averages over a
+    handful of words either side of the finding's own witness span instead.
+    """
+    if lo is None or hi is None:
+        return ""
+    window = usable[max(0, lo - cfg.local_context) : hi + cfg.local_context]
+    if not window:
+        return ""
+    mean_conf = sum(w.conf for w in window) / len(window)
+    return LOW_QUALITY_NOTE if mean_conf < cfg.misread_conf_ceiling else ""
+
+
 def _unsupported_finding(
     start: int,
     end: int,
@@ -448,6 +477,7 @@ def _unsupported_finding(
     lo, hi = _witness_span(start, end, pairs)
     bbox = _region(usable, witness, lo, hi, cfg)
     witness_text = " ".join(w.text for w in usable[lo:hi]) if lo is not None and hi is not None else ""
+    note = note or _local_hedge(usable, lo, hi, cfg)
     severity = min(1.0, 0.25 + 0.05 * count)
     if note:
         severity *= 0.6
@@ -475,6 +505,7 @@ def _dropped_finding(
     note: str,
 ) -> Finding:
     bbox = _region(usable, witness, start, end, cfg)
+    note = note or _local_hedge(usable, start, end, cfg)
     severity = min(0.9, 0.2 + 0.04 * count)
     if note:
         severity *= 0.6
@@ -504,6 +535,7 @@ def _substitution_finding(
     lo, hi = _witness_span(start, end, pairs)
     bbox = _region(usable, witness, lo, hi, cfg)
     witness_text = " ".join(w.text for w in usable[lo:hi]) if lo is not None and hi is not None else ""
+    note = note or _local_hedge(usable, lo, hi, cfg)
     return Finding(
         page=witness.index,
         kind=SUBSTITUTION,
