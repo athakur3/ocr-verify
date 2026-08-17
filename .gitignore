@@ -5,6 +5,7 @@ dist/
 build/
 *.egg-info/
 .pytest_cache/
+.pytest-tmp/
 .DS_Store
 ocr-verify-report.html
 .marker-venv/
