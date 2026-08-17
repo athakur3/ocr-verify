@@ -1,0 +1,232 @@
+{
+  "tool": "ocr-verify",
+  "version": "0.1.0",
+  "generated": "2026-08-17 05:37 UTC",
+  "pdf": "study/wild/downloads/what-about-tibet.pdf",
+  "engine_output": "study/wild/marker_out/what-about-tibet/what-about-tibet.md",
+  "engine_label": "marker",
+  "dpi": 200,
+  "min_conf": 40.0,
+  "pages": [
+    {
+      "page": 1,
+      "divergence": 0.385965,
+      "vlm_words": 57,
+      "witness_words": 40,
+      "unsupported_words": 22,
+      "dropped_words": 5,
+      "ink_ratio": 0.070985,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "unsupported_text",
+          "severity": 0.75,
+          "tokens": 10,
+          "bbox": [
+            231,
+            1465,
+            688,
+            1581
+          ],
+          "vlm_text": "\"aggression against Tibet\" by Peopled Republic of China. Price 5c Issued",
+          "witness_text": "ar e's cof Ching",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.5,
+          "tokens": 5,
+          "bbox": [
+            573,
+            270,
+            955,
+            339
+          ],
+          "vlm_text": "FAR EAST SPOTLIGHT WHAT ABOUT TIBET?",
+          "witness_text": "DOTLOIGHT",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.32,
+          "tokens": 3,
+          "bbox": [
+            231,
+            1465,
+            688,
+            1550
+          ],
+          "vlm_text": "",
+          "witness_text": "ar e's cof",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "divergence": 0.133758,
+      "vlm_words": 314,
+      "witness_words": 287,
+      "unsupported_words": 42,
+      "dropped_words": 15,
+      "ink_ratio": 0.129728,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "unsupported_text",
+          "severity": 0.45,
+          "tokens": 4,
+          "bbox": [
+            83,
+            1015,
+            1377,
+            1081
+          ],
+          "vlm_text": "Tufans in Tibet to Buddhism",
+          "witness_text": "to",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.4,
+          "tokens": 3,
+          "bbox": [
+            42,
+            109,
+            1447,
+            158
+          ],
+          "vlm_text": "of charges in the American",
+          "witness_text": "in the",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.4,
+          "tokens": 3,
+          "bbox": [
+            45,
+            173,
+            1364,
+            240
+          ],
+          "vlm_text": "is popularly known of Tibet's",
+          "witness_text": "known of",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.4,
+          "tokens": 3,
+          "bbox": [
+            39,
+            287,
+            1466,
+            455
+          ],
+          "vlm_text": "China.Just as much as",
+          "witness_text": "China just a much ae",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.4,
+          "tokens": 3,
+          "bbox": [
+            31,
+            1344,
+            1396,
+            1486
+          ],
+          "vlm_text": "(Formosa) and the establishment",
+          "witness_text": "Taiwen end the",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "divergence": 0.107463,
+      "vlm_words": 335,
+      "witness_words": 316,
+      "unsupported_words": 36,
+      "dropped_words": 17,
+      "ink_ratio": 0.145128,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "unsupported_text",
+          "severity": 0.5,
+          "tokens": 5,
+          "bbox": [
+            48,
+            794,
+            1438,
+            920
+          ],
+          "vlm_text": "August 31, 1907, England again pledged herself,",
+          "witness_text": "dugust 32, 1907, egain togather",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.45,
+          "tokens": 4,
+          "bbox": [
+            41,
+            1195,
+            1453,
+            1323
+          ],
+          "vlm_text": "Government's representative in Tibet remains an Englishman.",
+          "witness_text": "Gevernmont's representative in Titet remaing en",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "divergence": 0.104,
+      "vlm_words": 250,
+      "witness_words": 243,
+      "unsupported_words": 26,
+      "dropped_words": 19,
+      "ink_ratio": 0.096497,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "unsupported_text",
+          "severity": 0.4,
+          "tokens": 3,
+          "bbox": [
+            42,
+            537,
+            1435,
+            589
+          ],
+          "vlm_text": "effectively exercise this sovereignty thus excluding",
+          "witness_text": "fectively exercise this thus oxelnding",
+          "note": ""
+        },
+        {
+          "kind": "unsupported_text",
+          "severity": 0.4,
+          "tokens": 3,
+          "bbox": [
+            40,
+            871,
+            1452,
+            991
+          ],
+          "vlm_text": "long settled questions of sovereignty.",
+          "witness_text": "Joug questions of sovereigty.",
+          "note": ""
+        }
+      ]
+    }
+  ]
+}
