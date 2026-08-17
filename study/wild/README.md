@@ -126,6 +126,59 @@ different kind of change to `_classify`/`compare_page`'s finding construction, n
 constant change. Left as a scoped design problem for a future block, per the standing
 guidance not to rush this into `witness.py`/`align.py` without its own ablation.
 
+## Follow-up: the per-finding-local-confidence sketch was tried and doesn't work either
+
+Picked this up the block after it was scoped above. Implemented it exactly as sketched:
+window the mean-confidence / misread-rate check to the witness words anchoring one
+finding (`usable[lo-context : hi+context]`, same `context=8` already used for report
+snippets) instead of the whole page, and hedge that finding alone if the *local* window
+looks unreliable. Full precision/recall on both engines held at 1.00/1.00 (unsurprising —
+the synthetic corpus's degradation is page-uniform, so a page-mean and a local-mean never
+disagree there; `git status` after regenerating both `results-corpus.json` and
+`results-pages.json` was clean, byte-identical). But re-run against the real
+`what-about-tibet` findings, **it changed nothing** — none of the document's 12 findings
+picked up the hedge. Instrumented the two concrete false-positive examples directly:
+
+- **"China.Just as much as" (page 2, the "as"→"ae" case).** The witness word `"ae"`
+  itself reads at 95.9% confidence — but the ±8-token window around the finding is 21
+  words, and the other 20 are mostly clean 90%+ reads (`than`, `three`, `hundred`,
+  `years`, `has`, `been`, `part`, `of`, `China`, `just`...). Window mean comes out ~89%,
+  same as the page mean. **The dilution problem doesn't go away at window scale — it just
+  shrinks from ~110 words to ~21 and stays above every threshold.** Below the confidence
+  question entirely, there's a sharper root cause for this specific pair: `near_miss()`
+  in `normalize.py` refuses to compare tokens at all when
+  `max(len(a), len(b)) < 4` (a deliberate floor, to stop short words spuriously matching
+  each other) — `"as"` and `"ae"` are both 2 characters, so they never reach the
+  edit-distance check regardless of confidence. No confidence-based fix, local or global,
+  touches this; the exclusion happens one step earlier, in the matching logic, not the
+  quality gate.
+- **"FAR EAST SPOTLIGHT..." (page 1, the hand-lettered cover).** Here the misread word
+  itself *is* low confidence (`"DOTLOIGHT"` at 62.2%) — but it's one word in a 9-word
+  window (`context=8` pulls in the next line), and the other 8 are 84–95%. Window mean
+  ≈88%, again above the 80 ceiling. A tighter window (e.g. `context=2` instead of 8)
+  would likely have caught this one specifically, but that's a different, untested
+  change, and shrinking the window doesn't touch the "as"/"ae" case above at all — that
+  one fails earlier, in `near_miss`, not in the confidence gate.
+
+Net: the sketch as specified doesn't fire on either motivating example, so it was **not
+committed** — shipping it would have added real complexity (a new helper, a changed
+finding-builder signature) for zero behavior change on the cases it was meant to fix.
+Reverted after instrumenting; `git diff` after the revert is empty. This is a more
+precise diagnosis than the previous block reached, and changes what "the fix" looks like:
+
+1. The window-vs-page framing was the wrong axis. Shrinking the averaging window helps
+   only when the misread word itself is unconfident (the SPOTLIGHT case) — trying a much
+   tighter window (`context=1` or 2, not the report's `context=8`) is the natural next
+   experiment there, with its own precision/recall ablation since it changes what counts
+   as "nearby" for every finding, not just these two.
+2. The "as"/"ae" case is a *different bug* wearing the same symptom. It never reaches the
+   confidence gate because `near_miss()`'s `< 4` character floor excludes it from
+   comparison outright. Any fix here is a `normalize.py` change (relaxing or
+   confidence-gating the short-token floor), not an `align.py` one — and it's the riskier
+   of the two, since the floor exists specifically to stop short words from spuriously
+   matching each other; loosening it needs its own red-team pass, not just the existing
+   `tests/test_witness_failure_guards.py` suite.
+
 ## Next steps (not done this block)
 
 - More wild documents, especially ones with confirmed bleed-through (the original target
@@ -137,6 +190,9 @@ guidance not to rush this into `witness.py`/`align.py` without its own ablation.
   word-level scoring; no download spent, all screening was via archive.org's page-preview
   JPEGs) and ones with cleaner typefaces to isolate whether the false-positive driver here
   is specifically stylized/hand-lettered text, ink degradation, or both.
-- The witness-quality fix design sketched above (per-finding-local confidence, not
-  page-mean) is ready to be picked up as its own backlog item with its own ablation
-  against the synthetic corpus's precision=1.00.
+- Witness-quality fix, now split into two independent candidates per the diagnosis above:
+  (a) a much tighter local-confidence window (`context=1`–2) for the single-unconfident-
+  word case, ablated against the synthetic corpus; (b) a `near_miss()` short-token floor
+  relaxation for the confident-short-misread case, which needs its own red-team pass
+  since it touches the floor that guards against short words matching spuriously. Treat
+  these as separate backlog items — a fix for one will not touch the other.
