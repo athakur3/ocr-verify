@@ -1,0 +1,15 @@
+{
+  "seed": 20260817,
+  "pages": [
+    {
+      "page": 1,
+      "kind": "hand_lettered_cover",
+      "text": "THE FRONTIER GAZETTE Special Report from the Northern Stations Conclusions of the Commission\n\nThe commission concludes that the coastal survey achieved the greater part of\nits stated objectives. Positions were fixed for eleven of the fourteen proposed\nstations, and tidal series of at least six months were obtained at seven.\n\nThe loss of the third party's notebooks is regretted. The commission recommends\nthat duplicate records be transmitted by post at fortnightly intervals in all\nfuture work of this character, and that no single vessel carry the whole of a\nseason's observations.\n\nThe commission further records its appreciation of the resident observers, whose\ndiligence under conditions of considerable hardship is evident throughout the\nreturns."
+    },
+    {
+      "page": 2,
+      "kind": "mimeograph_body",
+      "text": "Notes upon the Instruments\n\nThe barometric readings were corrected for temperature by the standard tables.\nEach observer recorded the dry-bulb and the wet-bulb temperature at the moment\nof reading, and the corrections were applied during the reduction of the data.\n\nErrors of the aneroid barometer were found to be systematic rather than random.\nA correction curve was constructed for each instrument by comparison with the\nmercurial standard kept at the observatory, and the curves are reproduced in\nthe appendix to this report.\n\nTwo chronometers were carried by each party. The rates were determined before\ndeparture and verified upon return, and the mean of the two was adopted for all\nlongitude determinations."
+    }
+  ]
+}

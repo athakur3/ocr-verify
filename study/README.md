@@ -235,6 +235,33 @@ per-engine onset *ordering* claimed from the first pair is now open again — it
 either passage-sensitive or is a coarse-resolution artifact, and this study can't tell
 which without a matched-mode, bisected third run.
 
+## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
+
+The real-archival wild hunt (`study/wild/`) found two failure modes the 24-page corpus
+above never covered: hand-lettered display type and uneven mimeograph ink. Witness fix
+(a) — the tight local-confidence window that closed the false positives those modes
+caused on a real document — was validated only against that one download. This small,
+synthetic, two-page corpus reproduces both modes with known ground truth so the check is
+reproducible and runs in the test suite (`tests/test_degradation_modes.py`) instead of a
+one-off probe script:
+
+- **Hand-lettered cover**: a warped masthead title above a clean paragraph. The clean
+  body keeps the page-mean confidence healthy while the title itself reads low locally —
+  the split fix (a)'s local-vs-page-mean distinction was built for. Confirmed: the tight
+  window (`context=1`) hedges the title finding; the old wide window (`context=8`) does
+  not, matching the real document's before/after.
+- **Mimeograph body**: blotchy ink-density variation across an ordinary paragraph. At the
+  severity used here, the existing wholesale-disagreement fold — a different, already-
+  shipped guard, not fix (a) — is what keeps this from becoming an itemized accusation.
+  Pinned as a regression against a mode the corpus never previously exercised.
+
+Both pages use a "perfect" engine transcript (the exact ground truth text) as the
+comparison input, so any finding raised is attributable purely to the witness struggling
+with the image, not to any simulated engine error. This corpus is separate from the
+24-page corpus above and does not feed `study/score.py`'s precision/recall gate — its
+role is validating the witness heuristics generalize to failure modes real archival
+material exposed, not measuring engine fabrication.
+
 ## Honest limits of this study
 
 - One engine, one run, one synthetic-then-degraded corpus. This measures existence

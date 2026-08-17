@@ -24,11 +24,12 @@ from __future__ import annotations
 
 import io
 import json
+import math
 import random
 from pathlib import Path
 
 import pymupdf
-from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter, ImageOps
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "corpus"
@@ -230,6 +231,58 @@ def bleed_through(img: Image.Image, ghost: Image.Image, strength: float) -> Imag
     back = ImageEnhance.Contrast(back).enhance(0.12)
     back = back.point(lambda v: min(255, int(255 - (255 - v) * strength)))
     return ImageChops.darker(img, back)
+
+
+def hand_lettered(
+    img: Image.Image, rng: random.Random, amplitude: float = 6.0, period: float = 18.0
+) -> Image.Image:
+    """The wavering baseline and irregular stroke alignment of hand-lettered
+    display type (a masthead, a hand-drawn cover title) — not a font swap, a
+    real per-row horizontal-shift warp. Every row of the page is displaced by
+    a sine offset whose wavelength is comparable to a glyph's height, so
+    strokes that were machine-straight come out bent exactly the way an
+    unsteady hand's lettering does, rather than merely shifted as a rigid
+    block (which a wavelength much longer than a text line would produce,
+    and which costs Tesseract almost no confidence at all).
+    """
+    w, h = img.size
+    out = img.copy()
+    phase = rng.uniform(0, 2 * math.pi)
+    for y in range(h):
+        dx = int(amplitude * math.sin(2 * math.pi * y / period + phase))
+        row = img.crop((0, y, w, y + 1))
+        out.paste(row, (dx, y))
+    return out
+
+
+def mimeograph(img: Image.Image, strength: float, rng: random.Random) -> Image.Image:
+    """Uneven ink density from a worn spirit-duplicator master: some patches of
+    the page starved of ink, others normal — blotchy low-frequency variation,
+    unlike `shadow`'s smooth directional gradient. Built from a real blurred
+    noise field used as a blend mask between the page and a heavily-faded copy
+    of itself, so the unevenness has genuine spatial structure (patches with
+    soft edges) rather than a uniform wash.
+
+    A heavily-blurred noise field collapses toward its mean (law of large
+    numbers), so it is stretched back out with autocontrast before use — the
+    raw blur alone varies by only a few grey levels, nowhere near enough to
+    cross any threshold.
+    """
+    faded = ImageEnhance.Contrast(img).enhance(0.12)
+    field = Image.effect_noise(img.size, 40).filter(ImageFilter.GaussianBlur(45))
+    field = ImageOps.autocontrast(field)
+    hist = field.histogram()
+    target = img.width * img.height * (1 - strength)
+    cumulative = 0
+    cutoff = 255
+    for level, count in enumerate(hist):
+        cumulative += count
+        if cumulative >= target:
+            cutoff = level
+            break
+    mask = field.point(lambda v: 255 if v > cutoff else 0)
+    mask = mask.filter(ImageFilter.GaussianBlur(20))
+    return Image.composite(faded, img, mask)
 
 
 def blank() -> Image.Image:
