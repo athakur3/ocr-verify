@@ -1,0 +1,417 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Are The Philippines Really Free?",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          75.9,
+          104.25
+        ],
+        [
+          287.5,
+          104.25
+        ],
+        [
+          287.5,
+          239.775
+        ],
+        [
+          75.9,
+          239.775
+        ]
+      ]
+    },
+    {
+      "title": "Can Colonialism Reform?",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          44.086,
+          22.572
+        ],
+        [
+          459.15100000000007,
+          22.572
+        ],
+        [
+          459.15100000000007,
+          58.82399999999999
+        ],
+        [
+          44.086,
+          58.82399999999999
+        ]
+      ]
+    },
+    {
+      "title": "1. Government Finance",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          33.768,
+          533.52
+        ],
+        [
+          164.15,
+          533.52
+        ],
+        [
+          164.15,
+          545.148
+        ],
+        [
+          33.768,
+          545.148
+        ]
+      ]
+    },
+    {
+      "title": "2. Agriculture",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          27.434,
+          291.02399999999994
+        ],
+        [
+          118.25,
+          291.02399999999994
+        ],
+        [
+          118.25,
+          302.71999999999997
+        ],
+        [
+          27.434,
+          302.71999999999997
+        ]
+      ]
+    },
+    {
+      "title": "3. Industrial Development",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          24.023999999999997,
+          4.140000000000001
+        ],
+        [
+          176.946,
+          4.140000000000001
+        ],
+        [
+          176.946,
+          15.870000000000001
+        ],
+        [
+          24.023999999999997,
+          15.870000000000001
+        ]
+      ]
+    },
+    {
+      "title": "4. Balance of Payments",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          27.258000000000003,
+          430.56000000000006
+        ],
+        [
+          162.624,
+          430.56000000000006
+        ],
+        [
+          162.624,
+          442.29
+        ],
+        [
+          27.258000000000003,
+          442.29
+        ]
+      ]
+    },
+    {
+      "title": "5. Reforms",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          24.750999999999998,
+          306.05400000000003
+        ],
+        [
+          90.598,
+          306.05400000000003
+        ],
+        [
+          90.598,
+          317.85200000000003
+        ],
+        [
+          24.750999999999998,
+          317.85200000000003
+        ]
+      ]
+    },
+    {
+      "title": "6. Public Administration",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          34.875,
+          142.475
+        ],
+        [
+          184.60500000000002,
+          142.475
+        ],
+        [
+          184.60500000000002,
+          153.595
+        ],
+        [
+          34.875,
+          153.595
+        ]
+      ]
+    },
+    {
+      "title": "7. United States Aid",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          37.2,
+          530.9800000000001
+        ],
+        [
+          162.75,
+          530.9800000000001
+        ],
+        [
+          162.75,
+          542.1000000000001
+        ],
+        [
+          37.2,
+          542.1000000000001
+        ]
+      ]
+    },
+    {
+      "title": "Significance of the Bell Report",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          134.963,
+          620.224
+        ],
+        [
+          317.56,
+          620.224
+        ],
+        [
+          317.56,
+          632.8960000000001
+        ],
+        [
+          134.963,
+          632.8960000000001
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          15
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          16
+        ],
+        [
+          "SectionHeader",
+          4
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          16
+        ],
+        [
+          "SectionHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          14
+        ],
+        [
+          "SectionHeader",
+          4
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          16
+        ],
+        [
+          "SectionHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          12
+        ],
+        [
+          "SectionHeader",
+          4
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          18
+        ],
+        [
+          "SectionHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          16
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/are-the-philippines-really-free"
+}

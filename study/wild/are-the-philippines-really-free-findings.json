@@ -1,0 +1,162 @@
+{
+  "tool": "ocr-verify",
+  "version": "0.1.0",
+  "generated": "2026-08-17 18:34 UTC",
+  "pdf": "study/wild/downloads2/are-the-philippines-really-free.pdf",
+  "engine_output": "study/wild/marker_out2/are-the-philippines-really-free/are-the-philippines-really-free.md",
+  "engine_label": "AI engine",
+  "dpi": 200,
+  "min_conf": 40.0,
+  "pages": [
+    {
+      "page": 1,
+      "divergence": 0.538462,
+      "vlm_words": 39,
+      "witness_words": 27,
+      "unsupported_words": 21,
+      "dropped_words": 9,
+      "ink_ratio": 0.142514,
+      "witness_quality": "ok",
+      "verified": false,
+      "findings": [
+        {
+          "kind": "wholesale_disagreement",
+          "severity": 0.5,
+          "tokens": 30,
+          "bbox": null,
+          "vlm_text": "Are The Philippines Really Free? 10% INDIAN Published FAR EASTERN POLICY 80 11th 3, N. Y. Distances are in statute miles",
+          "witness_text": "Sway 1951 am thw) pa i Pubhshed Go 5",
+          "note": "21 of 39 AI words lack witness support and 9 of 27 witness words lack AI support, and 67% of the unmatched witness words are short shreds \u2014 the witness likely could not handle this page. Review the page image rather than trusting either reading."
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "divergence": 0.008386,
+      "vlm_words": 477,
+      "witness_words": 482,
+      "unsupported_words": 4,
+      "dropped_words": 9,
+      "ink_ratio": 0.288945,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 3,
+      "divergence": 0.011309,
+      "vlm_words": 619,
+      "witness_words": 626,
+      "unsupported_words": 7,
+      "dropped_words": 14,
+      "ink_ratio": 0.184691,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 4,
+      "divergence": 0.02921,
+      "vlm_words": 582,
+      "witness_words": 601,
+      "unsupported_words": 17,
+      "dropped_words": 36,
+      "ink_ratio": 0.265787,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "dropped_text",
+          "severity": 0.192,
+          "tokens": 3,
+          "bbox": [
+            62,
+            14,
+            494,
+            58
+          ],
+          "vlm_text": "",
+          "witness_text": "3. Industrial Development",
+          "note": "Witness confidence is low on this page, so this is a prompt to look, not a verdict."
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "divergence": 0.024311,
+      "vlm_words": 617,
+      "witness_words": 626,
+      "unsupported_words": 15,
+      "dropped_words": 24,
+      "ink_ratio": 0.14201,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 6,
+      "divergence": 0.021773,
+      "vlm_words": 643,
+      "witness_words": 654,
+      "unsupported_words": 14,
+      "dropped_words": 25,
+      "ink_ratio": 0.318182,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    },
+    {
+      "page": 7,
+      "divergence": 0.025765,
+      "vlm_words": 621,
+      "witness_words": 624,
+      "unsupported_words": 16,
+      "dropped_words": 19,
+      "ink_ratio": 0.196774,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": [
+        {
+          "kind": "unsupported_text",
+          "severity": 0.5,
+          "tokens": 5,
+          "bbox": [
+            69,
+            10,
+            1206,
+            92
+          ],
+          "vlm_text": "property led merely to huge",
+          "witness_text": "prop- erty",
+          "note": ""
+        },
+        {
+          "kind": "dropped_text",
+          "severity": 0.36,
+          "tokens": 4,
+          "bbox": [
+            374,
+            1725,
+            888,
+            1770
+          ],
+          "vlm_text": "",
+          "witness_text": "Significance of the Bell Report",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "divergence": 0.018933,
+      "vlm_words": 581,
+      "witness_words": 590,
+      "unsupported_words": 11,
+      "dropped_words": 20,
+      "ink_ratio": 0.442809,
+      "witness_quality": "ok",
+      "verified": true,
+      "findings": []
+    }
+  ]
+}

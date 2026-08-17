@@ -224,6 +224,81 @@ tone on documents like this one. A future change to *remove* an accusation on lo
 confidence (rather than hedge it) would be a materially different, riskier design and is
 not what was implemented here.
 
+## Document 2: a cleaner sibling from the same publisher
+
+*Run date: 2026-08-18. Engine: Marker (marker-pdf, default mode, `--paginate_output`).
+Source: public-domain scan from the Internet Archive, downloaded once, run once.*
+
+[`downloads2/are-the-philippines-really-free.pdf`](downloads2/are-the-philippines-really-free.pdf)
+— *"Are The Philippines Really Free? An Analysis of the Bell Report on the Philippines"*,
+an 8-page pamphlet issued by the **same publisher** as document 1
+(Committee For A Democratic Far Eastern Policy, New York), 1950/1951
+([archive.org/details/arephilippinesre00comm](https://archive.org/details/arephilippinesre00comm),
+public domain — same basis as document 1: pre-1964 US pamphlet, no copyright renewal on
+record). Found by querying archive.org for other works by the same creator, once it was
+known this publisher exists there — three other siblings turned up
+(`greatdebatepeace00comm`, `a-documented-record-who-started-the-korean-war` — literally
+the "Far East Spotlight" series document 1's cover misread was named after — and this
+one); this one was picked and screened via page-preview JPEGs first (no download spent)
+because it looked like the cleanest scan of the three for a first cross-document
+comparison: a printed (not hand-lettered) title cover and plain typewritten mimeograph
+body, closer to "typical" than document 1's cover. 1 of 3 downloads-per-block budget
+used.
+
+### What Marker actually did (checked by hand against the page images)
+
+Screened both flagged pages against [`downloads2/preview/`](downloads2/preview/)
+(rendered locally at 150 DPI from the source PDF, not archive.org's preview endpoint).
+Zero fabrication. The two real discrepancies are both mundane engine behavior already
+documented elsewhere in this study:
+
+- **Two section headings dropped**: "3. Industrial Development" (page 4) and
+  "Significance of the Bell Report" (page 7) are both genuinely on the page (confirmed
+  against the page image) and genuinely absent from Marker's markdown — the same
+  heading/marginalia-dropping behavior document 1's footer catalog code showed, not
+  invention.
+- **One page-boundary hyphenation, reconstructed correctly by Marker, split by the
+  witness**: "property" is hyphenated across a page break in the source ("prop-" /
+  "erty"); Marker's markdown correctly joins it back into "property", but Tesseract
+  reads the two fragments literally. `ocr-verify` flagged this as `unsupported_text`
+  because Marker's reconstructed word has no exact witness match — a witness-side
+  artifact, not an AI fabrication.
+
+Full output: [`marker_out2/are-the-philippines-really-free/are-the-philippines-really-free.md`](marker_out2/are-the-philippines-really-free/are-the-philippines-really-free.md).
+
+### What ocr-verify said
+
+Ran blind (PDF + Marker output, `ocr-verify` v0.1.0):
+[`are-the-philippines-really-free-report.html`](are-the-philippines-really-free-report.html),
+[`are-the-philippines-really-free-findings.json`](are-the-philippines-really-free-findings.json).
+
+```
+page 1:  53.8% divergence — wholesale disagreement (witness failed, excluded from gate)
+page 4:   2.9% divergence — dropped text
+page 7:   2.6% divergence — dropped text, unsupported text
+3 of 8 page(s) flagged; 84 of 4,140 AI words unsupported (2.03%) across 7 verified page(s)
+```
+
+Page 1 is the cover (title text over a printed world map graphic) — the witness-quality
+guard correctly caught this one and excluded it from the verified gate rather than
+scoring it as a false accusation, unlike document 1's hand-lettered cover, which the
+guard missed entirely (see the "Follow-up" sections above). Pages 4 and 7's findings are
+both the mundane cases described above, correctly reported as low-severity prompts to
+look ("note" hedge present on 4; page 7's `unsupported_text` at severity 0.5 is
+un-hedged — the hyphenation-reconstruction case fix (a)/(b) don't cover, since it's
+neither a low-confidence misread nor a short-token near-miss, but a different witness
+failure mode: correct-but-split tokens across a page boundary). **Verdict: zero
+fabrication, hand-confirmed** — this document's false-positive rate (2.03% unsupported,
+3 of 8 pages flagged, all three explained) is markedly lower than document 1's (13.18%,
+4 of 4 pages), consistent with this document lacking document 1's two hardest failure
+modes (hand-lettered display type, heavy mimeograph ink) outside its cover page.
+
+### Corpus count
+
+This is real-archival document **2 of the ≥3** target in `GOALS.md`'s C1 checkpoint
+(2026-08-30). Both documents hand-verified at zero fabrication; one more needed to close
+that gate item.
+
 ## Next steps (not done this block)
 
 - More wild documents, especially ones with confirmed bleed-through (the original target
