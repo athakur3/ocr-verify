@@ -1,0 +1,59 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "kind": "clean",
+      "tesseract_usable": 124,
+      "tesseract_mean_conf": 96.4,
+      "paddle_words": 124,
+      "paddle_mean_conf": 0.999,
+      "agreement_tesseract_in_paddle": 1.0,
+      "paddle_fabricated_vs_truth": 0,
+      "paddle_omitted_vs_truth": 0
+    },
+    {
+      "page": 5,
+      "kind": "blank_noise",
+      "tesseract_usable": 0,
+      "tesseract_mean_conf": 0.0,
+      "paddle_words": 0,
+      "paddle_mean_conf": 0.0,
+      "agreement_tesseract_in_paddle": 0.0,
+      "paddle_fabricated_vs_truth": 0,
+      "paddle_omitted_vs_truth": 0
+    },
+    {
+      "page": 15,
+      "kind": "noise_heavy",
+      "tesseract_usable": 0,
+      "tesseract_mean_conf": 0.0,
+      "paddle_words": 104,
+      "paddle_mean_conf": 0.997,
+      "agreement_tesseract_in_paddle": 0.0,
+      "paddle_fabricated_vs_truth": 0,
+      "paddle_omitted_vs_truth": 0
+    },
+    {
+      "page": 19,
+      "kind": "skew_6deg",
+      "tesseract_usable": 88,
+      "tesseract_mean_conf": 92.2,
+      "paddle_words": 78,
+      "paddle_mean_conf": 0.998,
+      "agreement_tesseract_in_paddle": 0.67,
+      "paddle_fabricated_vs_truth": 0,
+      "paddle_omitted_vs_truth": 37
+    },
+    {
+      "page": 23,
+      "kind": "combo_severe",
+      "tesseract_usable": 77,
+      "tesseract_mean_conf": 73.1,
+      "paddle_words": 115,
+      "paddle_mean_conf": 0.916,
+      "agreement_tesseract_in_paddle": 0.818,
+      "paddle_fabricated_vs_truth": 13,
+      "paddle_omitted_vs_truth": 13
+    }
+  ]
+}

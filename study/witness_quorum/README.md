@@ -70,7 +70,52 @@ its own confidence is high AND its reading agrees with whatever fragments Tesser
 *did* read on that page (page 23's 0.916 mean confidence is suspiciously close to its
 clean-page 0.997-0.999 range, so confidence alone would not have caught this case here).
 That is real design work, not a config flag, so per the backlog item ("ablate before
-merging") this stays a branch-only spike. If picked up again: the open question is
-whether an agreement-gated quorum (trust PaddleOCR only on tokens near words Tesseract
-also read, never on a page where Tesseract read nothing at all) recovers page 15's win
-without inheriting page 23's risk — untested here.
+merging") this stays a branch-only spike.
+
+## Follow-up: does the agreement-gated rule actually work? ([agreement_gate.py](agreement_gate.py))
+
+The obvious next question, and the one this spike's first pass left open: gate trust on
+whether PaddleOCR's reading *agrees* with whatever Tesseract itself managed to read on
+the same page, rather than trusting PaddleOCR outright. Tested directly — run Tesseract
+(the existing witness) on the same 5 pages, and measure what share of Tesseract's own
+words also show up in PaddleOCR's reading (exact or near-miss match, no ground truth
+involved in this signal; ground truth is used only afterward, to grade the resulting
+decision).
+
+| Page | Kind | Tesseract usable words | Tesseract mean conf | Agreement (Tesseract⊆Paddle) | PaddleOCR fabricated |
+| --- | --- | --- | --- | --- | --- |
+| 1 | clean | 124 | 96.4 | 1.000 | 0 |
+| 5 | blank_noise | 0 | 0.0 | 0.000 | 0 |
+| 15 | noise_heavy | 0 | 0.0 | 0.000 | 0 |
+| 19 | skew_6deg | 88 | 92.2 | 0.670 | 0 |
+| 23 | combo_severe | 77 | 73.1 | **0.818** | **13** |
+
+Full detail: [agreement_gate_results.json](agreement_gate_results.json).
+
+**The rule as sketched does not work, on both halves.**
+
+1. The "never trust when Tesseract read nothing" half directly disqualifies page 15 —
+   Tesseract reads 0 usable words there, that being exactly *why* it's the blind case.
+   Applied literally, the rule that was supposed to capture this spike's one clean win
+   would refuse to trust PaddleOCR on the one page where trusting it pays off.
+2. The "agreement" half is inverted from what's needed. Page 23 — the page where
+   PaddleOCR fabricates — has *higher* agreement with Tesseract (0.818) than page 19,
+   the clean partial-recovery case (0.670). The mechanism is legible in hindsight: under
+   heavy combined degradation, both engines are looking at the same damaged pixels and
+   converge on the same *wrong* reading, so agreement-with-Tesseract tracks shared
+   exposure to bad image quality, not correctness. Two witnesses agreeing is not evidence
+   they're right when the thing making one of them wrong (the image) is visible to both.
+
+So this specific two-part rule is dead on a 5-page sample, not just unmerged. It isn't
+a config-tuning problem (no threshold on this "agreement" signal separates page 23 from
+page 19 in the needed direction — 23's value is simply higher). A workable quorum, if
+one exists, needs a signal that isn't "do the two witnesses agree with each other,"
+since the failure mode here is exactly correlated failure between them. Candidates for
+a future pass, untested: whether PaddleOCR's own confidence separates cleanly on a
+larger sample than n=5 (this sample's 0.916 vs 0.997-0.999 gap looked real but was
+flagged too thin to trust after the first pass, and this second pass didn't add
+confidence-signal evidence either way); or abandoning the "trust one witness over the
+other" framing entirely in favor of surfacing disagreement itself as the finding
+(closer to how the tool already treats Tesseract-vs-AI disagreement) rather than trying
+to pick a winner. Not attempted here — this pass answers "does the sketched rule work,"
+not "what rule would."
