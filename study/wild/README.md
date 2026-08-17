@@ -72,11 +72,71 @@ not yet demonstrated on real archival material. The "Honest limits" section of
 `study/README.md` already flagged this gap ("Real archival scans have layouts and
 typefaces this corpus does not attempt"); this is the first direct data point on it.
 
+## Follow-up: why witness-quality said "ok" (confirmed root cause, next block)
+
+The previous block flagged this as worth a dedicated look but didn't dig in. Reproduced
+directly against the real `compare_page`/`_classify` code path (read-only —
+`witness_confidence_probe.py` in this directory, no `align.py`/`witness.py` changes):
+
+```
+page  mean_conf  usable/total  noise_rate  quality  low_conf<65?  misread-fold(rate>=0.20 & conf<80)?
+   0       84.2         0.854       0.098       ok       False       False
+   1       89.0         0.922       0.054       ok       False       False
+   2       90.0         0.941       0.075       ok       False       False
+   3       89.3         0.921       0.052       ok       False       False
+```
+
+(Divergence from these page images comes out slightly different from the committed
+report — 40.4/13.7/9.9/14.0% vs. the report's 38.6/13.4/10.7/10.4% — because this probe
+reruns Tesseract against the saved `downloads/preview/` PNGs rather than the original
+higher-resolution PDF render the report used. Same order of magnitude, same verdict on
+every page, not a discrepancy worth chasing further.)
+
+Both of the heuristic's guards miss independently, for the same underlying reason:
+
+1. **`low_conf_mean` (65) / usable-ratio (0.5) gate never trips.** Mean witness
+   confidence is 84–90% and 85–94% of raw words clear the usable-confidence floor —
+   this document is *mostly* read correctly, so the page-level average looks completely
+   healthy.
+2. **The `misread_rate_low` (0.20) × `misread_conf_ceiling` (80) fold never trips
+   either.** The witness-side noise rate (near-miss words, glyph-level disagreement
+   with the AI engine) is 5–10% on every page — real, but under the 20% trigger — and
+   mean confidence sits above the 80 ceiling regardless.
+
+The concrete failure: on page 1 Tesseract read "as" as **"ae" twice, at 95.6% and 86.2%
+confidence** — both comfortably above every threshold in `Settings`. A design comment in
+`align.py` (on `misread_conf_ceiling`) reasons that an engine "cannot lower Tesseract's
+confidence in a page it never touches" — true, but the implicit assumption is that a
+*misreading* witness also reports low confidence on its own misreads. That holds for
+the synthetic corpus's degradation modes (blur, noise, warp — genuinely hard to read, so
+Tesseract is genuinely unsure). It does not hold here: hand-lettered display type and
+uneven mimeograph ink produce glyph shapes that are still clean enough for Tesseract's
+character classifier to be confident about the *wrong* sequence. The errors are a small
+enough minority (5–10% noise rate) that they never pull the page mean down, and
+individually confident enough that no single-word threshold would catch them without
+also catching plenty of correct words.
+
+This means a real fix is not a threshold tweak (lowering `misread_conf_ceiling` or
+`low_conf_mean` would just make the gate fire more often on the synthetic corpus too,
+where high confidence currently *is* a reliable correctness signal — that would need its
+own precision/recall ablation on `study/`'s corpus before touching anything). It would
+need a signal that survives dilution — e.g. locally low confidence *within the specific
+run of tokens a finding is built from*, rather than a whole-page mean — which is a
+different kind of change to `_classify`/`compare_page`'s finding construction, not a
+constant change. Left as a scoped design problem for a future block, per the standing
+guidance not to rush this into `witness.py`/`align.py` without its own ablation.
+
 ## Next steps (not done this block)
 
 - More wild documents, especially ones with confirmed bleed-through (the original target
-  of this hunt) and ones with cleaner typefaces to isolate whether the false-positive
-  driver here is specifically stylized/hand-lettered text, ink degradation, or both.
-- If the pattern holds across more documents, the witness-quality heuristic (why did it
-  call these pages "ok"?) is worth a dedicated look — out of scope for this block, which
-  is document-gathering, not scorer surgery.
+  of this hunt, still unfound — this block screened several archive.org metadata leads
+  with explicit "show-through"/"bleed through" language, including a 1696 English
+  auction-catalogue microfilm scan literally titled "Faded, print show-through" — but at
+  full resolution none showed unambiguous mirrored/reversed text, and the strongest
+  metadata hit was Latin book-catalogue listings, off-domain for this study's English
+  word-level scoring; no download spent, all screening was via archive.org's page-preview
+  JPEGs) and ones with cleaner typefaces to isolate whether the false-positive driver here
+  is specifically stylized/hand-lettered text, ink degradation, or both.
+- The witness-quality fix design sketched above (per-finding-local confidence, not
+  page-mean) is ready to be picked up as its own backlog item with its own ablation
+  against the synthetic corpus's precision=1.00.
