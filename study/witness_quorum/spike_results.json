@@ -1,0 +1,49 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "kind": "clean",
+      "truth_words": 124,
+      "paddle_words": 124,
+      "paddle_mean_conf": 0.999,
+      "paddle_fabricated": 0,
+      "paddle_omitted": 0
+    },
+    {
+      "page": 5,
+      "kind": "blank_noise",
+      "truth_words": 0,
+      "paddle_words": 0,
+      "paddle_mean_conf": 0.0,
+      "paddle_fabricated": 0,
+      "paddle_omitted": 0
+    },
+    {
+      "page": 15,
+      "kind": "noise_heavy",
+      "truth_words": 104,
+      "paddle_words": 104,
+      "paddle_mean_conf": 0.997,
+      "paddle_fabricated": 0,
+      "paddle_omitted": 0
+    },
+    {
+      "page": 19,
+      "kind": "skew_6deg",
+      "truth_words": 115,
+      "paddle_words": 78,
+      "paddle_mean_conf": 0.998,
+      "paddle_fabricated": 0,
+      "paddle_omitted": 37
+    },
+    {
+      "page": 23,
+      "kind": "combo_severe",
+      "truth_words": 115,
+      "paddle_words": 115,
+      "paddle_mean_conf": 0.916,
+      "paddle_fabricated": 13,
+      "paddle_omitted": 13
+    }
+  ]
+}
