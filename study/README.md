@@ -187,6 +187,54 @@ for Marker's 75-word collapses, and Marker is perfectly clean at strengths where
 is already fabricating. There is no universal "safe" ghost level to test at — which is an
 argument for witnessing every page rather than spot-checking known-bad conditions.
 
+### Second-seed check: does the onset survive a different passage pair? (run 2026-08-17)
+
+The sweep above uses one passage pair (real "conclusions" text, ghost "survey" text). A
+second corpus ([sweep/make_sweep2.py](sweep/make_sweep2.py)) repeats the same six-level
+construction with a different pair — real "tides" text, ghost "instruments" text — same
+strengths, same scoring ([sweep/score_sweep2.py](sweep/score_sweep2.py)), to check whether
+the fabrication onset is a property of the mechanism or an artifact of that specific
+wording. Marker ran in default (fast) mode here, not the explicit balanced mode used for
+the main study's single fabrication case; the first sweep's run command was not recorded
+precisely enough to confirm which mode it used, so mode is a confound between the two
+sweeps and not just passage content — noted, not glossed over. Full numbers:
+[sweep/sweep2_results.json](sweep/sweep2_results.json).
+
+| Ghost strength | Marker fabricated | Marker omitted | MinerU fabricated | MinerU omitted |
+| --- | --- | --- | --- | --- |
+| 0.00 | 0 | 37 | 0 | 0 |
+| 0.10 | 0 | 37 | 0 | 0 |
+| 0.20 | 2 | 36 | 4 | 0 |
+| 0.30 | 2 | 36 | 4 | 0 |
+| 0.40 | 2 | 36 | 4 | 0 |
+| 0.55 | 19 | 41 | 4 | 0 |
+
+What replicates and what doesn't:
+
+- **The core claim survives**: both engines are clean at 0.10 and both fabricate by 0.20
+  — same coarse onset window as the first pair. Fabrication-under-bleed-through is not
+  an artifact of the specific "conclusions"/"survey" wording.
+- **The sharp two-onset story does not clearly replicate at this granularity.** In the
+  first pair Marker was high-threshold-then-catastrophic and MinerU was hair-trigger-but-
+  small; here both engines cross into fabrication in the *same* coarse bin (0.10–0.20),
+  and Marker's fabrication stays small (2–19 words) rather than exploding — the opposite
+  of its behaviour on the first pair. No bisect was run on this corpus (0.10–0.20 is
+  unresolved into finer strengths), so a real onset-order difference could still be
+  hiding inside that bin; this run cannot distinguish "the order flipped" from "the order
+  is noise at coarse resolution." Given the mode confound above, this pair alone cannot
+  settle it either way.
+- **Marker's content-loss generalizes, but its shape changes.** Here it drops the title
+  *and* the entire third paragraph (~37 of 115 words) at every strength including 0.0 —
+  worse than the first pair's 4-word title-only loss, and ghost-independent in the same
+  way. Content loss unrelated to the ghost looks like a real, passage-sensitive Marker
+  behaviour, not a fluke of one passage.
+
+Net effect on the multi-seed caveat below: the headline claim (fabrication has a
+strength-dependent onset, and it's low) holds up under a second passage. The specific
+per-engine onset *ordering* claimed from the first pair is now open again — it was
+either passage-sensitive or is a coarse-resolution artifact, and this study can't tell
+which without a matched-mode, bisected third run.
+
 ## Honest limits of this study
 
 - One engine, one run, one synthetic-then-degraded corpus. This measures existence
@@ -196,7 +244,9 @@ argument for witnessing every page rather than spot-checking known-bad condition
   have layouts and typefaces this corpus does not attempt.
 - Degradations are real image operations, but the *pages* are born digital. A physically
   scanned test target would be stronger and is future work.
-- The sweep and bisect run one seed and one engine pass per strength level, on a single
-  passage pair. The onset locations and curve shapes are observations about these runs;
-  a multi-seed, multi-passage robustness pass is future work before treating either
-  number as a property of the engine.
+- The sweep and bisect run one seed and one engine pass per strength level. A second
+  passage pair (above) confirms the onset itself isn't wording-specific, but wasn't
+  bisected and used an unconfirmed Marker mode, so it can't settle whether the first
+  pair's per-engine onset *ordering* is real or an artifact — a matched-mode, bisected
+  third run is still future work before treating that ordering as a property of either
+  engine.
