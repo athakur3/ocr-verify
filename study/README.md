@@ -116,6 +116,11 @@ pipeline, local). Per-page mapping from `content_list.json` (`page_idx`); captur
 | **Bleed-through** | **58 fabricated words, degeneration loop** | **5 fabricated words ("lye source of catalyst solutions")** |
 | ocr-verify score | precision 1.00, recall 1.00 | precision 1.00, recall 1.00 |
 
+Both numbers are gated mechanically, not just claimed in prose:
+`tests/test_study_gate.py` calls `study/score.py`'s scoring function directly
+against both captured engine outputs and fails the build if either regresses
+below 1.00.
+
 The cross-engine headline: **two engines, different quality tiers, same fabrication
 trigger.** MinerU is dramatically more faithful than Marker on this corpus — no dropped
 content anywhere — yet bleed-through still induced invented text on both. Ghosted

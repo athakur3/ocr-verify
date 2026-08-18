@@ -72,7 +72,12 @@ def bag_delta(emitted: list[str], truth: list[str]) -> tuple[int, int]:
     return fabricated, omitted
 
 
-def main(engine_output: Path) -> None:
+def score(engine_output: Path) -> dict:
+    """Run both measurement steps and return {"summary": ..., "pages": [...]}.
+
+    Split out from main() so the precision/recall gate (tests/test_study_gate.py)
+    can call this directly instead of shelling out and re-parsing stdout.
+    """
     truth = json.loads(TRUTH.read_text())
     pages_truth = truth["pages"]
     n_pages = len(pages_truth)
@@ -151,24 +156,35 @@ def main(engine_output: Path) -> None:
         "recall": recall,
         "min_fabricated_tokens": MIN_FABRICATED_TOKENS,
     }
+    return {"summary": summary, "pages": rows}
+
+
+def main(engine_output: Path) -> None:
+    result = score(engine_output)
+    summary, rows = result["summary"], result["pages"]
+    n_pages = summary["corpus_pages"]
+    precision, recall = summary["precision"], summary["recall"]
+    tp, fp = summary["confusion"]["tp"], summary["confusion"]["fp"]
+    fn, tn = summary["confusion"]["fn"], summary["confusion"]["tn"]
+
     results_path = ROOT / f"results-{engine_output.parent.name if engine_output.is_file() else engine_output.name}.json"
-    results_path.write_text(json.dumps({"summary": summary, "pages": rows}, indent=2), "utf-8")
+    results_path.write_text(json.dumps(result, indent=2), "utf-8")
 
     print(f"\n{'page':>4}  {'kind':<22} {'truth':>5} {'emit':>5} {'fab':>4} {'omit':>4}  "
           f"{'engine?':<8} {'tool?':<6} verdict")
-    for e, t in zip(engine_rows, tool_rows):
+    for row in rows:
         verdict = (
-            "TP" if e["engine_fabricated"] and t["flagged_fabrication"]
-            else "FP" if t["flagged_fabrication"]
-            else "FN" if e["engine_fabricated"]
+            "TP" if row["engine_fabricated"] and row["flagged_fabrication"]
+            else "FP" if row["flagged_fabrication"]
+            else "FN" if row["engine_fabricated"]
             else "tn"
         )
-        tool_col = "flag" if t["flagged_fabrication"] else ("hedge" if t["hedged"] else "-")
-        print(f"{e['page']:>4}  {e['kind']:<22} {e['truth_words']:>5} {e['emitted_words']:>5} "
-              f"{e['fabricated_words']:>4} {e['omitted_words']:>4}  "
-              f"{'FABRICATED' if e['engine_fabricated'] else '-':<8} "
+        tool_col = "flag" if row["flagged_fabrication"] else ("hedge" if row["hedged"] else "-")
+        print(f"{row['page']:>4}  {row['kind']:<22} {row['truth_words']:>5} {row['emitted_words']:>5} "
+              f"{row['fabricated_words']:>4} {row['omitted_words']:>4}  "
+              f"{'FABRICATED' if row['engine_fabricated'] else '-':<8} "
               f"{tool_col:<6} {verdict}"
-              + (f"  [witness {t['witness_quality']}]" if t["witness_quality"] != "ok" else ""))
+              + (f"  [witness {row['witness_quality']}]" if row["witness_quality"] != "ok" else ""))
 
     print(f"\nengine fabricated on {summary['engine_pages_with_fabrication']}/{n_pages} pages "
           f"({summary['engine_fabricated_words_total']} invented words)")
