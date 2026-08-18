@@ -1,0 +1,26 @@
+{
+  "truth_words_per_page": 115,
+  "rows": [
+    {
+      "ghost_strength": 0.125,
+      "marker_fabricated": 0,
+      "marker_omitted": 0,
+      "mineru_fabricated": 4,
+      "mineru_omitted": 0
+    },
+    {
+      "ghost_strength": 0.15,
+      "marker_fabricated": 2,
+      "marker_omitted": 0,
+      "mineru_fabricated": 3,
+      "mineru_omitted": 0
+    },
+    {
+      "ghost_strength": 0.175,
+      "marker_fabricated": 2,
+      "marker_omitted": 0,
+      "mineru_fabricated": 4,
+      "mineru_omitted": 0
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Observations of the Tide",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          67.932,
+          72.864
+        ],
+        [
+          192.168,
+          72.864
+        ],
+        [
+          192.168,
+          86.328
+        ],
+        [
+          67.932,
+          86.328
+        ]
+      ]
+    },
+    {
+      "title": "Observations of the Tide",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          67.932,
+          72.864
+        ],
+        [
+          192.168,
+          72.864
+        ],
+        [
+          192.168,
+          86.328
+        ],
+        [
+          67.932,
+          86.328
+        ]
+      ]
+    },
+    {
+      "title": "Observations of the Tide",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          67.932,
+          72.864
+        ],
+        [
+          192.168,
+          72.864
+        ],
+        [
+          192.168,
+          86.328
+        ],
+        [
+          67.932,
+          86.328
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/sweep2_bisect"
+}

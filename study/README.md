@@ -346,6 +346,47 @@ Two findings, one expected and one not:
   worth a finer bisect specifically around content-loss if picked up again, independent of
   the fabrication question this run was built to answer.
 
+### Bisecting sweep 2's 0.10-0.20 gap (run 2026-08-19)
+
+The second-seed check left pair 2 (tides/instruments) as the one pair where both engines'
+onset landed in the same coarse bin — Marker 0→2 fabricated and MinerU 0→4 fabricated,
+both between 0.10 and 0.20 — an open tie the "Honest limits" section flagged as the one
+pair not yet bisected. A bisect corpus
+([sweep/make_sweep2_bisect.py](sweep/make_sweep2_bisect.py)) adds three finer strengths —
+0.125 / 0.15 / 0.175 — on the same pair, same explicit `--mode fast`. Full numbers:
+[sweep/sweep2_bisect_results.json](sweep/sweep2_bisect_results.json).
+
+| Ghost strength | Marker fabricated | Marker omitted | MinerU fabricated | MinerU omitted |
+| --- | --- | --- | --- | --- |
+| 0.10 | 0 | 37 | 0 | 0 |
+| 0.125 | 0 | 0 | 4 | 0 |
+| 0.15 | 2 | 0 | 3 | 0 |
+| 0.175 | 2 | 0 | 4 | 0 |
+| 0.20 | 2 | 36 | 4 | 0 |
+
+- **The tie resolves: MinerU crosses first here too.** MinerU is already fabricating (3-4
+  words) at 0.125, the first strength above 0.10, while Marker stays clean until 0.15. The
+  coarse run's apparent tie was a resolution artifact, not a genuine simultaneous
+  crossing. All three passage pairs now agree on ordering (MinerU's onset precedes
+  Marker's), which is the strongest form of that claim this study can currently make —
+  see "Honest limits" below for what "agree" does and doesn't establish.
+- **The "ghost-independent" omission claim breaks down here too, replicating the sweep-3
+  bisect finding on a second pair.** All three bisect strengths render the title and every
+  paragraph intact — 0 omitted, not the 36-37 words dropped at every coarse strength
+  (0.0 through 0.55, this same pair). Two of the three pairs checked at fine resolution now
+  show the same pattern: the "always omits regardless of ghost strength" framing held only
+  at the coarse strengths actually sampled, not in between. Verified by reading the raw
+  Marker markdown directly (all three pages show the full title and all three paragraphs),
+  not inferred from the scorer alone.
+- **Infra note for future sweep runs**: the first attempt at this bisect (produced by an
+  interrupted prior session, recovered and finished this block) omitted
+  `--paginate_output` from the `marker_single` invocation, silently producing markdown
+  with no `{N}---` page markers — `score_sweep2_bisect.py`'s page-splitting regex then
+  found zero pages and scored every page as 100% omitted. This is the same failure mode
+  already documented in this study's operational history; worth an assert-based guard in
+  the scoring script itself if this recurs a third time, since it currently fails silently
+  rather than erroring.
+
 ## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
 
 The real-archival wild hunt (`study/wild/`) found two failure modes the 24-page corpus
@@ -393,10 +434,13 @@ material exposed, not measuring engine fabrication.
   A bisect of the third pair's 0.20–0.30 gap (see "Bisecting sweep 3's 0.20-0.30 gap"
   above) pinned Marker's cliff on *that specific pair* to a narrow 0.275–0.30 band — clean
   before, fabricating and content-complete after — and confirmed MinerU crosses first on
-  this pair, matching the first pair's ordering. That settles ordering for one pair at
-  fine resolution; it does not establish the ordering generalizes, since the second pair's
-  coarse run still shows both engines crossing in the same bin and was never bisected.
-  Whether the second pair would also resolve to "MinerU first" under the same fine
-  resolution, or genuinely ties or reverses, is unbisected and open — the honest claim is
-  "ordering is resolvable and pair 1 and pair 3 agree," not "ordering always favors
-  MinerU."
+  this pair, matching the first pair's ordering. A second bisect, of the second pair's
+  0.10–0.20 gap (see "Bisecting sweep 2's 0.10-0.20 gap" above), resolved that pair's
+  apparent tie the same way: MinerU fabricates by 0.125, Marker not until 0.15. All three
+  passage pairs now agree once measured at matched fine resolution — MinerU's onset
+  precedes Marker's in every case checked. That is still three pairs, not a general law;
+  the honest claim is "ordering is resolvable and all three pairs tested agree," not
+  "ordering always favors MinerU." The two bisects also share a second result: both found
+  the coarse sweep's "ghost-independent" Marker content-loss (title and a paragraph
+  dropped at every coarse strength) vanishes at the finer strengths in between —
+  present at every strength actually sampled, but not a strength-independent constant.
