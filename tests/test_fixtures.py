@@ -8,6 +8,7 @@ page, these fail.
 
 from __future__ import annotations
 
+import json
 import shutil
 from pathlib import Path
 
@@ -19,6 +20,7 @@ from ocr_verify.ingest import load_vlm_output
 from ocr_verify.model import (
     BLANK_PAGE_FABRICATION,
     DROPPED_TEXT,
+    KIND_LABELS,
     UNSUPPORTED_TEXT,
     PageResult,
 )
@@ -121,6 +123,35 @@ class TestCli:
         assert "data:image/png;base64," in body  # evidence crops are embedded
         assert "Blank-page fabrication" in body
         assert js.exists()
+
+    def test_writes_sarif(self, tmp_path, results):
+        html = tmp_path / "report.html"
+        sarif_path = tmp_path / "report.sarif"
+        code = main([str(PDF), str(ENGINE), "-o", str(html), "--sarif", str(sarif_path), "-q"])
+        assert code == 0
+
+        data = json.loads(sarif_path.read_text(encoding="utf-8"))
+        assert data["version"] == "2.1.0"
+        run = data["runs"][0]
+        assert run["tool"]["driver"]["name"] == "ocr-verify"
+        rule_ids = {r["id"] for r in run["tool"]["driver"]["rules"]}
+        assert rule_ids == set(KIND_LABELS)
+
+        sarif_results = run["results"]
+        total_findings = sum(len(page.findings) for page in results.values())
+        assert len(sarif_results) == total_findings
+        assert {r["ruleId"] for r in sarif_results} <= rule_ids
+        assert {r["level"] for r in sarif_results} <= {"error", "warning", "note"}
+
+        blank_finding = next(f for f in results[2].findings if f.kind == BLANK_PAGE_FABRICATION)
+        page_2_blank = next(
+            r for r in sarif_results
+            if r["ruleId"] == BLANK_PAGE_FABRICATION and r["properties"]["page"] == 2
+        )
+        # An accusatory finding is only downgraded to "warning" when hedged (has a
+        # note) — same distinction the report itself draws (report.py's note paragraph).
+        assert page_2_blank["level"] == ("warning" if blank_finding.note else "error")
+        assert page_2_blank["locations"][0]["physicalLocation"]["region"]["startLine"] == 2
 
     def test_report_is_self_contained(self, tmp_path):
         html = tmp_path / "report.html"

@@ -59,6 +59,9 @@ ocr-verify book.pdf out/ --pages 47
 
 # machine-readable findings alongside the report
 ocr-verify book.pdf out/ -o report.html --json findings.json
+
+# SARIF, for GitHub code scanning or another CI dashboard
+ocr-verify book.pdf out/ -o report.html --sarif findings.sarif
 ```
 
 ### In CI
@@ -81,10 +84,13 @@ Two gate semantics worth knowing:
 
 ```yaml
 - name: Verify OCR output
-  run: ocr-verify corpus/doc.pdf ocr-out/ -o report.html --fail-on 0.02
+  run: ocr-verify corpus/doc.pdf ocr-out/ -o report.html --fail-on 0.02 --sarif findings.sarif
 - uses: actions/upload-artifact@v4
   if: always()
   with: { name: ocr-verify-report, path: report.html }
+- uses: github/codeql-action/upload-sarif@v3
+  if: always()
+  with: { sarif_file: findings.sarif }
 ```
 
 ## What it reports

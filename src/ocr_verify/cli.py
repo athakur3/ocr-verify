@@ -14,7 +14,7 @@ from pathlib import Path
 from . import __version__
 from .align import Settings, compare_page
 from .ingest import IngestError, load_vlm_output
-from .model import KIND_LABELS, PageResult, Report, VlmPage
+from .model import ACCUSATORY_KINDS, KIND_BLURBS, KIND_LABELS, PageResult, Report, VlmPage
 from .render import page_count, render_pdf
 from .report import write_report
 from .witness import TesseractMissing, run_witness, tesseract_version
@@ -47,6 +47,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("-o", "--out", type=Path, default=Path("ocr-verify-report.html"),
                    help="HTML report path (default: ocr-verify-report.html)")
     p.add_argument("--json", type=Path, default=None, help="also write machine-readable findings here")
+    p.add_argument("--sarif", type=Path, default=None,
+                   help="also write findings as SARIF 2.1.0, for GitHub code scanning / CI dashboards")
     p.add_argument("--engine-label", default="AI engine", help="name of the engine under test, for the report")
     p.add_argument("--dpi", type=int, default=200, help="rasterization DPI (default: 200)")
     p.add_argument("--lang", default="eng", help="Tesseract language (default: eng)")
@@ -167,6 +169,10 @@ def main(argv: list[str] | None = None) -> int:
             args.json.parent.mkdir(parents=True, exist_ok=True)
             args.json.write_text(json.dumps(_as_dict(report), indent=2), encoding="utf-8")
 
+        if args.sarif:
+            args.sarif.parent.mkdir(parents=True, exist_ok=True)
+            args.sarif.write_text(json.dumps(_as_sarif(report), indent=2), encoding="utf-8")
+
         # Only pages the witness could actually cover count toward the gate:
         # failing a build because the witness went blind on a noisy page would
         # punish the AI engine for Tesseract's weakness.
@@ -187,6 +193,8 @@ def main(argv: list[str] | None = None) -> int:
         log(f"report: {args.out}")
         if args.json:
             log(f"json:   {args.json}")
+        if args.sarif:
+            log(f"sarif:  {args.sarif}")
 
         if args.fail_on is not None:
             if overall > args.fail_on:
@@ -248,6 +256,82 @@ def _as_dict(report: Report) -> dict:
                 ],
             }
             for p in report.pages
+        ],
+    }
+
+
+def _sarif_level(kind: str, hedged: bool) -> str:
+    """Map a finding to a SARIF result level.
+
+    Mirrors the model's own distinction (see model.py's ACCUSATORY_KINDS comment):
+    an accusation the witness cannot fully back is a warning, not an error, and a
+    coverage gap (unverifiable_page) is a note, never an accusation at all.
+    """
+    if kind == "unverifiable_page":
+        return "note"
+    if kind in ACCUSATORY_KINDS:
+        return "warning" if hedged else "error"
+    return "warning"
+
+
+def _as_sarif(report: Report) -> dict:
+    """SARIF 2.1.0, for GitHub code scanning uploads and other CI dashboards.
+
+    Locations point at the source PDF; there is no line number for a scanned
+    page, so the page number fills `region.startLine` (SARIF requires the field
+    if a region is present at all) and is repeated in `properties` for tools
+    that read structured data instead.
+    """
+    pdf_uri = Path(report.pdf).as_posix()
+    rules = [
+        {
+            "id": kind,
+            "name": label.replace(" ", "").replace("-", ""),
+            "shortDescription": {"text": label},
+            "fullDescription": {"text": KIND_BLURBS[kind]},
+            "defaultConfiguration": {"level": _sarif_level(kind, hedged=False)},
+        }
+        for kind, label in KIND_LABELS.items()
+    ]
+    results = [
+        {
+            "ruleId": f.kind,
+            "level": _sarif_level(f.kind, hedged=bool(f.note)),
+            "message": {"text": f.note or f"{KIND_LABELS[f.kind]}: {f.vlm_text!r}"},
+            "locations": [
+                {
+                    "physicalLocation": {
+                        "artifactLocation": {"uri": pdf_uri},
+                        "region": {"startLine": p.index + 1},
+                    }
+                }
+            ],
+            "properties": {
+                "page": p.index + 1,
+                "severity": round(f.severity, 4),
+                "tokens": f.n_tokens,
+                "vlm_text": f.vlm_text,
+                "witness_text": f.witness_text,
+            },
+        }
+        for p in report.pages
+        for f in p.findings
+    ]
+    return {
+        "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+        "version": "2.1.0",
+        "runs": [
+            {
+                "tool": {
+                    "driver": {
+                        "name": "ocr-verify",
+                        "version": report.version,
+                        "informationUri": "https://github.com/athakur3/ocr-verify",
+                        "rules": rules,
+                    }
+                },
+                "results": results,
+            }
         ],
     }
 
