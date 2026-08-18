@@ -166,6 +166,19 @@ class TestCli:
         assert main(args + ["--fail-on", "0.5"]) == 0
         assert main(args + ["--fail-on", "0.01"]) == 1
 
+    def test_fail_on_catches_engine_gone_silent(self, tmp_path):
+        # An engine that emits nothing produces vlm_words = 0 on every verified
+        # page: `unsupported / total_words` hits the 0/0 fallback and reads as
+        # 0.00% divergence, which a naive --fail-on would call clean. Zero words
+        # compared is not the same as zero disagreement, and must still fail.
+        empty_engine = tmp_path / "empty_engine_output"
+        empty_engine.mkdir()
+        for i in range(1, 6):
+            (empty_engine / f"page_{i:03d}.md").write_text("", encoding="utf-8")
+        html = tmp_path / "report.html"
+        code = main([str(PDF), str(empty_engine), "-o", str(html), "--fail-on", "0.5", "-q"])
+        assert code == 1
+
     def test_page_subset(self, tmp_path):
         html = tmp_path / "report.html"
         js = tmp_path / "report.json"

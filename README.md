@@ -84,6 +84,10 @@ Two gate semantics worth knowing:
 - Exclusion is not a free pass: if more than `--max-unverified` (default 25%) of the AI
   engine's words sit on unverifiable pages, the gate fails anyway. An engine cannot pass
   by being unverifiable.
+- Going silent is not a free pass either: if the witness verifies pages but the AI engine
+  produced zero words on all of them (wrong output path, an ingest bug, a crashed run),
+  the divergence ratio has nothing to divide by and the gate fails rather than reading
+  that as 0% divergence.
 
 ### Checking a corpus at once
 

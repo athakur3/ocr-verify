@@ -217,6 +217,18 @@ def main(argv: list[str] | None = None) -> int:
             log(f"sarif:  {args.sarif}")
 
         if args.fail_on is not None:
+            # An engine that emits nothing (ingest bug, wrong output path, a
+            # crashed run whose empty files still parse) produces vlm_words = 0
+            # on every verified page, so `overall` hits the 0/0 fallback above
+            # and reads as a clean 0.00% divergence — the tool going silent
+            # would pass the gate it exists to fail. Verified pages with zero
+            # AI words is itself the signal: there was nothing to compare.
+            if verified and total_words == 0:
+                log(f"FAIL: {len(verified)} page(s) were verified but the AI engine "
+                    "produced 0 words on all of them — divergence cannot be computed "
+                    "(0/0), which --fail-on would otherwise read as clean. Check the "
+                    "engine output path and format.")
+                return EXIT_FLAGGED
             if overall > args.fail_on:
                 log(f"FAIL: divergence {overall * 100:.2f}% exceeds --fail-on "
                     f"{args.fail_on * 100:.2f}%")
