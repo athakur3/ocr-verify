@@ -300,11 +300,51 @@ What this settles and what it doesn't:
   the first two pairs (does Marker or MinerU cross into fabrication first) is not
   resolvable at this coarse a strength resolution — a bisected run around 0.20–0.30 is
   still the way to settle it, now that mode is a controlled variable.
-- **Marker's content-loss is the most stable signal across all three seeds**: every
-  passage loses its title (and, for the second and third pairs, additional paragraphs) at
-  every strength including 0.00, ghost-independent every time. Three for three, this is
-  the one Marker behaviour that looks like a real property of the engine rather than an
-  artifact of one passage.
+- **Marker's content-loss is the most stable signal across all three seeds at the
+  strengths sampled so far**: every passage loses its title (and, for the second and
+  third pairs, additional paragraphs) at every strength tested in the six-point sweep,
+  ghost-independent every time. The bisect below complicates "ghost-independent," though
+  — see next section.
+
+### Bisecting sweep 3's 0.20-0.30 gap (run 2026-08-18)
+
+The third-seed check narrowed Marker's onset to somewhere between 0.20 (clean) and 0.30
+(14 fabricated words, omission drops from 39 to 3) but couldn't resolve it further, and
+flagged this exact gap as the next step. A bisect corpus
+([sweep/make_sweep3_bisect.py](sweep/make_sweep3_bisect.py)) adds three finer strengths —
+0.225 / 0.25 / 0.275 — on the same survey/tides pair, same explicit `--mode fast`. Full
+numbers: [sweep/sweep3_bisect_results.json](sweep/sweep3_bisect_results.json).
+
+| Ghost strength | Marker fabricated | Marker omitted | MinerU fabricated | MinerU omitted |
+| --- | --- | --- | --- | --- |
+| 0.20 | 0 | 39 | 4 | 0 |
+| 0.225 | 0 | 0 | 4 | 0 |
+| 0.25 | 0 | 0 | 4 | 0 |
+| 0.275 | 0 | 0 | 4 | 0 |
+| 0.30 | 14 | 3 | 4 | 0 |
+
+Two findings, one expected and one not:
+
+- **Marker's cliff is sharper than the coarse sweep suggested, not fuzzier.** Zero
+  fabrication and zero omission at 0.225, 0.25, and 0.275 — completely clean — then both
+  fabrication (14 words) and near-complete omission-recovery (39 → 3) appear together at
+  0.30. The transition is confined to a 0.025-wide band (0.275–0.30) rather than smeared
+  across the whole 0.20–0.30 decade. This settles the onset-ordering question for this
+  pair specifically: MinerU is already fabricating at 0.20 (steady 4 words, unchanged
+  through the whole bisect and into 0.55), while Marker stays clean until 0.30 — MinerU
+  crosses first, cleanly, matching the first pair's ordering rather than the second pair's
+  same-coarse-bin result.
+- **The "ghost-independent" title-omission claim doesn't hold at 0.225–0.275.** All three
+  bisect pages render the title and every paragraph intact — 0 omitted words, not the 39
+  seen at 0.0/0.10/0.20 and every other level in the coarse sweep. Content-loss and
+  fabrication are moving together here, not independently: the same 0.275→0.30 boundary
+  that turns on fabrication also turns off the title-dropping behavior. That reframes the
+  coarse-sweep pattern — omission wasn't a strength-independent constant, it was constant
+  *within the strengths actually sampled*, and the bisect happened to land in a gap where
+  it isn't. Whether that gap is a narrow real feature of this passage or evidence the
+  omission behavior has its own separate, unmeasured onset is unresolved by this run —
+  worth a finer bisect specifically around content-loss if picked up again, independent of
+  the fabrication question this run was built to answer.
 
 ## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
 
@@ -350,7 +390,13 @@ material exposed, not measuring engine fabrication.
   onset location and magnitude are not — a third pair with mode explicitly matched to the
   second still produced a materially different curve (see "Third-seed check" above),
   which rules out mode as the hidden variable but leaves passage-sensitivity unexplained.
-  The specific claim that one engine's onset reliably precedes the other's is still
-  unsettled at this coarse a strength resolution — a bisected run around 0.20–0.30 is the
-  next step before treating either engine's onset *ordering* as a property of the engine
-  rather than of the strength granularity tested.
+  A bisect of the third pair's 0.20–0.30 gap (see "Bisecting sweep 3's 0.20-0.30 gap"
+  above) pinned Marker's cliff on *that specific pair* to a narrow 0.275–0.30 band — clean
+  before, fabricating and content-complete after — and confirmed MinerU crosses first on
+  this pair, matching the first pair's ordering. That settles ordering for one pair at
+  fine resolution; it does not establish the ordering generalizes, since the second pair's
+  coarse run still shows both engines crossing in the same bin and was never bisected.
+  Whether the second pair would also resolve to "MinerU first" under the same fine
+  resolution, or genuinely ties or reverses, is unbisected and open — the honest claim is
+  "ordering is resolvable and pair 1 and pair 3 agree," not "ordering always favors
+  MinerU."

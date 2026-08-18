@@ -1,0 +1,170 @@
+[
+    {
+        "type": "text",
+        "text": "The Survey of Coastal Stations",
+        "text_level": 2,
+        "bbox": [
+            112,
+            92,
+            364,
+            111
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.",
+        "bbox": [
+            111,
+            135,
+            728,
+            219
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.",
+        "bbox": [
+            111,
+            241,
+            725,
+            325
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+        "bbox": [
+            111,
+            348,
+            740,
+            410
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "Operations of the topic",
+        "bbox": [
+            684,
+            92,
+            883,
+            109
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "The Survey of Coastal Stations",
+        "text_level": 2,
+        "bbox": [
+            112,
+            92,
+            364,
+            111
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.",
+        "bbox": [
+            111,
+            135,
+            728,
+            219
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.",
+        "bbox": [
+            111,
+            241,
+            725,
+            325
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+        "bbox": [
+            111,
+            348,
+            740,
+            410
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "header",
+        "text": "Operations of the topic",
+        "bbox": [
+            684,
+            92,
+            883,
+            109
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "The Survey of Coastal Stations",
+        "text_level": 2,
+        "bbox": [
+            112,
+            92,
+            364,
+            111
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.",
+        "bbox": [
+            111,
+            135,
+            728,
+            219
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.",
+        "bbox": [
+            111,
+            241,
+            725,
+            325
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+        "bbox": [
+            111,
+            348,
+            740,
+            410
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "Operations of the topic",
+        "bbox": [
+            684,
+            92,
+            883,
+            109
+        ],
+        "page_idx": 2
+    }
+]
