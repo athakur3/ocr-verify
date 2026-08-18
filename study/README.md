@@ -383,9 +383,17 @@ pair not yet bisected. A bisect corpus
   `--paginate_output` from the `marker_single` invocation, silently producing markdown
   with no `{N}---` page markers — `score_sweep2_bisect.py`'s page-splitting regex then
   found zero pages and scored every page as 100% omitted. This is the same failure mode
-  already documented in this study's operational history; worth an assert-based guard in
-  the scoring script itself if this recurs a third time, since it currently fails silently
-  rather than erroring.
+  already documented in this study's operational history.
+- **Guard added (2026-08-19), so it cannot recur silently**: the five scorers' duplicated
+  page-splitting helpers were replaced by one shared `study/sweep/pagesplit.py`, which
+  raises `SweepOutputError` when Marker's markdown contains no `{N}---` markers (naming
+  `--paginate_output` as the cause) or when MinerU's `content_list.json` yields no text on
+  any page. Losing *some* pages still scores as omission — an engine emitting nothing for a
+  heavily degraded page is a real measurement — but it now prints which page indices were
+  missing. `tests/test_sweep_page_split.py` covers both failure shapes and additionally
+  re-splits every committed Marker capture, so an un-paginated capture cannot be committed
+  and scored as total content loss. All five scorers were re-run after the refactor and
+  reproduce their committed results JSONs byte-for-byte.
 
 ## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
 

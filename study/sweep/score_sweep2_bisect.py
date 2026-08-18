@@ -9,7 +9,6 @@ Run: uv run python study/sweep/score_sweep2_bisect.py
 from __future__ import annotations
 
 import json
-import re
 import sys
 from pathlib import Path
 
@@ -17,6 +16,7 @@ ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT.parent.parent / "src"))
 sys.path.insert(0, str(ROOT.parent))
 
+from pagesplit import marker_pages, mineru_pages  # noqa: E402
 from score import bag_delta  # noqa: E402
 from ocr_verify.normalize import tokenize  # noqa: E402
 
@@ -25,30 +25,18 @@ def toks(text: str, markup: bool = False) -> list[str]:
     return [n for _, n in tokenize(text, markup=markup)]
 
 
-def marker_pages(md_path: Path) -> dict[int, str]:
-    parts = re.split(r"^\{(\d+)\}-+$", md_path.read_text("utf-8"), flags=re.M)
-    return {int(parts[i]): parts[i + 1] for i in range(1, len(parts), 2)}
-
-
-def mineru_pages(content_list: Path) -> dict[int, str]:
-    items = json.loads(content_list.read_text("utf-8"))
-    pages: dict[int, list[str]] = {}
-    for it in items:
-        t = (it.get("text") or "").strip()
-        if t:
-            pages.setdefault(it["page_idx"], []).append(t)
-    return {idx: "\n\n".join(chunks) for idx, chunks in pages.items()}
-
-
 def main() -> None:
     truth = json.loads((ROOT / "sweep2_bisect_ground_truth.json").read_text())
     truth_toks = {p["page"] - 1: toks(p["text"]) for p in truth["pages"]}
     strengths = {p["page"] - 1: p["ghost_strength"] for p in truth["pages"]}
 
     engines = {
-        "marker": marker_pages(ROOT / "marker_out2_bisect" / "sweep2_bisect" / "sweep2_bisect.md"),
+        "marker": marker_pages(
+            ROOT / "marker_out2_bisect" / "sweep2_bisect" / "sweep2_bisect.md", len(truth_toks)
+        ),
         "mineru": mineru_pages(
-            ROOT / "mineru_out2_bisect" / "sweep2_bisect" / "hybrid_auto" / "sweep2_bisect_content_list.json"
+            ROOT / "mineru_out2_bisect" / "sweep2_bisect" / "hybrid_auto" / "sweep2_bisect_content_list.json",
+            len(truth_toks),
         ),
     }
 
