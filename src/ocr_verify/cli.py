@@ -37,16 +37,30 @@ def build_parser() -> argparse.ArgumentParser:
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    p.add_argument("pdf", type=Path, help="source PDF the AI engine was run on")
+    p.add_argument("pdf", type=Path, nargs="?", default=None,
+                   help="source PDF the AI engine was run on (omit with --batch)")
     p.add_argument(
         "engine_output",
         type=Path,
+        nargs="?",
+        default=None,
         help="the AI engine's output: a directory of per-page .md/.txt, a single "
-        "markdown file with page markers, or .jsonl/.json",
+        "markdown file with page markers, or .jsonl/.json (omit with --batch)",
     )
+    p.add_argument("--batch", type=Path, default=None, metavar="MANIFEST",
+                   help="JSON array of {pdf, engine_output, [engine_label, out, json, "
+                   "sarif]} objects; runs each through the same pipeline and returns the "
+                   "worst exit code across all of them. Global flags (--dpi, --fail-on, "
+                   "...) apply to every entry; an entry's own out/json/sarif override the "
+                   "default naming. --pages is not supported with --batch. With --batch, "
+                   "--json/--out name the aggregate summary and default output directory, "
+                   "not a single document's report.")
     p.add_argument("-o", "--out", type=Path, default=Path("ocr-verify-report.html"),
-                   help="HTML report path (default: ocr-verify-report.html)")
-    p.add_argument("--json", type=Path, default=None, help="also write machine-readable findings here")
+                   help="HTML report path (default: ocr-verify-report.html); with "
+                   "--batch, the directory default per-entry reports are written into")
+    p.add_argument("--json", type=Path, default=None,
+                   help="also write machine-readable findings here (with --batch: the "
+                   "aggregate summary)")
     p.add_argument("--sarif", type=Path, default=None,
                    help="also write findings as SARIF 2.1.0, for GitHub code scanning / CI dashboards")
     p.add_argument("--engine-label", default="AI engine", help="name of the engine under test, for the report")
@@ -103,6 +117,12 @@ def parse_pages(spec: str | None, total: int) -> list[int] | None:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     log = (lambda *a: None) if args.quiet else (lambda *a: print(*a, file=sys.stderr))
+
+    if args.batch is not None:
+        return _run_batch(args, log)
+    if args.pdf is None or args.engine_output is None:
+        print("error: pdf and engine_output are required unless --batch is given", file=sys.stderr)
+        return EXIT_ERROR
 
     try:
         if not args.pdf.exists():
@@ -219,6 +239,85 @@ def main(argv: list[str] | None = None) -> int:
     except KeyboardInterrupt:
         print("interrupted", file=sys.stderr)
         return EXIT_ERROR
+
+
+def _run_batch(args: argparse.Namespace, log) -> int:
+    """Run every manifest entry through `main()` and return the worst exit code.
+
+    Each entry gets its own `main()` invocation instead of a parallel code path,
+    so batch mode inherits the single-document gates (fail-on, max-unverified,
+    error handling) exactly rather than risking drift between two implementations.
+    """
+    if args.pages:
+        print("error: --pages is not supported with --batch", file=sys.stderr)
+        return EXIT_ERROR
+    try:
+        entries = json.loads(args.batch.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"error: could not read batch manifest {args.batch}: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    if not isinstance(entries, list) or not entries:
+        print(f"error: batch manifest must be a non-empty JSON array: {args.batch}", file=sys.stderr)
+        return EXIT_ERROR
+
+    out_dir = Path(".") if args.out == Path("ocr-verify-report.html") else args.out
+    worst = EXIT_OK
+    summary: list[dict] = []
+    with tempfile.TemporaryDirectory(prefix="ocr-verify-batch-") as tmp:
+        for i, entry in enumerate(entries):
+            if not isinstance(entry, dict) or "pdf" not in entry or "engine_output" not in entry:
+                print(f"error: batch entry {i} needs \"pdf\" and \"engine_output\"", file=sys.stderr)
+                return EXIT_ERROR
+            pdf = str(entry["pdf"])
+            out = str(entry.get("out") or out_dir / f"{Path(pdf).stem}-report.html")
+            json_path = str(entry.get("json") or Path(tmp) / f"{i}.json")
+            sub_argv = [
+                pdf, str(entry["engine_output"]),
+                "-o", out,
+                "--json", json_path,
+                "--engine-label", str(entry.get("engine_label", args.engine_label)),
+                "--dpi", str(args.dpi),
+                "--lang", args.lang,
+                "--psm", str(args.psm),
+                "--min-conf", str(args.min_conf),
+                "--min-run", str(args.min_run),
+                "--max-unverified", str(args.max_unverified),
+                "--workers", str(args.workers),
+            ]
+            if entry.get("sarif"):
+                sub_argv += ["--sarif", str(entry["sarif"])]
+            if args.fail_on is not None:
+                sub_argv += ["--fail-on", str(args.fail_on)]
+            if args.quiet:
+                sub_argv.append("-q")
+
+            code = main(sub_argv)
+            worst = max(worst, code)
+            row = {"pdf": pdf, "engine_output": str(entry["engine_output"]), "out": out, "exit_code": code}
+            try:
+                data = json.loads(Path(json_path).read_text(encoding="utf-8"))
+                pages = data.get("pages", [])
+                row["pages_flagged"] = sum(1 for p in pages if p["findings"])
+                row["pages_total"] = len(pages)
+                row["unsupported_words"] = sum(p["unsupported_words"] for p in pages if p["verified"])
+                row["total_words"] = sum(p["vlm_words"] for p in pages if p["verified"])
+            except (OSError, json.JSONDecodeError, KeyError):
+                pass  # entry errored before writing json; exit_code already captures it
+            summary.append(row)
+            log(f"[{i + 1}/{len(entries)}] {pdf}: exit {code}")
+
+        if args.json:
+            args.json.parent.mkdir(parents=True, exist_ok=True)
+            args.json.write_text(
+                json.dumps({"tool": "ocr-verify", "version": __version__, "batch": summary}, indent=2),
+                encoding="utf-8",
+            )
+
+    ok = sum(1 for r in summary if r["exit_code"] == EXIT_OK)
+    log(f"batch: {ok}/{len(summary)} document(s) clean")
+    if args.json:
+        log(f"batch summary: {args.json}")
+    return worst
 
 
 def _as_dict(report: Report) -> dict:

@@ -182,3 +182,62 @@ class TestCli:
 
     def test_bad_page_spec_exits_2(self, tmp_path):
         assert main([str(PDF), str(ENGINE), "--pages", "99", "-q"]) == 2
+
+    def test_missing_pdf_and_engine_output_exits_2(self):
+        assert main(["-q"]) == 2
+
+
+class TestBatch:
+    def _manifest(self, tmp_path, n, break_second=False):
+        entries = []
+        for i in range(n):
+            entries.append({
+                # entry 1 of a break_second manifest points at a PDF that doesn't
+                # exist, forcing that entry's own main() call to EXIT_ERROR — proof
+                # the aggregate reflects the worst per-entry outcome, not just the
+                # first or last.
+                "pdf": str(PDF) if not (break_second and i == 1) else str(tmp_path / "nope.pdf"),
+                "engine_output": str(ENGINE),
+                "out": str(tmp_path / f"{i}-report.html"),
+                "json": str(tmp_path / f"{i}-report.json"),
+            })
+        manifest = tmp_path / "manifest.json"
+        manifest.write_text(json.dumps(entries), encoding="utf-8")
+        return manifest
+
+    def test_batch_runs_every_entry_and_writes_summary(self, tmp_path):
+        manifest = self._manifest(tmp_path, 2)
+        summary = tmp_path / "summary.json"
+        code = main(["--batch", str(manifest), "--json", str(summary), "-q"])
+        assert code == 0
+        for i in range(2):
+            assert (tmp_path / f"{i}-report.html").exists()
+            assert (tmp_path / f"{i}-report.json").exists()
+
+        data = json.loads(summary.read_text(encoding="utf-8"))
+        rows = data["batch"]
+        assert len(rows) == 2
+        assert all(r["exit_code"] == 0 for r in rows)
+        assert all(r["pages_total"] == 5 for r in rows)
+        assert all(r["pages_flagged"] == 3 for r in rows)  # matches pages 2, 3, 5 above
+
+    def test_batch_worst_exit_code_wins(self, tmp_path):
+        manifest = self._manifest(tmp_path, 2, break_second=True)
+        summary = tmp_path / "summary.json"
+        code = main(["--batch", str(manifest), "--json", str(summary), "-q"])
+        assert code == 2  # EXIT_ERROR, even though entry 0 alone succeeds
+
+        rows = json.loads(summary.read_text(encoding="utf-8"))["batch"]
+        assert [r["exit_code"] for r in rows] == [0, 2]
+
+    def test_batch_rejects_pages_flag(self, tmp_path):
+        manifest = self._manifest(tmp_path, 1)
+        assert main(["--batch", str(manifest), "--pages", "2", "-q"]) == 2
+
+    def test_batch_missing_manifest_exits_2(self, tmp_path):
+        assert main(["--batch", str(tmp_path / "nope.json"), "-q"]) == 2
+
+    def test_batch_entry_missing_engine_output_exits_2(self, tmp_path):
+        manifest = tmp_path / "manifest.json"
+        manifest.write_text(json.dumps([{"pdf": str(PDF)}]), encoding="utf-8")
+        assert main(["--batch", str(manifest), "-q"]) == 2

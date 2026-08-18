@@ -62,6 +62,9 @@ ocr-verify book.pdf out/ -o report.html --json findings.json
 
 # SARIF, for GitHub code scanning or another CI dashboard
 ocr-verify book.pdf out/ -o report.html --sarif findings.sarif
+
+# a whole corpus at once, from a JSON manifest — see "Checking a corpus at once" below
+ocr-verify --batch manifest.json --fail-on 0.02
 ```
 
 ### In CI
@@ -81,6 +84,28 @@ Two gate semantics worth knowing:
 - Exclusion is not a free pass: if more than `--max-unverified` (default 25%) of the AI
   engine's words sit on unverifiable pages, the gate fails anyway. An engine cannot pass
   by being unverifiable.
+
+### Checking a corpus at once
+
+`--batch` runs a whole manifest of documents through the same gate in one invocation —
+useful for a nightly regression run over a fixed corpus, rather than one shell loop per repo.
+
+```bash
+ocr-verify --batch manifest.json --fail-on 0.02 --json summary.json
+```
+
+```json
+[
+  {"pdf": "corpus/doc1.pdf", "engine_output": "marker_out/doc1/"},
+  {"pdf": "corpus/doc2.pdf", "engine_output": "marker_out/doc2/", "out": "reports/doc2.html"}
+]
+```
+
+Every global flag (`--dpi`, `--fail-on`, `--max-unverified`, ...) applies to each entry; an
+entry can override `out`/`json`/`sarif`/`engine_label` individually. The exit code is the
+worst across all entries (`2` if any document errored, else `1` if any failed `--fail-on`,
+else `0`), and `--json` writes one aggregate summary instead of a single document's findings.
+`--pages` is not supported in batch mode.
 
 ```yaml
 - name: Verify OCR output
