@@ -122,6 +122,29 @@ else `0`), and `--json` writes one aggregate summary instead of a single documen
   with: { sarif_file: findings.sarif }
 ```
 
+### As a GitHub Action
+
+`action.yml` wraps the same CLI as a composite action — installs Tesseract, installs
+`ocr-verify`, and runs it — so other repos can consume it as a reusable check without
+copying install steps:
+
+```yaml
+- uses: athakur3/ocr-verify@main
+  with:
+    pdf: corpus/doc.pdf
+    engine-output: ocr-out/
+    fail-on: '0.02'
+    sarif: findings.sarif
+- uses: github/codeql-action/upload-sarif@v3
+  if: always()
+  with: { sarif_file: findings.sarif }
+```
+
+Pass `batch: manifest.json` instead of `pdf`/`engine-output` to check a whole corpus (see
+above); any flag without a dedicated input can be passed through `extra-args`. The action
+exposes `exit-code` as an output for workflows that want to branch on the result rather
+than just fail the job.
+
 ## What it reports
 
 Four **accusations** — claims the evidence can carry:

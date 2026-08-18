@@ -1,0 +1,99 @@
+name: 'ocr-verify'
+description: 'Cross-engine hallucination diff for AI OCR/VLM output — fails CI when an engine fabricates or drops text a Tesseract witness can see.'
+author: 'athakur3'
+branding:
+  icon: 'check-circle'
+  color: 'blue'
+
+inputs:
+  pdf:
+    description: 'Path to the source PDF (omit when using batch)'
+    required: false
+    default: ''
+  engine-output:
+    description: 'Path to the AI engine output to verify — directory, markdown file, or JSONL (omit when using batch)'
+    required: false
+    default: ''
+  batch:
+    description: 'Path to a JSON manifest for --batch mode, checking a whole corpus in one run'
+    required: false
+    default: ''
+  fail-on:
+    description: 'Divergence ratio above which the gate fails the build, e.g. 0.02'
+    required: false
+    default: ''
+  max-unverified:
+    description: 'Max ratio of engine words on unverifiable pages before the gate fails anyway (tool default: 0.25)'
+    required: false
+    default: ''
+  out:
+    description: 'HTML report output path'
+    required: false
+    default: 'ocr-verify-report.html'
+  json:
+    description: 'JSON findings output path'
+    required: false
+    default: ''
+  sarif:
+    description: 'SARIF output path, for github/codeql-action/upload-sarif'
+    required: false
+    default: ''
+  extra-args:
+    description: 'Additional raw ocr-verify CLI flags, appended verbatim (e.g. --dpi 300 --lang eng)'
+    required: false
+    default: ''
+  version:
+    description: 'ocr-verify version constraint to install from PyPI, e.g. "==0.1.0" (default: latest)'
+    required: false
+    default: ''
+
+outputs:
+  exit-code:
+    description: 'ocr-verify exit code: 0 clean, 1 over --fail-on threshold, 2 error'
+    value: ${{ steps.run.outputs.exit-code }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Tesseract
+      shell: bash
+      run: command -v tesseract >/dev/null 2>&1 || (sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr)
+
+    - name: Install ocr-verify
+      shell: bash
+      env:
+        OCR_VERIFY_VERSION: ${{ inputs.version }}
+      run: pip install "ocr-verify${OCR_VERIFY_VERSION}"
+
+    - name: Run ocr-verify
+      id: run
+      shell: bash
+      env:
+        IN_PDF: ${{ inputs.pdf }}
+        IN_ENGINE_OUTPUT: ${{ inputs.engine-output }}
+        IN_BATCH: ${{ inputs.batch }}
+        IN_OUT: ${{ inputs.out }}
+        IN_JSON: ${{ inputs.json }}
+        IN_SARIF: ${{ inputs.sarif }}
+        IN_FAIL_ON: ${{ inputs.fail-on }}
+        IN_MAX_UNVERIFIED: ${{ inputs.max-unverified }}
+        IN_EXTRA_ARGS: ${{ inputs.extra-args }}
+      run: |
+        set +e
+        args=()
+        if [ -n "$IN_BATCH" ]; then
+          args+=(--batch "$IN_BATCH")
+        else
+          [ -n "$IN_PDF" ] && args+=("$IN_PDF")
+          [ -n "$IN_ENGINE_OUTPUT" ] && args+=("$IN_ENGINE_OUTPUT")
+        fi
+        [ -n "$IN_OUT" ] && args+=(--out "$IN_OUT")
+        [ -n "$IN_JSON" ] && args+=(--json "$IN_JSON")
+        [ -n "$IN_SARIF" ] && args+=(--sarif "$IN_SARIF")
+        [ -n "$IN_FAIL_ON" ] && args+=(--fail-on "$IN_FAIL_ON")
+        [ -n "$IN_MAX_UNVERIFIED" ] && args+=(--max-unverified "$IN_MAX_UNVERIFIED")
+        # shellcheck disable=SC2086
+        ocr-verify "${args[@]}" $IN_EXTRA_ARGS
+        code=$?
+        echo "exit-code=$code" >> "$GITHUB_OUTPUT"
+        exit $code
