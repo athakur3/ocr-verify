@@ -15,10 +15,10 @@ study/mineru_out/corpus/hybrid_auto/*_middle.json
 study/mineru_out/corpus/hybrid_auto/*_layout.pdf
 study/mineru_out/corpus/hybrid_auto/*_origin.pdf
 study/mineru_out/corpus/hybrid_auto/images/
-study/sweep/*_out/sweep/hybrid_auto/*_model.json
-study/sweep/*_out/sweep/hybrid_auto/*_middle.json
-study/sweep/*_out/sweep/hybrid_auto/*_layout.pdf
-study/sweep/*_out/sweep/hybrid_auto/*_origin.pdf
+study/sweep/*_out*/sweep*/hybrid_auto/*_model.json
+study/sweep/*_out*/sweep*/hybrid_auto/*_middle.json
+study/sweep/*_out*/sweep*/hybrid_auto/*_layout.pdf
+study/sweep/*_out*/sweep*/hybrid_auto/*_origin.pdf
 study/sweep/mineru_bisect/bisect/hybrid_auto/*_model.json
 study/sweep/mineru_bisect/bisect/hybrid_auto/*_middle.json
 study/sweep/mineru_bisect/bisect/hybrid_auto/*_layout.pdf

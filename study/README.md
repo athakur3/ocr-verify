@@ -240,6 +240,72 @@ per-engine onset *ordering* claimed from the first pair is now open again — it
 either passage-sensitive or is a coarse-resolution artifact, and this study can't tell
 which without a matched-mode, bisected third run.
 
+### Third-seed check: does matching mode resolve the onset-order question? (run 2026-08-18)
+
+The construction here has no randomness — `bleed_through()` is a deterministic image
+operation, and the main study already confirmed byte-identical output across repeat
+engine runs at fixed input. So a "seed" in this study means a different passage pair, not
+a different RNG draw; multi-seed and multi-passage are the same thing here. This third
+corpus ([sweep/make_sweep3.py](sweep/make_sweep3.py)) swaps roles instead of introducing
+new text: "survey" (ghost in the first pair) is real here, "tides" (real in the second
+pair) is the ghost. Every passage used so far now appears in the opposite role at least
+once, so no single passage's content can be the whole explanation for an onset that shows
+up across all three runs. This run also closes the mode confound the second pair left
+open: `marker_single --mode fast` was used explicitly and verified first — `--mode
+balanced` was re-tested directly before this run and still fails with the same "Failed to
+initialize samplers: failed to parse grammar" error on every page (confirmed broken in
+this venv as of today), so fast mode is not just a match to the second pair, it is
+currently the only mode that works at all. Same strengths, same scoring
+([sweep/score_sweep3.py](sweep/score_sweep3.py)). Full numbers:
+[sweep/sweep3_results.json](sweep/sweep3_results.json).
+
+| Ghost strength | Marker fabricated | Marker omitted | MinerU fabricated | MinerU omitted |
+| --- | --- | --- | --- | --- |
+| 0.00 | 0 | 39 | 0 | 0 |
+| 0.10 | 0 | 39 | 0 | 0 |
+| 0.20 | 0 | 39 | 4 | 0 |
+| 0.30 | 14 | 3 | 4 | 0 |
+| 0.40 | 1 | 39 | 4 | 0 |
+| 0.55 | 0 | 39 | 4 | 0 |
+
+**Cross-seed spread at each strength** (three passage pairs, same six strengths — this is
+between-passage spread, not repeated-trial variance at fixed input, since nothing about
+this pipeline is stochastic):
+
+| Ghost strength | Marker (3 seeds) | Marker range | MinerU (3 seeds) | MinerU range |
+| --- | --- | --- | --- | --- |
+| 0.00 | 0, 0, 0 | 0 | 0, 0, 0 | 0 |
+| 0.10 | 0, 0, 0 | 0 | 0, 0, 0 | 0 |
+| 0.20 | 20, 2, 0 | 20 | 15, 4, 4 | 11 |
+| 0.30 | 75, 2, 14 | 73 | 13, 4, 4 | 9 |
+| 0.40 | 20, 2, 1 | 19 | 5, 4, 4 | 1 |
+| 0.55 | 55, 19, 0 | 55 | 5, 4, 4 | 1 |
+
+What this settles and what it doesn't:
+
+- **MinerU's onset location replicates cleanly, 3 for 3**: clean at 0.00 and 0.10,
+  fabricating by 0.20, every time. Magnitude is low and tightens with more seeds (range
+  shrinks from 11 words at 0.20 to 1 word by 0.40–0.55) — this is the closest thing in
+  the whole study to a *characterization* rather than an observation: MinerU has a real,
+  narrow onset band on this mechanism, and its fabrication stays small regardless of
+  passage.
+- **Matching mode did not make Marker's curve well-behaved — it did the opposite.**
+  Sweep 2 and sweep 3 both ran explicit `--mode fast`, removing the mode confound between
+  those two runs specifically, yet they diverge sharply: sweep 2 fabricates a small,
+  fairly steady amount from 0.20 (2, 2, 2, then 19 at 0.55); sweep 3 stays clean through
+  0.20, spikes to 14 at 0.30, then reverts to 1 and 0. Same engine, same mode, same
+  strength ladder, different passage — different shape entirely. That rules out "mode was
+  the hidden variable" as the explanation for Marker's non-monotonicity; passage content
+  is doing real work here, not just wording-level noise. The onset-order question from
+  the first two pairs (does Marker or MinerU cross into fabrication first) is not
+  resolvable at this coarse a strength resolution — a bisected run around 0.20–0.30 is
+  still the way to settle it, now that mode is a controlled variable.
+- **Marker's content-loss is the most stable signal across all three seeds**: every
+  passage loses its title (and, for the second and third pairs, additional paragraphs) at
+  every strength including 0.00, ghost-independent every time. Three for three, this is
+  the one Marker behaviour that looks like a real property of the engine rather than an
+  artifact of one passage.
+
 ## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
 
 The real-archival wild hunt (`study/wild/`) found two failure modes the 24-page corpus
@@ -276,9 +342,15 @@ material exposed, not measuring engine fabrication.
   have layouts and typefaces this corpus does not attempt.
 - Degradations are real image operations, but the *pages* are born digital. A physically
   scanned test target would be stronger and is future work.
-- The sweep and bisect run one seed and one engine pass per strength level. A second
-  passage pair (above) confirms the onset itself isn't wording-specific, but wasn't
-  bisected and used an unconfirmed Marker mode, so it can't settle whether the first
-  pair's per-engine onset *ordering* is real or an artifact — a matched-mode, bisected
-  third run is still future work before treating that ordering as a property of either
-  engine.
+- The sweep and bisect run one seed and one engine pass per strength level, and the
+  mechanism itself is fully deterministic (no randomness in the construction; the main
+  study already confirmed byte-identical repeat runs), so "seed" here means passage pair,
+  not RNG draw. Three passage pairs now confirm MinerU's fabrication onset (clean at
+  0.10, fabricating by 0.20) is a real, narrow, passage-independent property. Marker's
+  onset location and magnitude are not — a third pair with mode explicitly matched to the
+  second still produced a materially different curve (see "Third-seed check" above),
+  which rules out mode as the hidden variable but leaves passage-sensitivity unexplained.
+  The specific claim that one engine's onset reliably precedes the other's is still
+  unsettled at this coarse a strength resolution — a bisected run around 0.20–0.30 is the
+  next step before treating either engine's onset *ordering* as a property of the engine
+  rather than of the strength granularity tested.
