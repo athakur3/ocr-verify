@@ -6,7 +6,9 @@
       "ghost_passage": "survey",
       "marker_mode": null,
       "truth_words_per_page": 104,
-      "truth_words_inherited_by_bisect": true,
+      "bisects_inheriting_truth_words": [
+        "bisect_results.json"
+      ],
       "sources": [
         "sweep_results.json",
         "bisect_results.json"
@@ -131,7 +133,7 @@
       "ghost_passage": "instruments",
       "marker_mode": "fast",
       "truth_words_per_page": 115,
-      "truth_words_inherited_by_bisect": false,
+      "bisects_inheriting_truth_words": [],
       "sources": [
         "sweep2_results.json",
         "sweep2_bisect_results.json"
@@ -248,14 +250,18 @@
       "ghost_passage": "tides",
       "marker_mode": "fast",
       "truth_words_per_page": 124,
-      "truth_words_inherited_by_bisect": false,
+      "bisects_inheriting_truth_words": [],
       "sources": [
         "sweep3_results.json",
-        "sweep3_bisect_results.json"
+        "sweep3_bisect_results.json",
+        "sweep3_lowbisect_results.json"
       ],
       "strengths": [
         0.0,
         0.1,
+        0.125,
+        0.15,
+        0.175,
         0.2,
         0.225,
         0.25,
@@ -279,9 +285,9 @@
         "mineru": {
           "crossed": true,
           "last_clean": 0.1,
-          "first_fabricating": 0.2,
+          "first_fabricating": 0.125,
           "words_at_first_fabricating": 4,
-          "bracket_width": 0.1
+          "bracket_width": 0.025
         }
       },
       "rows": [
@@ -299,6 +305,30 @@
           "marker_fabricated": 0,
           "marker_omitted": 39,
           "mineru_fabricated": 0,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.125,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.15,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.175,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
           "mineru_omitted": 0
         },
         {
@@ -363,6 +393,9 @@
   "shared_strengths": [
     0.0,
     0.1,
+    0.125,
+    0.15,
+    0.175,
     0.2,
     0.3,
     0.4,
@@ -427,6 +460,96 @@
           0.0
         ],
         "percent_range": 0.0
+      }
+    },
+    "0.125": {
+      "marker": {
+        "words": [
+          0,
+          0,
+          0
+        ],
+        "words_range": 0,
+        "percent_of_page": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "percent_range": 0.0
+      },
+      "mineru": {
+        "words": [
+          5,
+          4,
+          4
+        ],
+        "words_range": 1,
+        "percent_of_page": [
+          4.8,
+          3.5,
+          3.2
+        ],
+        "percent_range": 1.6
+      }
+    },
+    "0.15": {
+      "marker": {
+        "words": [
+          0,
+          2,
+          0
+        ],
+        "words_range": 2,
+        "percent_of_page": [
+          0.0,
+          1.7,
+          0.0
+        ],
+        "percent_range": 1.7
+      },
+      "mineru": {
+        "words": [
+          5,
+          3,
+          4
+        ],
+        "words_range": 2,
+        "percent_of_page": [
+          4.8,
+          2.6,
+          3.2
+        ],
+        "percent_range": 2.2
+      }
+    },
+    "0.175": {
+      "marker": {
+        "words": [
+          24,
+          2,
+          0
+        ],
+        "words_range": 24,
+        "percent_of_page": [
+          23.1,
+          1.7,
+          0.0
+        ],
+        "percent_range": 23.1
+      },
+      "mineru": {
+        "words": [
+          15,
+          4,
+          4
+        ],
+        "words_range": 11,
+        "percent_of_page": [
+          14.4,
+          3.5,
+          3.2
+        ],
+        "percent_range": 11.2
       }
     },
     "0.2": {
@@ -618,7 +741,7 @@
         ],
         "seed3": [
           0.1,
-          0.2
+          0.125
         ]
       },
       "provably_different_seed_pairs": [],

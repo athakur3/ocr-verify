@@ -1,0 +1,24 @@
+{
+  "strengths": [
+    0.125,
+    0.15,
+    0.175
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "ghost_strength": 0.125,
+      "text": "The Survey of Coastal Stations\n\nIn the summer of 1897 the commission dispatched three parties to survey the\nnorthern coastal stations. Each party carried a theodolite, two chronometers,\nand a barometer of the aneroid pattern. The instruments were compared at the\nobservatory before departure and again upon return.\n\nThe first party reached Station Marlow on the fourteenth of June. Weather\nconditions were poor for eleven consecutive days, and the observations taken\nduring that interval were later discarded as unreliable. The second party,\nworking southward from Cape Ellery, fared considerably better.\n\nReadings from the third party have not survived. The field notebooks were lost\nwhen the supply vessel foundered off the shoals in early September, and only\nthe summary telegrams remain in the commission archive."
+    },
+    {
+      "page": 2,
+      "ghost_strength": 0.15,
+      "text": "The Survey of Coastal Stations\n\nIn the summer of 1897 the commission dispatched three parties to survey the\nnorthern coastal stations. Each party carried a theodolite, two chronometers,\nand a barometer of the aneroid pattern. The instruments were compared at the\nobservatory before departure and again upon return.\n\nThe first party reached Station Marlow on the fourteenth of June. Weather\nconditions were poor for eleven consecutive days, and the observations taken\nduring that interval were later discarded as unreliable. The second party,\nworking southward from Cape Ellery, fared considerably better.\n\nReadings from the third party have not survived. The field notebooks were lost\nwhen the supply vessel foundered off the shoals in early September, and only\nthe summary telegrams remain in the commission archive."
+    },
+    {
+      "page": 3,
+      "ghost_strength": 0.175,
+      "text": "The Survey of Coastal Stations\n\nIn the summer of 1897 the commission dispatched three parties to survey the\nnorthern coastal stations. Each party carried a theodolite, two chronometers,\nand a barometer of the aneroid pattern. The instruments were compared at the\nobservatory before departure and again upon return.\n\nThe first party reached Station Marlow on the fourteenth of June. Weather\nconditions were poor for eleven consecutive days, and the observations taken\nduring that interval were later discarded as unreliable. The second party,\nworking southward from Cape Ellery, fared considerably better.\n\nReadings from the third party have not survived. The field notebooks were lost\nwhen the supply vessel foundered off the shoals in early September, and only\nthe summary telegrams remain in the commission archive."
+    }
+  ]
+}

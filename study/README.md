@@ -395,6 +395,58 @@ pair not yet bisected. A bisect corpus
   and scored as total content loss. All five scorers were re-run after the refactor and
   reproduce their committed results JSONs byte-for-byte.
 
+### Bisecting sweep 3's 0.10-0.20 gap: MinerU's onset at matched resolution (run 2026-08-19)
+
+The computed characterization below named its own weakest claim: MinerU's onset was only
+*consistent with* one common strength, and seed 3's bracket was the wide (0.10, 0.20] not
+because the measurement said so but because that seed's bisect had been placed at
+0.225–0.275 to chase Marker's crossing. Seeds 1 and 2 were both bracketed at
+(0.10, 0.125]; seed 3 had simply never been sampled there. That is a gap in the ladder,
+not a result, so this run closes it — a second bisect corpus on the same survey/tides
+pair, same explicit `--mode fast`, at the same 0.125 / 0.15 / 0.175 strengths the other
+two seeds already have ([sweep/make_sweep3_lowbisect.py](sweep/make_sweep3_lowbisect.py),
+numbers in [sweep/sweep3_lowbisect_results.json](sweep/sweep3_lowbisect_results.json)).
+
+The run was designed to be able to fail: a clean 0.125 on this pair would have split
+MinerU's brackets and refuted the common onset outright.
+
+| Ghost strength | Marker fabricated | Marker omitted | MinerU fabricated | MinerU omitted |
+| --- | --- | --- | --- | --- |
+| 0.10 | 0 | 39 | 0 | 0 |
+| 0.125 | 0 | 0 | 4 | 0 |
+| 0.15 | 0 | 0 | 4 | 0 |
+| 0.175 | 0 | 0 | 4 | 0 |
+| 0.20 | 0 | 39 | 4 | 0 |
+
+- **MinerU crosses at 0.125 here too, so all three seeds now carry the identical bracket
+  (0.10, 0.125].** The common-onset reading stops being merely unrefuted and becomes a
+  positive agreement of three independent passage pairs at 0.025 resolution — the finest
+  any of them has been measured at. It is still three pairs and still a bracket, not a
+  constant: what is now excluded is any onset outside (0.10, 0.125] on these pairs, not
+  the possibility that a fourth passage lands elsewhere.
+- **The first-crossing amplitude is as stable as the threshold — but the *count* is the
+  flattering half of that.** MinerU fabricates 5, 4 and 4 words at its first fabricating
+  strength across the three seeds (4.8%, 3.5%, 3.2% of each page), against Marker's 24, 2
+  and 14 on the same pairs. Reading the actual tokens on seed 3, though, the constant 4 is
+  two different behaviours wearing one number: at 0.125 and 0.15 the invented words are
+  glyph-level garbage (`anotherreado`, `ebit`, `edit`, `to`), while from 0.175 up through
+  0.55 they settle into the same recurring fluent fragment (`of`, `operations`, `the`,
+  `topic`, with `title`/`operation` substituted at two strengths). A count-only view of
+  this curve looks flat across 0.125–0.55; the words say the engine crosses into noise
+  first and into plausible-looking invention afterwards. `tests/test_onset_summary.py`
+  re-derives both token sets from the committed captures so this stays a measurement.
+- **Marker stays clean at all three strengths, which is the check this run had to pass.**
+  Seed 3's Marker onset is bracketed at (0.275, 0.30] by the other bisect, so any
+  fabrication at 0.125–0.175 would have contradicted it. None appeared. The two bisects
+  on this seed are separate corpora built from the same passage pair, so this is a weak
+  but real reproducibility check on the generator, not only on the engine.
+- **The omission-vanishes-between-coarse-strengths pattern replicates a third time**, on
+  the third pair: 39 words omitted at every coarse strength on this seed, 0 at all six
+  bisected strengths across both of its bisects. All three pairs checked at fine
+  resolution now show it. The pattern is consistent enough that "Marker drops content
+  independently of ghost strength" should be read as an artifact of which strengths the
+  coarse ladder happened to sample, not as a property of the engine.
+
 ### Cross-seed characterization: the onset claims, computed (2026-08-19)
 
 The five sections above were written one run at a time, and their cross-seed table was
@@ -402,9 +454,11 @@ typed by hand out of the results JSONs. That is fine for narrative and weak for 
 a transcription slip is invisible, and raw word counts are not comparable across seeds in
 the first place — the three passages are 104, 115 and 124 words, so "20 fabricated" means
 19.2% of the page on seed 1 and 16.1% on seed 3. [sweep/summarize_onsets.py](sweep/summarize_onsets.py)
-recomputes the consolidation from all six committed results JSONs into
+recomputes the consolidation from all seven committed results JSONs into
 [sweep/onset_summary.json](sweep/onset_summary.json); `tests/test_onset_summary.py`
-re-derives it and fails if it drifts from the captures.
+re-derives it and fails if it drifts from the captures. (Written when there were six; the
+seventh is seed 3's low bisect above, and every number in this section was regenerated
+from the script rather than edited by hand when it landed.)
 
 Three deliberate choices in how it computes, each refusing a more flattering shape:
 
@@ -422,15 +476,20 @@ Three deliberate choices in how it computes, each refusing a more flattering sha
 | --- | --- | --- | --- | --- | --- |
 | 1 | conclusions / survey | unrecorded (confound) | 104 | (0.15, 0.175] | (0.10, 0.125] |
 | 2 | tides / instruments | fast | 115 | (0.125, 0.15] | (0.10, 0.125] |
-| 3 | survey / tides | fast | 124 | (0.275, 0.30] | (0.10, 0.20] |
+| 3 | survey / tides | fast | 124 | (0.275, 0.30] | (0.10, 0.125] |
 
-**Cross-seed spread, normalized** (seeds 1, 2, 3 at the six strengths all three share;
-percentages are of each seed's own page):
+**Cross-seed spread, normalized** (seeds 1, 2, 3 at the nine strengths all three now
+share; percentages are of each seed's own page). Seed 3's low bisect added the three
+bisected strengths to this intersection — before it, only the six coarse strengths were
+common to all three seeds:
 
 | Ghost strength | Marker % of page | Marker range | MinerU % of page | MinerU range |
 | --- | --- | --- | --- | --- |
 | 0.00 | 0.0, 0.0, 0.0 | 0.0 | 0.0, 0.0, 0.0 | 0.0 |
 | 0.10 | 0.0, 0.0, 0.0 | 0.0 | 0.0, 0.0, 0.0 | 0.0 |
+| 0.125 | 0.0, 0.0, 0.0 | 0.0 | 4.8, 3.5, 3.2 | 1.6 |
+| 0.15 | 0.0, 1.7, 0.0 | 1.7 | 4.8, 2.6, 3.2 | 2.2 |
+| 0.175 | 23.1, 1.7, 0.0 | 23.1 | 14.4, 3.5, 3.2 | 11.2 |
 | 0.20 | 19.2, 1.7, 0.0 | 19.2 | 14.4, 3.5, 3.2 | 11.2 |
 | 0.30 | 72.1, 1.7, 11.3 | 70.4 | 12.5, 3.5, 3.2 | 9.3 |
 | 0.40 | 19.2, 1.7, 0.8 | 18.4 | 4.8, 3.5, 3.2 | 1.6 |
@@ -450,13 +509,17 @@ What the computation says that the prose could not:
   pair isolates passage from mode. That pair is disjoint on its own ((0.125, 0.15] vs
   (0.275, 0.30]), which is what makes "passage content moves Marker's onset" a measurement
   here rather than an inference about a confound.
-- **MinerU is *consistent with* one onset — which is weaker than having one.** Its three
-  brackets all overlap, so no seed refutes a single common onset somewhere in
-  (0.10, 0.125]. That is not the same as demonstrating one, and seed 3's bracket is the
-  wide (0.10, 0.20] only because that seed's bisect was placed around 0.20–0.30 to chase
-  Marker. Narrowing seed 3 in the 0.10–0.20 range is the run that would actually test it.
+- **MinerU's three brackets are now identical, not merely overlapping.** When this
+  section was first written they overlapped — no seed refuted a common onset in
+  (0.10, 0.125], but seed 3's bracket was the wide (0.10, 0.20] only because its bisect
+  had been placed around 0.20–0.30 to chase Marker, so the agreement was partly an
+  absence of measurement. The low bisect above supplied it: all three seeds bracket
+  MinerU at (0.10, 0.125]. `consistent_with_one_onset` still reports what it reports —
+  no seed refutes a common onset — but it is now backed by three seeds measured at that
+  resolution rather than two measured and one unsampled.
 - **Normalizing does not rescue Marker and does not change MinerU.** Marker's between-seed
-  spread at 0.30 is 70.4 percentage points of the page — the passage-sensitivity is not an
+  spread at 0.30 is 70.4 percentage points of the page, against 1.6 for MinerU at its own
+  first crossing — the passage-sensitivity is not an
   artifact of comparing differently-sized pages. MinerU's spread still tightens with
   strength (11.2 → 1.6 points), the same shape the raw counts showed.
 - The pre-existing hand-typed cross-seed table in "Third-seed check" was checked against
@@ -503,9 +566,11 @@ material exposed, not measuring engine fabrication.
   mechanism itself is fully deterministic (no randomness in the construction; the main
   study already confirmed byte-identical repeat runs), so "seed" here means passage pair,
   not RNG draw. Three passage pairs are all *consistent with* a single narrow MinerU
-  fabrication onset (clean at 0.10, fabricating by 0.20) — their onset brackets overlap,
-  so none of them refutes one, which is weaker than the "passage-independent property"
-  this section previously claimed and is what the computed summary supports. Marker's
+  fabrication onset, and as of the seed-3 low bisect all three carry the *identical*
+  bracket (0.10, 0.125] rather than merely overlapping ones — none refutes a common
+  onset, and all three have now been measured at the resolution where they could have.
+  That is still weaker than the "passage-independent property" this section once claimed:
+  three pairs agreeing is agreement, not independence. Marker's
   onset location and magnitude are not — a third pair with mode explicitly matched to the
   second still produced a materially different curve (see "Third-seed check" above),
   which rules out mode as the hidden variable but leaves passage-sensitivity unexplained.
@@ -526,4 +591,8 @@ material exposed, not measuring engine fabrication.
   question are now computed from disjoint onset brackets rather than argued in prose —
   see "Cross-seed characterization" above, which also records that Marker's
   passage-sensitivity holds between the two seeds whose Marker mode matches, so it is not
-  the mode confound wearing a different hat.
+  the mode confound wearing a different hat. The third pair's 0.10–0.20 gap has since been
+  bisected as well, so no seed's onset bracket is now wider than 0.025 for either engine,
+  and the omission-vanishes-between-sampled-strengths pattern has replicated on all three
+  pairs — the "Marker drops content regardless of ghost strength" reading should be
+  treated as a sampling artifact of the coarse ladder rather than an engine property.

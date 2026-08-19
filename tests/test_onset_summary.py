@@ -142,7 +142,7 @@ def test_a_bisect_from_a_different_passage_cannot_be_merged_into_a_curve(tmp_pat
     try:
         with pytest.raises(SweepSummaryError, match="not the same passage"):
             load_curve({"id": "x", "real": "a", "ghost": "b", "marker_mode": "fast",
-                        "coarse": "coarse.json", "bisect": "bisect.json"})
+                        "coarse": "coarse.json", "bisects": ["bisect.json"]})
     finally:
         summarize_onsets.ROOT = original
 
@@ -173,3 +173,103 @@ def test_the_readme_normalized_table_matches_the_computed_spread():
         assert float(m_range) == spread["marker"]["percent_range"]
         assert u_pct == ", ".join(f"{v}" for v in spread["mineru"]["percent_of_page"])
         assert float(u_range) == spread["mineru"]["percent_range"]
+
+
+def _write_curve(tmp_path, name: str, page_words: int, triples) -> None:
+    (tmp_path / name).write_text(json.dumps({
+        "truth_words_per_page": page_words,
+        "rows": [{"ghost_strength": s, "marker_fabricated": m, "mineru_fabricated": u}
+                 for s, m, u in triples],
+    }))
+
+
+def _in_tmp(tmp_path, seed: dict):
+    """Run load_curve against JSONs in tmp_path instead of the committed captures."""
+    import summarize_onsets
+
+    original, summarize_onsets.ROOT = summarize_onsets.ROOT, tmp_path
+    try:
+        return load_curve(seed)
+    finally:
+        summarize_onsets.ROOT = original
+
+
+def test_a_seed_can_carry_several_bisects_placed_around_different_engines(tmp_path):
+    # Seed 3 is the real case: one bisect placed around Marker's crossing, a second later
+    # around MinerU's. Both belong to the same curve and must sort into it by strength.
+    _write_curve(tmp_path, "coarse.json", 124, [(0.1, 0, 0), (0.2, 0, 4), (0.3, 14, 4)])
+    _write_curve(tmp_path, "high.json", 124, [(0.25, 0, 4)])
+    _write_curve(tmp_path, "low.json", 124, [(0.125, 0, 4)])
+
+    curve = _in_tmp(tmp_path, {"id": "s3", "real": "a", "ghost": "b", "marker_mode": "fast",
+                               "coarse": "coarse.json", "bisects": ["high.json", "low.json"]})
+
+    assert [r["strength"] for r in curve["rows"]] == [0.1, 0.125, 0.2, 0.25, 0.3]
+    assert curve["sources"] == ["coarse.json", "high.json", "low.json"]
+    # The later bisect is what tightens the bracket; merging must let it.
+    assert onset(curve["rows"], "mineru")["first_fabricating"] == 0.125
+
+
+def test_two_bisects_measuring_the_same_strength_is_an_error_not_a_silent_pick(tmp_path):
+    # Two runs of one strength are two measurements; keeping whichever sorted first would
+    # hide a disagreement between them.
+    _write_curve(tmp_path, "coarse.json", 124, [(0.1, 0, 0)])
+    _write_curve(tmp_path, "a.json", 124, [(0.125, 0, 4)])
+    _write_curve(tmp_path, "b.json", 124, [(0.125, 0, 0)])
+
+    with pytest.raises(SweepSummaryError, match="measured twice"):
+        _in_tmp(tmp_path, {"id": "s3", "real": "a", "ghost": "b", "marker_mode": "fast",
+                           "coarse": "coarse.json", "bisects": ["a.json", "b.json"]})
+
+
+def test_every_seed_brackets_mineru_at_the_same_measured_resolution():
+    # The study's strongest MinerU claim: three passage pairs, one identical bracket. It
+    # is only worth stating because all three were sampled at 0.125 — an unsampled seed
+    # agreeing by default is what this test exists to keep out of the claim.
+    summary = json.loads((SWEEP / "onset_summary.json").read_text("utf-8"))
+    brackets = summary["onset_consistency"]["mineru"]["brackets"]
+    assert set(map(tuple, brackets.values())) == {(0.1, 0.125)}
+    assert summary["onset_consistency"]["mineru"]["consistent_with_one_onset"] is True
+    for seed in summary["seeds"]:
+        assert 0.125 in seed["strengths"], f"{seed['id']} never measured the deciding strength"
+
+
+def _fabricated_tokens(truth_name: str, content_list: str) -> dict[float, set[str]]:
+    """Words MinerU emitted on each page that the ground-truth passage does not contain."""
+    from collections import Counter
+
+    sys.path.insert(0, str(SWEEP.parent.parent / "src"))
+    from ocr_verify.normalize import tokenize  # noqa: PLC0415
+    from pagesplit import mineru_pages  # noqa: PLC0415
+
+    truth_doc = json.loads((SWEEP / truth_name).read_text("utf-8"))
+    truth = Counter(n for _, n in tokenize(truth_doc["pages"][0]["text"]))
+    pages = mineru_pages(SWEEP / content_list, len(truth_doc["pages"]))
+    out = {}
+    for idx, page in enumerate(truth_doc["pages"]):
+        got = Counter(n for _, n in tokenize(pages.get(idx, ""), markup=True))
+        out[page["ghost_strength"]] = set((got - truth).elements())
+    return out
+
+
+def test_mineru_crosses_into_noise_before_it_crosses_into_plausible_invention():
+    # Seed 3 fabricates exactly 4 words at every strength from 0.125 to 0.55, which reads
+    # as one flat behaviour until you look at the words. The README says it is two; this
+    # re-derives that from the captures so the claim cannot become decorative.
+    low = _fabricated_tokens(
+        "sweep3_lowbisect_ground_truth.json",
+        "mineru_out3_lowbisect/sweep3_lowbisect/hybrid_auto/sweep3_lowbisect_content_list.json",
+    )
+    coarse = _fabricated_tokens(
+        "ground_truth3.json", "mineru_out3/sweep3/hybrid_auto/sweep3_content_list.json"
+    )
+
+    assert all(len(v) == 4 for v in low.values()), "the counts really are identical"
+    assert len(coarse[0.2]) == 4
+
+    # Onset strengths invent non-words; the settled fragment appears from 0.175 up.
+    assert low[0.125] & {"ebit", "edit"}
+    assert not (low[0.125] & coarse[0.2]), "0.125's tokens are a different fabrication"
+    assert low[0.175] & coarse[0.2], "0.175 has already turned into the settled fragment"
+    # And the settled fragment persists to the top of the ladder.
+    assert coarse[0.55] & coarse[0.2]

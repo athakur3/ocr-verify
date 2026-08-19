@@ -39,7 +39,7 @@ SEEDS = [
         "ghost": "survey",
         "marker_mode": None,
         "coarse": "sweep_results.json",
-        "bisect": "bisect_results.json",
+        "bisects": ["bisect_results.json"],
     },
     {
         "id": "seed2",
@@ -47,7 +47,7 @@ SEEDS = [
         "ghost": "instruments",
         "marker_mode": "fast",
         "coarse": "sweep2_results.json",
-        "bisect": "sweep2_bisect_results.json",
+        "bisects": ["sweep2_bisect_results.json"],
     },
     {
         "id": "seed3",
@@ -55,7 +55,9 @@ SEEDS = [
         "ghost": "tides",
         "marker_mode": "fast",
         "coarse": "sweep3_results.json",
-        "bisect": "sweep3_bisect_results.json",
+        # Two bisects: 0.225-0.275 was placed to chase Marker's crossing, 0.125-0.175
+        # later to bracket MinerU's at the same resolution seeds 1 and 2 already had.
+        "bisects": ["sweep3_bisect_results.json", "sweep3_lowbisect_results.json"],
     },
 ]
 
@@ -82,22 +84,35 @@ def _rows(path: Path, source: str) -> tuple[list[dict], int | None]:
 
 
 def load_curve(seed: dict) -> dict:
-    coarse, coarse_truth = _rows(ROOT / seed["coarse"], "coarse")
-    bisect, bisect_truth = _rows(ROOT / seed["bisect"], "bisect")
+    """Merge a seed's coarse ladder with every bisect run on the same passage pair.
 
+    A seed can carry more than one bisect — seed 3 has two, placed around different
+    engines' crossings — so this takes a list. Each is checked against the ladder's page
+    length before it is allowed into the curve, because two runs of the same passage are
+    the only thing that makes their strengths comparable.
+    """
+    coarse, coarse_truth = _rows(ROOT / seed["coarse"], "coarse")
     if coarse_truth is None:
         raise SweepSummaryError(f"{seed['coarse']}: no truth_words_per_page to normalize by")
-    truth_inherited = bisect_truth is None
-    if not truth_inherited and bisect_truth != coarse_truth:
-        raise SweepSummaryError(
-            f"{seed['id']}: bisect page is {bisect_truth} words but the ladder is "
-            f"{coarse_truth} — the two are not the same passage, so they cannot share a curve"
-        )
 
-    rows = coarse + bisect
+    rows = list(coarse)
+    inherited = []
+    for name in seed["bisects"]:
+        bisect, bisect_truth = _rows(ROOT / name, "bisect")
+        if bisect_truth is None:
+            inherited.append(name)
+        elif bisect_truth != coarse_truth:
+            raise SweepSummaryError(
+                f"{seed['id']}: {name}'s page is {bisect_truth} words but the ladder is "
+                f"{coarse_truth} — the two are not the same passage, so they cannot share a curve"
+            )
+        rows += bisect
+
     strengths = [r["strength"] for r in rows]
     if len(set(strengths)) != len(strengths):
-        raise SweepSummaryError(f"{seed['id']}: a strength appears in both the ladder and the bisect")
+        raise SweepSummaryError(
+            f"{seed['id']}: a strength is measured twice across the ladder and its bisects"
+        )
     rows.sort(key=lambda r: r["strength"])
 
     return {
@@ -106,8 +121,9 @@ def load_curve(seed: dict) -> dict:
         "ghost_passage": seed["ghost"],
         "marker_mode": seed["marker_mode"],
         "truth_words_per_page": coarse_truth,
-        "truth_words_inherited_by_bisect": truth_inherited,
-        "sources": [seed["coarse"], seed["bisect"]],
+        # Named files, not a bool: with several bisects, *which* one inherited matters.
+        "bisects_inheriting_truth_words": inherited,
+        "sources": [seed["coarse"], *seed["bisects"]],
         "rows": rows,
     }
 
@@ -261,7 +277,7 @@ def build_summary(curves: list[dict]) -> dict:
                 "ghost_passage": c["ghost_passage"],
                 "marker_mode": c["marker_mode"],
                 "truth_words_per_page": c["truth_words_per_page"],
-                "truth_words_inherited_by_bisect": c["truth_words_inherited_by_bisect"],
+                "bisects_inheriting_truth_words": c["bisects_inheriting_truth_words"],
                 "sources": c["sources"],
                 "strengths": [r["strength"] for r in c["rows"]],
                 "omission_unrecorded_at": {
