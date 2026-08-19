@@ -74,3 +74,42 @@ def mineru_pages(content_list: Path, expected_pages: int | None = None) -> dict[
         )
     _warn_missing(pages, expected_pages, content_list)
     return pages
+
+
+def docling_pages(doc_json: Path, expected_pages: int | None = None) -> dict[int, str]:
+    """Group Docling's `DoclingDocument` JSON text items into {page_index: text}.
+
+    Docling's markdown export carries no page markers at all — the same shape as a
+    `marker_single` run without `--paginate_output`, and unfixable by a flag — so the
+    JSON export is the only per-page source. Its `texts[*].prov[*].page_no` is 1-based;
+    the indices returned here are 0-based, matching `marker_pages`/`mineru_pages`.
+
+    `texts` is the only text-bearing collection in the sweep captures (no tables, no
+    picture captions). That is asserted rather than assumed: a capture whose `tables` or
+    `pictures` are non-empty would be silently under-read here, so it raises instead.
+    """
+    doc = json.loads(doc_json.read_text("utf-8"))
+    for collection in ("tables", "pictures"):
+        if doc.get(collection):
+            raise SweepOutputError(
+                f"{doc_json} has {len(doc[collection])} item(s) in '{collection}', which "
+                f"this splitter does not read. The sweep corpora contain neither, so this "
+                f"is a different document than expected — extend docling_pages() to walk "
+                f"{collection} before scoring it, or the text in them counts as omitted."
+            )
+    chunks: dict[int, list[str]] = {}
+    for item in doc.get("texts") or []:
+        text = (item.get("text") or "").strip()
+        prov = item.get("prov") or []
+        if not text or not prov:
+            continue
+        chunks.setdefault(prov[0]["page_no"] - 1, []).append(text)
+    pages = {idx: "\n\n".join(texts) for idx, texts in chunks.items()}
+    if not pages:
+        raise SweepOutputError(
+            f"{doc_json} yielded no text on any page, so there is nothing to score. "
+            f"Check that the docling run completed and that this is the JSON export "
+            f"(`--to json`) rather than the markdown one, which has no page numbers."
+        )
+    _warn_missing(pages, expected_pages, doc_json)
+    return pages

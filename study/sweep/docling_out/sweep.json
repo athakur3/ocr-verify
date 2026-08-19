@@ -1,0 +1,954 @@
+{
+  "schema_name": "DoclingDocument",
+  "version": "1.10.0",
+  "name": "sweep",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 14546875206644380019,
+    "filename": "sweep.pdf"
+  },
+  "furniture": {
+    "self_ref": "#/furniture",
+    "children": [],
+    "content_layer": "furniture",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/texts/1"
+      },
+      {
+        "$ref": "#/texts/2"
+      },
+      {
+        "$ref": "#/texts/3"
+      },
+      {
+        "$ref": "#/texts/4"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
+        "$ref": "#/texts/6"
+      },
+      {
+        "$ref": "#/texts/7"
+      },
+      {
+        "$ref": "#/texts/8"
+      },
+      {
+        "$ref": "#/texts/9"
+      },
+      {
+        "$ref": "#/texts/10"
+      },
+      {
+        "$ref": "#/texts/11"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/texts/13"
+      },
+      {
+        "$ref": "#/texts/14"
+      },
+      {
+        "$ref": "#/texts/15"
+      },
+      {
+        "$ref": "#/texts/16"
+      },
+      {
+        "$ref": "#/texts/17"
+      },
+      {
+        "$ref": "#/texts/18"
+      },
+      {
+        "$ref": "#/texts/19"
+      },
+      {
+        "$ref": "#/texts/20"
+      },
+      {
+        "$ref": "#/texts/21"
+      },
+      {
+        "$ref": "#/texts/22"
+      },
+      {
+        "$ref": "#/texts/23"
+      },
+      {
+        "$ref": "#/texts/24"
+      },
+      {
+        "$ref": "#/texts/25"
+      },
+      {
+        "$ref": "#/texts/26"
+      },
+      {
+        "$ref": "#/texts/27"
+      },
+      {
+        "$ref": "#/texts/28"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "groups": [],
+  "texts": [
+    {
+      "self_ref": "#/texts/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 71.9807701955769,
+            "t": 716.1136363842329,
+            "r": 226.35000096480766,
+            "b": 706.2272727478693,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Conclusions of the Commission",
+      "text": "Conclusions of the Commission",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 69.99999733809527,
+            "t": 681.9999999,
+            "r": 448.66666753333334,
+            "b": 637.8461539288539,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            231
+          ]
+        }
+      ],
+      "orig": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.",
+      "text": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+    },
+    {
+      "self_ref": "#/texts/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 70.62621704553571,
+            "t": 615.0409835932787,
+            "r": 462.6666627533334,
+            "b": 553.2624763056258,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            258
+          ]
+        }
+      ],
+      "orig": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.",
+      "text": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 70.47917408623488,
+            "t": 533.333333078665,
+            "r": 462.2166572677497,
+            "b": 486.0000000125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            167
+          ]
+        }
+      ],
+      "orig": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns.",
+      "text": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns."
+    },
+    {
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 71.99999903750002,
+            "t": 715.9999999708333,
+            "r": 225.9999990375,
+            "b": 705.9999999708333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Conclusions of the Commission",
+      "text": "Conclusions of the Commission",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 70.6593928702042,
+            "t": 682.7142856935586,
+            "r": 449.0083869012269,
+            "b": 634.3985438579359,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            231
+          ]
+        }
+      ],
+      "orig": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.",
+      "text": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 70.56251749112656,
+            "t": 618.3606558052049,
+            "r": 464.4374903863732,
+            "b": 552.6311475336065,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            258
+          ]
+        }
+      ],
+      "orig": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.",
+      "text": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+    },
+    {
+      "self_ref": "#/texts/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 70.61943078358469,
+            "t": 530.9999999095238,
+            "r": 460.6666689714286,
+            "b": 485.5126647846614,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            167
+          ]
+        }
+      ],
+      "orig": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns.",
+      "text": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns."
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 72.00000085555553,
+            "t": 716.1136363819444,
+            "r": 226.00000085555553,
+            "b": 706.2272727455808,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Conclusions of the Commission",
+      "text": "Conclusions of the Commission",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 389.649605210883,
+            "t": 716.3333332904762,
+            "r": 542.0157469431665,
+            "b": 704.9999999571429,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            31
+          ]
+        }
+      ],
+      "orig": "anoilsi? Istaso) 1o voviu? odT)",
+      "text": "anoilsi? Istaso) 1o voviu? odT)"
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 70.6593928702042,
+            "t": 682.7142856935586,
+            "r": 449.0083869012269,
+            "b": 634.6099753939975,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            231
+          ]
+        }
+      ],
+      "orig": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.",
+      "text": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 70.56251749112656,
+            "t": 618.3606558052049,
+            "r": 464.4374903863732,
+            "b": 552.6311475336065,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            258
+          ]
+        }
+      ],
+      "orig": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.",
+      "text": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+    },
+    {
+      "self_ref": "#/texts/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 70.61943078358469,
+            "t": 530.9999999095238,
+            "r": 460.6666689714286,
+            "b": 485.5126647846614,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            167
+          ]
+        }
+      ],
+      "orig": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns.",
+      "text": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns."
+    },
+    {
+      "self_ref": "#/texts/13",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 72.00000085555553,
+            "t": 716.1063829970449,
+            "r": 226.00000085555553,
+            "b": 706.2127659757683,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Conclusions of the Commission",
+      "text": "Conclusions of the Commission",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/14",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 389.6496067039698,
+            "t": 716.3333332333333,
+            "r": 542.0157484362533,
+            "b": 704.3333332333333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            31
+          ]
+        }
+      ],
+      "orig": "anoidsi\u20b4 IstasoO to vovww? odTl",
+      "text": "anoidsi\u20b4 IstasoO to vovww? odTl"
+    },
+    {
+      "self_ref": "#/texts/15",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 70.6593928702042,
+            "t": 682.7142856935586,
+            "r": 449.0083869012269,
+            "b": 634.7596014304745,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            231
+          ]
+        }
+      ],
+      "orig": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.",
+      "text": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+    },
+    {
+      "self_ref": "#/texts/16",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 70.65964539735273,
+            "t": 615.0409835844262,
+            "r": 463.00810046369537,
+            "b": 552.6311475336065,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            258
+          ]
+        }
+      ],
+      "orig": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.",
+      "text": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+    },
+    {
+      "self_ref": "#/texts/17",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 71.26475806338625,
+            "t": 530.9999999095238,
+            "r": 460.6666689714286,
+            "b": 486.09897230291784,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            167
+          ]
+        }
+      ],
+      "orig": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns.",
+      "text": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the returns."
+    },
+    {
+      "self_ref": "#/texts/18",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 72.31538546929484,
+            "t": 716.1063829970449,
+            "r": 226.019231623141,
+            "b": 706.2127659757683,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Conclusions of the Commission",
+      "text": "Conclusions of the Commission",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/19",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 390.23599721898074,
+            "t": 717.1468105632127,
+            "r": 542.4437710633817,
+            "b": 703.3897624636138,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            28
+          ]
+        }
+      ],
+      "orig": "\u0433\u043d\u043e\u0457\u0432\u0456\u20b4 \u0406sjeso0 1o vovw? dT|",
+      "text": "\u0433\u043d\u043e\u0457\u0432\u0456\u20b4 \u0406sjeso0 1o vovw? dT|",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/20",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 70.33332960666674,
+            "t": 682.7142857621882,
+            "r": 449.0000020962962,
+            "b": 634.6422177015368,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            231
+          ]
+        }
+      ],
+      "orig": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.",
+      "text": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+    },
+    {
+      "self_ref": "#/texts/21",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 71.32576760179299,
+            "t": 615.0000000333333,
+            "r": 463.008106171566,
+            "b": 552.9999999875,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            258
+          ]
+        }
+      ],
+      "orig": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations.",
+      "text": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a season's observations."
+    },
+    {
+      "self_ref": "#/texts/22",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 70.5000171582811,
+            "t": 531.0510204413265,
+            "r": 466.5999927442186,
+            "b": 486.4597801900926,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            171
+          ]
+        }
+      ],
+      "orig": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the odo returns.",
+      "text": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the odo returns."
+    },
+    {
+      "self_ref": "#/texts/23",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 71.95058315009233,
+            "t": 716.0215828333244,
+            "r": 226.1845893405872,
+            "b": 706.0268198089051,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Conclusions of the Commission",
+      "text": "Conclusions of the Commission",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/24",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 390.36918821574426,
+            "t": 714.6906476212098,
+            "r": 453.62645258428483,
+            "b": 706.7050361104184,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "orig": "anonst& Istas",
+      "text": "anonst& Istas",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/25",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 70.52907691790564,
+            "t": 682.0827339798541,
+            "r": 447.9404094413371,
+            "b": 636.4982016204851,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            231
+          ]
+        }
+      ],
+      "orig": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven.",
+      "text": "The commission concludes that the coastal survey achieved the greater part of its stated objectives. Positions were fixed for eleven of the fourteen proposed stations, and tidal series of at least six months were obtained at seven."
+    },
+    {
+      "self_ref": "#/texts/26",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 465.7093014954748,
+            "t": 647.1954020813866,
+            "r": 540.3386611331587,
+            "b": 640.1072798164423,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            14
+          ]
+        }
+      ],
+      "orig": "ejemotsd s bas",
+      "text": "ejemotsd s bas"
+    },
+    {
+      "self_ref": "#/texts/27",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 71.23983006659608,
+            "t": 615.2988503172526,
+            "r": 477.08139596418886,
+            "b": 553.6321842748899,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            267
+          ]
+        }
+      ],
+      "orig": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a 100g 919 season's observations.",
+      "text": "The loss of the third party's notebooks is regretted. The commission recommends that duplicate records be transmitted by post at fortnightly intervals in all future work of this character, and that no single vessel carry the whole of a 100g 919 season's observations."
+    },
+    {
+      "self_ref": "#/texts/28",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 70.15000082376127,
+            "t": 532.8750000761719,
+            "r": 540.3386566662098,
+            "b": 485.89130438857507,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            187
+          ]
+        }
+      ],
+      "orig": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the t odt moit \u0433\u0434\u043b\u0456\u0432\u043e\u042f! returns.",
+      "text": "The commission further records its appreciation of the resident observers, whose diligence under conditions of considerable hardship is evident throughout the t odt moit \u0433\u0434\u043b\u0456\u0432\u043e\u042f! returns."
+    }
+  ],
+  "pictures": [],
+  "tables": [],
+  "key_value_items": [],
+  "form_items": [],
+  "pages": {
+    "1": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 1
+    },
+    "2": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 2
+    },
+    "3": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 3
+    },
+    "4": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 4
+    },
+    "5": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 5
+    },
+    "6": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 6
+    }
+  }
+}

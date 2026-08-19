@@ -1,0 +1,508 @@
+{
+  "schema_name": "DoclingDocument",
+  "version": "1.10.0",
+  "name": "sweep3_bisect",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 7868340619931736323,
+    "filename": "sweep3_bisect.pdf"
+  },
+  "furniture": {
+    "self_ref": "#/furniture",
+    "children": [],
+    "content_layer": "furniture",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/texts/1"
+      },
+      {
+        "$ref": "#/texts/2"
+      },
+      {
+        "$ref": "#/texts/3"
+      },
+      {
+        "$ref": "#/texts/4"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
+        "$ref": "#/texts/6"
+      },
+      {
+        "$ref": "#/texts/7"
+      },
+      {
+        "$ref": "#/texts/8"
+      },
+      {
+        "$ref": "#/texts/9"
+      },
+      {
+        "$ref": "#/texts/10"
+      },
+      {
+        "$ref": "#/texts/11"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/texts/13"
+      },
+      {
+        "$ref": "#/texts/14"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "groups": [],
+  "texts": [
+    {
+      "self_ref": "#/texts/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 71.33333181333336,
+            "t": 715.9999999866667,
+            "r": 223.33333181333336,
+            "b": 703.9999999866667,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            30
+          ]
+        }
+      ],
+      "orig": "The Survey of Coastal Stations",
+      "text": "The Survey of Coastal Stations",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 420.645933675731,
+            "t": 716.3333333666667,
+            "r": 539.6937805656831,
+            "b": 706.3333333666667,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            23
+          ]
+        }
+      ],
+      "orig": "obil edi to anoisytezdO",
+      "text": "obil edi to anoisytezdO"
+    },
+    {
+      "self_ref": "#/texts/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 70.20833795052074,
+            "t": 683.6666668558131,
+            "r": 446.1499949948264,
+            "b": 620.00000012,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            282
+          ]
+        }
+      ],
+      "orig": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.",
+      "text": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return."
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 71.8250101949988,
+            "t": 598.0000000333333,
+            "r": 443.53748309125143,
+            "b": 535.33333335,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            288
+          ]
+        }
+      ],
+      "orig": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.",
+      "text": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better."
+    },
+    {
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 70.60171691403397,
+            "t": 513.9999999733334,
+            "r": 452.3421888808639,
+            "b": 465.9841271964723,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            211
+          ]
+        }
+      ],
+      "orig": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+      "text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive."
+    },
+    {
+      "self_ref": "#/texts/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 71.33333181333336,
+            "t": 715.9999999866667,
+            "r": 223.33333181333336,
+            "b": 703.9999999866667,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            30
+          ]
+        }
+      ],
+      "orig": "The Survey of Coastal Stations",
+      "text": "The Survey of Coastal Stations",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 420.6666657933333,
+            "t": 716.3333334333333,
+            "r": 539.9999991266667,
+            "b": 706.3333334333333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "obiT adi to anoidsviezdO",
+      "text": "obiT adi to anoidsviezdO"
+    },
+    {
+      "self_ref": "#/texts/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 70.20833795052074,
+            "t": 683.6666668558131,
+            "r": 446.1499949948264,
+            "b": 620.00000012,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            282
+          ]
+        }
+      ],
+      "orig": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.",
+      "text": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return."
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 71.8250101949988,
+            "t": 598.0000000333333,
+            "r": 443.53748309125143,
+            "b": 535.33333335,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            288
+          ]
+        }
+      ],
+      "orig": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.",
+      "text": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better."
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 70.59311311712312,
+            "t": 513.9999999733334,
+            "r": 452.3421888808639,
+            "b": 465.77407234206646,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            211
+          ]
+        }
+      ],
+      "orig": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+      "text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive."
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 71.33333459999999,
+            "t": 716.0000000444445,
+            "r": 223.33333459999997,
+            "b": 704.0000000444444,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            30
+          ]
+        }
+      ],
+      "orig": "The Survey of Coastal Stations",
+      "text": "The Survey of Coastal Stations",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 420.645932270305,
+            "t": 715.6666666250001,
+            "r": 539.6937791602572,
+            "b": 706.3333332916667,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "obiT edi to anoiteviezdo",
+      "text": "obiT edi to anoiteviezdo"
+    },
+    {
+      "self_ref": "#/texts/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 70.20833795052074,
+            "t": 683.6666668558131,
+            "r": 446.1499949948264,
+            "b": 620.00000012,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            282
+          ]
+        }
+      ],
+      "orig": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return.",
+      "text": "In the summer of 1897 the commission dispatched three parties to survey the northern coastal stations. Each party carried a theodolite, two chronometers, and a barometer of the aneroid pattern. The instruments were compared at the observatory before departure and again upon return."
+    },
+    {
+      "self_ref": "#/texts/13",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 71.8250101949988,
+            "t": 598.0000000333333,
+            "r": 443.53748309125143,
+            "b": 535.3333333333333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            288
+          ]
+        }
+      ],
+      "orig": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better.",
+      "text": "The first party reached Station Marlow on the fourteenth of June. Weather conditions were poor for eleven consecutive days, and the observations taken during that interval were later discarded as unreliable. The second party, working southward from Cape Ellery, fared considerably better."
+    },
+    {
+      "self_ref": "#/texts/14",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 70.60035014983465,
+            "t": 513.9999999733334,
+            "r": 452.3421888808639,
+            "b": 465.9510221330414,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            211
+          ]
+        }
+      ],
+      "orig": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive.",
+      "text": "Readings from the third party have not survived. The field notebooks were lost when the supply vessel foundered off the shoals in early September, and only the summary telegrams remain in the commission archive."
+    }
+  ],
+  "pictures": [],
+  "tables": [],
+  "key_value_items": [],
+  "form_items": [],
+  "pages": {
+    "1": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 1
+    },
+    "2": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 2
+    },
+    "3": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 3
+    }
+  }
+}

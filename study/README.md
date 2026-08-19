@@ -606,6 +606,78 @@ pairs*, not of MinerU, and it joins Marker's onset on the list of things this st
 shown to be passage-dependent. The seed-3 measurement itself stands and its test still
 guards it, now named for the seed it actually covers.
 
+### Third engine: is the fabrication onset a property of generative decoding? (2026-08-19)
+
+Everything above rests on two engines, and both of them decode text with a language model.
+So every result so far is compatible with two very different readings: bleed-through makes
+*engines* fabricate, or bleed-through makes *generative* engines fabricate. Two generative
+engines cannot separate those, and the difference matters — the second reading would mean a
+plain OCR pipeline is the safe choice under this degradation, which is exactly the sort of
+advice a verification tool should not give by accident.
+
+Docling 2.120.3 answers it, because it has no generative step: a layout model plus an OCR
+reader, run here with Apple Vision (`--ocr-engine ocrmac`) rather than Tesseract, so it
+does not share a reader with ocr-verify's witness. It was scored on the ladder the other
+two were scored on — all three passage pairs, all four bisects, the same `bag_delta`
+measurement, the same layer buckets — because a coarse-only bracket is 0.1 wide and would
+have read as agreement with everything. Instrument:
+[sweep/score_docling.py](sweep/score_docling.py), numbers in
+[sweep/docling_results.json](sweep/docling_results.json), 27 tests in
+`tests/test_docling_onset.py`.
+
+| Seed | Marker onset | MinerU onset | Docling onset | Docling vs Marker | Docling vs MinerU |
+| --- | --- | --- | --- | --- | --- |
+| 1 (conclusions/survey) | (0.15, 0.175] | (0.1, 0.125] | (0.125, 0.15] | Docling first | MinerU first |
+| 2 (tides/instruments) | (0.125, 0.15] | (0.1, 0.125] | (0.125, 0.15] | undetermined | MinerU first |
+| 3 (survey/tides) | (0.275, 0.3] | (0.1, 0.125] | (0.1, 0.125] | Docling first | undetermined |
+
+**The first reading wins: fabrication under bleed-through is not a generative artifact.**
+The non-generative pipeline crosses on all three pairs, in the same 0.10–0.15 band as the
+generative ones, with brackets the same 0.025 width. On two pairs it provably crosses
+*before* Marker. "Provably" here is the same test the Marker-vs-MinerU verdict uses —
+disjoint brackets — and where the brackets coincide the table says `undetermined` rather
+than ranking two engines the ladder cannot separate. 21 of its 30 measured rows fabricate,
+106 words in total.
+
+**The published ordering survives a third engine.** On no pair does Docling provably cross
+before MinerU, and on two it provably crosses after. MinerU is still the first to fabricate
+in every comparison this study can resolve.
+
+**Docling's opposite failure profile is the more useful finding for a verification tool.**
+It omits *nothing*: 0 dropped words at every strength on every pair, where Marker drops the
+title and a paragraph on most rows. So the three engines fail in three different directions
+under the same degradation — Marker loses real text and transcribes ghost ink, MinerU keeps
+the text and invents, Docling keeps the text and adds ghost-ink artifacts. A tool that only
+checked for one of those would pass two of these engines.
+
+**What the buckets cannot say here, stated as a bound.** 82 of the 106 fabricated words land
+in `unattributable` — no word of either layer's vocabulary — which for Marker and MinerU
+reads as invention. It cannot be read that way for this engine. The ghost layer is bled
+through *mirrored*, and Docling transcribes mirrored ink literally: `anoitsviezdo` beside
+"Observations", `odt`/`edi`/`adi` beside "the". Those are real ink read the wrong way round,
+not invention, and the ghost vocabulary is stored un-mirrored so they cannot match it.
+`invented_share_upper_bound` is therefore named as a bound, not a measurement.
+
+That reading is deliberately *not* backed by a classifier. Reversing every page and ghost
+word and matching with the same ≥4-character near-miss tolerance the scorer uses catches 7
+of the 106 tokens, because mirroring flips each glyph's shape and the reader then
+misidentifies it (b/d, r/i) — the string is not a reversal of anything. The failed test is
+computed and published rather than dropped, for the same reason the bigram lexicality proxy
+was dropped above: a claim about mirrored ink that rests only on how it looks should say so.
+
+**A third fabrication mode, on the pair where the buckets do work.** Seed 2's upper
+strengths fabricate with `unattributable` at zero: Docling emits `Observations of the Tide
+Observations of the Tide` as one heading — the real title, duplicated. Not ghost ink, not
+invention, but real page text emitted twice. Its curve is also non-monotonic (fabricating at
+0.15 and 0.175, clean again at 0.2, fabricating from 0.3), which is why "onset" throughout
+this study means the first crossing and says so.
+
+**Reproducibility caveat.** The Apple Vision reader is macOS-only. That was the right choice
+for independence from the Tesseract witness, but it means this column cannot be reproduced
+on Linux as captured; the captures are committed so the numbers can still be checked, and a
+`--ocr-engine rapidocr` re-run would be the portable comparison. The layout stage is
+deterministic here — a repeat run of the same corpus is byte-identical.
+
 ## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
 
 The real-archival wild hunt (`study/wild/`) found two failure modes the 24-page corpus
@@ -635,9 +707,14 @@ material exposed, not measuring engine fabrication.
 
 ## Honest limits of this study
 
-- One engine, one run, one synthetic-then-degraded corpus. This measures existence
+- Three engines, one run each, one synthetic-then-degraded corpus. This measures existence
   ("a current, widely used engine does/does not fabricate under these conditions"), not
-  prevalence in the wild.
+  prevalence in the wild. (This bullet said "one engine" until 2026-08-19, when the third
+  engine was added and the count was three runs stale.)
+- The third engine's OCR reader is Apple Vision, which is macOS-only. That was chosen so it
+  would not share a reader with ocr-verify's Tesseract witness, but it means that column
+  cannot be re-captured on Linux as run. Its captures are committed so the numbers remain
+  checkable, and `--ocr-engine rapidocr` would be the portable re-run.
 - The passages are 19th-century-survey pastiche written for this study. Real archival scans
   have layouts and typefaces this corpus does not attempt.
 - Degradations are real image operations, but the *pages* are born digital. A physically

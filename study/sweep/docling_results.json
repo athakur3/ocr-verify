@@ -1,0 +1,703 @@
+{
+  "engine": {
+    "name": "docling",
+    "version": "2.120.3",
+    "ibm_models_version": "3.14.0",
+    "ocr_backend": "ocrmac 1.0.1 (Apple Vision)",
+    "generative": false,
+    "command": "docling convert --ocr-engine ocrmac --to json --image-export-mode placeholder --device cpu"
+  },
+  "seeds": [
+    {
+      "id": "seed1",
+      "real": "conclusions",
+      "ghost": "survey",
+      "truth_words_per_page": 104,
+      "captures": [
+        "docling_out/sweep.json",
+        "docling_bisect/bisect.json"
+      ],
+      "rows": [
+        {
+          "strength": 0.0,
+          "kind": "coarse",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.1,
+          "kind": "coarse",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.125,
+          "kind": "bisect",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.15,
+          "kind": "bisect",
+          "docling_fabricated": 5,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [
+            "enolisi",
+            "isteso",
+            "to",
+            "yovuu",
+            "odl"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        },
+        {
+          "strength": 0.175,
+          "kind": "bisect",
+          "docling_fabricated": 5,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [
+            "anoilsi",
+            "istaso",
+            "to",
+            "voviu",
+            "odt"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        },
+        {
+          "strength": 0.2,
+          "kind": "coarse",
+          "docling_fabricated": 5,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [
+            "anoilsi",
+            "istaso",
+            "1o",
+            "voviu",
+            "odt"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 5
+          }
+        },
+        {
+          "strength": 0.3,
+          "kind": "coarse",
+          "docling_fabricated": 5,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [
+            "anoidsi\u20b4",
+            "istasoo",
+            "to",
+            "vovww",
+            "odtl"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        },
+        {
+          "strength": 0.4,
+          "kind": "coarse",
+          "docling_fabricated": 6,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [
+            "\u0433\u043d\u043e\u0457\u0432\u0456\u20b4",
+            "\u0456sjeso0",
+            "1o",
+            "vovw",
+            "dt",
+            "odo"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 6
+          }
+        },
+        {
+          "strength": 0.55,
+          "kind": "coarse",
+          "docling_fabricated": 11,
+          "docling_omitted": 0,
+          "words_on_page": 104,
+          "tokens": [
+            "anonst&",
+            "istas",
+            "ejemotsd",
+            "s",
+            "bas",
+            "100g",
+            "919",
+            "t",
+            "odt",
+            "moit",
+            "\u0433\u0434\u043b\u0456\u0432\u043e\u044f"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 11
+          }
+        }
+      ],
+      "onset": {
+        "crossed": true,
+        "last_clean": 0.125,
+        "first_fabricating": 0.15,
+        "words_at_first_fabricating": 5,
+        "bracket_width": 0.025
+      }
+    },
+    {
+      "id": "seed2",
+      "real": "tides",
+      "ghost": "instruments",
+      "truth_words_per_page": 115,
+      "captures": [
+        "docling_out2/sweep2.json",
+        "docling_sweep2_bisect/sweep2_bisect.json"
+      ],
+      "rows": [
+        {
+          "strength": 0.0,
+          "kind": "coarse",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.1,
+          "kind": "coarse",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.125,
+          "kind": "bisect",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.15,
+          "kind": "bisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [
+            "anomunieni",
+            "odi",
+            "noqu",
+            "\u0433\u043e\u0442o\u0438"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        },
+        {
+          "strength": 0.175,
+          "kind": "bisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [
+            "ainomunenl",
+            "adi",
+            "nogu",
+            "\u0433\u044d\u0442\u043e"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        },
+        {
+          "strength": 0.2,
+          "kind": "coarse",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.3,
+          "kind": "coarse",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [
+            "tide",
+            "observations",
+            "of",
+            "the"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 2,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.4,
+          "kind": "coarse",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [
+            "tide",
+            "observations",
+            "of",
+            "the"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 2,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.55,
+          "kind": "coarse",
+          "docling_fabricated": 5,
+          "docling_omitted": 0,
+          "words_on_page": 115,
+          "tokens": [
+            "tide",
+            "2jns",
+            "observations",
+            "of",
+            "the"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 2,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 1
+          }
+        }
+      ],
+      "onset": {
+        "crossed": true,
+        "last_clean": 0.125,
+        "first_fabricating": 0.15,
+        "words_at_first_fabricating": 4,
+        "bracket_width": 0.025
+      }
+    },
+    {
+      "id": "seed3",
+      "real": "survey",
+      "ghost": "tides",
+      "truth_words_per_page": 124,
+      "captures": [
+        "docling_out3/sweep3.json",
+        "docling_sweep3_bisect/sweep3_bisect.json",
+        "docling_sweep3_lowbisect/sweep3_lowbisect.json"
+      ],
+      "rows": [
+        {
+          "strength": 0.0,
+          "kind": "coarse",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.1,
+          "kind": "coarse",
+          "docling_fabricated": 0,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        {
+          "strength": 0.125,
+          "kind": "lowbisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "abit",
+            "adi",
+            "lo",
+            "anorsy1e2d0"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        },
+        {
+          "strength": 0.15,
+          "kind": "lowbisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obil",
+            "adi",
+            "anoitsviezdo",
+            "to"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        },
+        {
+          "strength": 0.175,
+          "kind": "lowbisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obil",
+            "adt",
+            "enortsvigedo",
+            "to"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        },
+        {
+          "strength": 0.2,
+          "kind": "coarse",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obit",
+            "edi",
+            "anoitsviezdo",
+            "to"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        },
+        {
+          "strength": 0.225,
+          "kind": "bisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obil",
+            "edi",
+            "anoisytezdo",
+            "to"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        },
+        {
+          "strength": 0.25,
+          "kind": "bisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obit",
+            "adi",
+            "anoidsviezdo",
+            "to"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        },
+        {
+          "strength": 0.275,
+          "kind": "bisect",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obit",
+            "edi",
+            "anoiteviezdo",
+            "to"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        },
+        {
+          "strength": 0.3,
+          "kind": "coarse",
+          "docling_fabricated": 4,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obit",
+            "edi",
+            "anoitsviezdo",
+            "to"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        },
+        {
+          "strength": 0.4,
+          "kind": "coarse",
+          "docling_fabricated": 2,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "alu",
+            "1991"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        },
+        {
+          "strength": 0.55,
+          "kind": "coarse",
+          "docling_fabricated": 14,
+          "docling_omitted": 0,
+          "words_on_page": 124,
+          "tokens": [
+            "obit",
+            "adi",
+            "noitsvtezdo",
+            "to",
+            "anoitsviozdo",
+            "isbit",
+            "ng",
+            "odt",
+            "noitqumoni",
+            "art",
+            "wolod",
+            "toot",
+            "wot",
+            "bas"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 1,
+            "unattributable": 12
+          }
+        }
+      ],
+      "onset": {
+        "crossed": true,
+        "last_clean": 0.1,
+        "first_fabricating": 0.125,
+        "words_at_first_fabricating": 4,
+        "bracket_width": 0.025
+      }
+    }
+  ],
+  "ordering": {
+    "per_seed": {
+      "seed1": {
+        "marker": "docling_first",
+        "mineru": "mineru_first"
+      },
+      "seed2": {
+        "marker": "undetermined",
+        "mineru": "mineru_first"
+      },
+      "seed3": {
+        "marker": "docling_first",
+        "mineru": "undetermined"
+      }
+    },
+    "docling_provably_first_against": {
+      "marker": [
+        "seed1",
+        "seed3"
+      ],
+      "mineru": []
+    },
+    "provably_first_against_docling": {
+      "marker": [],
+      "mineru": [
+        "seed1",
+        "seed2"
+      ]
+    },
+    "undetermined_against": {
+      "marker": [
+        "seed2"
+      ],
+      "mineru": [
+        "seed3"
+      ]
+    }
+  },
+  "totals": {
+    "rows_measured": 30,
+    "rows_fabricating": 21,
+    "fabricated_words": 106,
+    "unattributable_words": 82,
+    "ghost_layer_words": 3,
+    "invented_share_upper_bound": 0.7736,
+    "reversed_vocab_matches": 7,
+    "caveat": "unattributable is an upper bound on invention for this engine, not a measurement of it: the ghost layer is mirrored on the page and stored un-mirrored, so literally transcribed ghost ink cannot match it",
+    "seeds_crossing": [
+      "seed1",
+      "seed2",
+      "seed3"
+    ],
+    "seeds_clean": [],
+    "max_omitted_share": 0.0,
+    "min_omitted_share": 0.0
+  }
+}

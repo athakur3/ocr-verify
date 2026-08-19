@@ -1,0 +1,478 @@
+{
+  "schema_name": "DoclingDocument",
+  "version": "1.10.0",
+  "name": "sweep2_bisect",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 13837637026947551903,
+    "filename": "sweep2_bisect.pdf"
+  },
+  "furniture": {
+    "self_ref": "#/furniture",
+    "children": [],
+    "content_layer": "furniture",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/texts/1"
+      },
+      {
+        "$ref": "#/texts/2"
+      },
+      {
+        "$ref": "#/texts/3"
+      },
+      {
+        "$ref": "#/texts/4"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
+        "$ref": "#/texts/6"
+      },
+      {
+        "$ref": "#/texts/7"
+      },
+      {
+        "$ref": "#/texts/8"
+      },
+      {
+        "$ref": "#/texts/9"
+      },
+      {
+        "$ref": "#/texts/10"
+      },
+      {
+        "$ref": "#/texts/11"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/texts/13"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "groups": [],
+  "texts": [
+    {
+      "self_ref": "#/texts/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 71.97607580681819,
+            "t": 715.9999999708333,
+            "r": 191.6889944671053,
+            "b": 705.9999999708333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "Observations of the Tide",
+      "text": "Observations of the Tide",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 68.7999993727605,
+            "t": 681.9999999833333,
+            "r": 459.99999676111116,
+            "b": 616.8333333760417,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            282
+          ]
+        }
+      ],
+      "orig": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.",
+      "text": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+    },
+    {
+      "self_ref": "#/texts/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 71.33332950666674,
+            "t": 598.0249999867,
+            "r": 453.9999961733334,
+            "b": 551.4749997783333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            234
+          ]
+        }
+      ],
+      "orig": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.",
+      "text": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.00000187666664,
+            "t": 531.5249997783333,
+            "r": 447.33333521000003,
+            "b": 484.974999916875,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            208
+          ]
+        }
+      ],
+      "orig": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory.",
+      "text": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+    },
+    {
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 72.33333399629628,
+            "t": 716.0000000259259,
+            "r": 191.6666673296296,
+            "b": 706.0000000259259,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "Observations of the Tide",
+      "text": "Observations of the Tide",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 406.982379314721,
+            "t": 715.6666665777777,
+            "r": 540.687225129699,
+            "b": 704.9999999111111,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            26
+          ]
+        }
+      ],
+      "orig": "anomunieni odi noqu \u0433\u043e\u0442o\u0438!",
+      "text": "anomunieni odi noqu \u0433\u043e\u0442o\u0438!"
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 68.08750783890967,
+            "t": 682.8367346970164,
+            "r": 461.52082505366644,
+            "b": 619.8756078393976,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            282
+          ]
+        }
+      ],
+      "orig": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.",
+      "text": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+    },
+    {
+      "self_ref": "#/texts/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 68.71667132635405,
+            "t": 598.0250000285,
+            "r": 454.3421514914049,
+            "b": 551.4749999792188,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            234
+          ]
+        }
+      ],
+      "orig": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.",
+      "text": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 71.9917354439339,
+            "t": 531.525000083125,
+            "r": 447.6809938226997,
+            "b": 484.31000012634996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            208
+          ]
+        }
+      ],
+      "orig": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory.",
+      "text": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 72.33333399629628,
+            "t": 716.0000000259259,
+            "r": 191.6666673296296,
+            "b": 706.0000000259259,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "Observations of the Tide",
+      "text": "Observations of the Tide",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 406.9823792584959,
+            "t": 715.6666665904762,
+            "r": 540.6872250734739,
+            "b": 704.9999999238096,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            26
+          ]
+        }
+      ],
+      "orig": "ainomunenl adi nogu \u0433\u044d\u0442\u043e/!",
+      "text": "ainomunenl adi nogu \u0433\u044d\u0442\u043e/!"
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 68.08750783890967,
+            "t": 682.8367346970164,
+            "r": 461.52082505366644,
+            "b": 619.8756078393976,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            282
+          ]
+        }
+      ],
+      "orig": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening.",
+      "text": "Tidal observations at Station Marlow were continued through the winter without interruption. The gauge was of the float pattern, housed in a timber well sunk four feet below the lowest recorded water. Readings were taken hourly by the resident observer and transcribed each evening."
+    },
+    {
+      "self_ref": "#/texts/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 71.33332950666674,
+            "t": 598.0249999867,
+            "r": 453.9999961733334,
+            "b": 551.4749997783333,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            234
+          ]
+        }
+      ],
+      "orig": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables.",
+      "text": "The self-registering apparatus failed twice during December, on both occasions owing to the freezing of the float chamber. Manual readings were substituted for the affected intervals and are marked accordingly in the published tables."
+    },
+    {
+      "self_ref": "#/texts/13",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 72.00000187666664,
+            "t": 531.5249997783333,
+            "r": 447.33333521000003,
+            "b": 484.974999916875,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            208
+          ]
+        }
+      ],
+      "orig": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory.",
+      "text": "A comparison of the winter series with the corresponding series from the preceding year shows agreement within two hundredths of a foot for the mean water level, which the commission regarded as satisfactory."
+    }
+  ],
+  "pictures": [],
+  "tables": [],
+  "key_value_items": [],
+  "form_items": [],
+  "pages": {
+    "1": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 1
+    },
+    "2": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 2
+    },
+    "3": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 3
+    }
+  }
+}
