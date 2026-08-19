@@ -252,10 +252,14 @@ def _fabricated_tokens(truth_name: str, content_list: str) -> dict[float, set[st
     return out
 
 
-def test_mineru_crosses_into_noise_before_it_crosses_into_plausible_invention():
+def test_on_seed_3_mineru_crosses_into_noise_before_it_crosses_into_plausible_invention():
     # Seed 3 fabricates exactly 4 words at every strength from 0.125 to 0.55, which reads
     # as one flat behaviour until you look at the words. The README says it is two; this
     # re-derives that from the captures so the claim cannot become decorative.
+    #
+    # Renamed 2026-08-19 to say "on seed 3". The body only ever measured seed 3, but the
+    # old name asserted a property of the engine, and tests/test_fabricated_words.py shows
+    # seed 1 refutes that general form — its onset fabrication is ordinary English.
     low = _fabricated_tokens(
         "sweep3_lowbisect_ground_truth.json",
         "mineru_out3_lowbisect/sweep3_lowbisect/hybrid_auto/sweep3_lowbisect_content_list.json",

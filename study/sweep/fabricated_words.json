@@ -1,0 +1,1854 @@
+{
+  "buckets": [
+    "ghost_only",
+    "page_only",
+    "both",
+    "near_miss",
+    "unattributable"
+  ],
+  "runs": [
+    {
+      "seed": "seed1",
+      "kind": "coarse",
+      "real": "conclusions",
+      "ghost": "survey",
+      "results": "sweep_results.json"
+    },
+    {
+      "seed": "seed1",
+      "kind": "bisect",
+      "real": "conclusions",
+      "ghost": "survey",
+      "results": "bisect_results.json"
+    },
+    {
+      "seed": "seed2",
+      "kind": "coarse",
+      "real": "tides",
+      "ghost": "instruments",
+      "results": "sweep2_results.json"
+    },
+    {
+      "seed": "seed2",
+      "kind": "bisect",
+      "real": "tides",
+      "ghost": "instruments",
+      "results": "sweep2_bisect_results.json"
+    },
+    {
+      "seed": "seed3",
+      "kind": "coarse",
+      "real": "survey",
+      "ghost": "tides",
+      "results": "sweep3_results.json"
+    },
+    {
+      "seed": "seed3",
+      "kind": "bisect",
+      "real": "survey",
+      "ghost": "tides",
+      "results": "sweep3_bisect_results.json"
+    },
+    {
+      "seed": "seed3",
+      "kind": "lowbisect",
+      "real": "survey",
+      "ghost": "tides",
+      "results": "sweep3_lowbisect_results.json"
+    }
+  ],
+  "rows": [
+    {
+      "seed": "seed1",
+      "kind": "coarse",
+      "strength": 0.0,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "coarse",
+      "strength": 0.1,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "bisect",
+      "strength": 0.125,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 5,
+          "tokens": [
+            "true",
+            "version",
+            "to",
+            "create",
+            "results"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "ghost_only",
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "bisect",
+      "strength": 0.15,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 5,
+          "tokens": [
+            "true",
+            "2016y",
+            "of",
+            "cogasi",
+            "2stouy"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "both",
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "bisect",
+      "strength": 0.175,
+      "engines": {
+        "marker": {
+          "fabricated": 24,
+          "tokens": [
+            "summer",
+            "summer",
+            "coastal",
+            "permanent",
+            "summer",
+            "summer",
+            "a",
+            "permanent",
+            "summer",
+            "summer",
+            "and",
+            "of",
+            "the",
+            "the",
+            "of",
+            "and",
+            "the",
+            "of",
+            "a",
+            "the",
+            "of",
+            "the",
+            "of",
+            "the"
+          ],
+          "kinds": [
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both"
+          ],
+          "buckets": {
+            "ghost_only": 6,
+            "page_only": 0,
+            "both": 16,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        },
+        "mineru": {
+          "fabricated": 15,
+          "tokens": [
+            "yog",
+            "zanmislaj",
+            "tejogistje",
+            "tewistij",
+            "ni",
+            "ni",
+            "nismet",
+            "2mistgolat",
+            "yismimu2",
+            "ndi",
+            "true",
+            "name",
+            "marxist",
+            "strains",
+            "of"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "both"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 14
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "coarse",
+      "strength": 0.2,
+      "engines": {
+        "marker": {
+          "fabricated": 20,
+          "tokens": [
+            "summer",
+            "summer",
+            "coastal",
+            "permanent",
+            "summer",
+            "summer",
+            "summer",
+            "coastal",
+            "stations",
+            "the",
+            "of",
+            "and",
+            "the",
+            "of",
+            "a",
+            "the",
+            "of",
+            "the",
+            "of",
+            "the"
+          ],
+          "kinds": [
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both"
+          ],
+          "buckets": {
+            "ghost_only": 5,
+            "page_only": 0,
+            "both": 14,
+            "near_miss": 0,
+            "unattributable": 1
+          }
+        },
+        "mineru": {
+          "fabricated": 15,
+          "tokens": [
+            "ipe",
+            "summity",
+            "telegistve",
+            "testiiv",
+            "ni",
+            "nismi",
+            "siqirlve",
+            "true",
+            "name",
+            "marxist",
+            "strains",
+            "in",
+            "commission",
+            "of",
+            "the"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "both",
+            "both",
+            "both",
+            "both"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 4,
+            "near_miss": 0,
+            "unattributable": 11
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "coarse",
+      "strength": 0.3,
+      "engines": {
+        "marker": {
+          "fabricated": 75,
+          "tokens": [
+            "summer",
+            "summer",
+            "coastal",
+            "it",
+            "had",
+            "previously",
+            "done",
+            "coastal",
+            "survey",
+            "achieved",
+            "greater",
+            "part",
+            "summer",
+            "coastal",
+            "stations",
+            "it",
+            "had",
+            "previously",
+            "done",
+            "coastal",
+            "survey",
+            "achieved",
+            "greater",
+            "part",
+            "the",
+            "summer",
+            "the",
+            "coastal",
+            "stations",
+            "than",
+            "it",
+            "had",
+            "previously",
+            "done",
+            "the",
+            "the",
+            "the",
+            "that",
+            "that",
+            "the",
+            "of",
+            "future",
+            "working",
+            "ship",
+            "interval",
+            "a",
+            "single",
+            "vessel",
+            "carries",
+            "the",
+            "of",
+            "a",
+            "future",
+            "working",
+            "ship",
+            "interval",
+            "the",
+            "of",
+            "the",
+            "whose",
+            "of",
+            "the",
+            "residence",
+            "from",
+            "the",
+            "subject",
+            "vessel",
+            "tourists",
+            "off",
+            "the",
+            "shore",
+            "in",
+            "each",
+            "september",
+            "only"
+          ],
+          "kinds": [
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "both",
+            "both",
+            "page_only",
+            "page_only",
+            "page_only",
+            "ghost_only",
+            "both",
+            "both",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "both",
+            "both",
+            "page_only",
+            "page_only",
+            "page_only",
+            "both",
+            "ghost_only",
+            "both",
+            "both",
+            "both",
+            "near_miss",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "both",
+            "page_only",
+            "ghost_only",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "page_only",
+            "both",
+            "near_miss",
+            "both",
+            "both",
+            "both",
+            "page_only",
+            "ghost_only",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "both",
+            "both",
+            "page_only",
+            "both",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "both",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only"
+          ],
+          "buckets": {
+            "ghost_only": 13,
+            "page_only": 10,
+            "both": 32,
+            "near_miss": 2,
+            "unattributable": 18
+          }
+        },
+        "mineru": {
+          "fabricated": 13,
+          "tokens": [
+            "lye",
+            "zijnay",
+            "2stouy",
+            "coastal",
+            "of",
+            "lpg",
+            "immunisty",
+            "telegisture",
+            "tourism",
+            "in",
+            "the",
+            "commercial",
+            "startup"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "both",
+            "both",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "both",
+            "both",
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 4,
+            "near_miss": 0,
+            "unattributable": 9
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "coarse",
+      "strength": 0.4,
+      "engines": {
+        "marker": {
+          "fabricated": 20,
+          "tokens": [
+            "summer",
+            "summer",
+            "coastal",
+            "promoted",
+            "survey",
+            "achievement",
+            "stations",
+            "and",
+            "and",
+            "future",
+            "working",
+            "that",
+            "interval",
+            "later",
+            "discarded",
+            "as",
+            "unreliable",
+            "the",
+            "the",
+            "residents"
+          ],
+          "kinds": [
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "both",
+            "unattributable",
+            "both",
+            "both",
+            "both",
+            "page_only",
+            "ghost_only",
+            "both",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "both",
+            "near_miss"
+          ],
+          "buckets": {
+            "ghost_only": 8,
+            "page_only": 1,
+            "both": 8,
+            "near_miss": 1,
+            "unattributable": 2
+          }
+        },
+        "mineru": {
+          "fabricated": 5,
+          "tokens": [
+            "lye",
+            "synexy",
+            "of",
+            "catalyst",
+            "solutions"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "both",
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed1",
+      "kind": "coarse",
+      "strength": 0.55,
+      "engines": {
+        "marker": {
+          "fabricated": 55,
+          "tokens": [
+            "summer",
+            "summer",
+            "coastal",
+            "particularly",
+            "stations",
+            "and",
+            "the",
+            "the",
+            "resident",
+            "observers",
+            "the",
+            "summary",
+            "telegrams",
+            "tension",
+            "in",
+            "the",
+            "striping",
+            "the",
+            "subply",
+            "vessel",
+            "tourists",
+            "off",
+            "the",
+            "shorts",
+            "in",
+            "each",
+            "season",
+            "and",
+            "only",
+            "was",
+            "the",
+            "subply",
+            "vessel",
+            "tourists",
+            "off",
+            "the",
+            "shorts",
+            "in",
+            "each",
+            "season",
+            "and",
+            "only",
+            "was",
+            "the",
+            "subply",
+            "vessel",
+            "tourists",
+            "off",
+            "the",
+            "shorts",
+            "in",
+            "each",
+            "season",
+            "and",
+            "only"
+          ],
+          "kinds": [
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "both",
+            "both",
+            "both",
+            "both",
+            "page_only",
+            "page_only",
+            "both",
+            "ghost_only",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "both",
+            "unattributable",
+            "both",
+            "near_miss",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "both",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "near_miss",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "both",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "near_miss",
+            "both",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "both",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "ghost_only"
+          ],
+          "buckets": {
+            "ghost_only": 13,
+            "page_only": 2,
+            "both": 23,
+            "near_miss": 3,
+            "unattributable": 14
+          }
+        },
+        "mineru": {
+          "fabricated": 5,
+          "tokens": [
+            "lye",
+            "source",
+            "of",
+            "catalyst",
+            "solutions"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "both",
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "coarse",
+      "strength": 0.0,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "coarse",
+      "strength": 0.1,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "bisect",
+      "strength": 0.125,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "2115m12n1",
+            "3d1",
+            "noq1",
+            "29104"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 4
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "bisect",
+      "strength": 0.15,
+      "engines": {
+        "marker": {
+          "fabricated": 2,
+          "tokens": [
+            "concern",
+            "a"
+          ],
+          "kinds": [
+            "unattributable",
+            "both"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 1
+          }
+        },
+        "mineru": {
+          "fabricated": 3,
+          "tokens": [
+            "note",
+            "already",
+            "used"
+          ],
+          "kinds": [
+            "near_miss",
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 1,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "bisect",
+      "strength": 0.175,
+      "engines": {
+        "marker": {
+          "fabricated": 2,
+          "tokens": [
+            "concern",
+            "a"
+          ],
+          "kinds": [
+            "unattributable",
+            "both"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 1
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "notes",
+            "know",
+            "the",
+            "programming"
+          ],
+          "kinds": [
+            "ghost_only",
+            "unattributable",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "coarse",
+      "strength": 0.2,
+      "engines": {
+        "marker": {
+          "fabricated": 2,
+          "tokens": [
+            "conception",
+            "can"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "notes",
+            "know",
+            "the",
+            "programming"
+          ],
+          "kinds": [
+            "ghost_only",
+            "unattributable",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "coarse",
+      "strength": 0.3,
+      "engines": {
+        "marker": {
+          "fabricated": 2,
+          "tokens": [
+            "conception",
+            "can"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "notes",
+            "how",
+            "the",
+            "internet"
+          ],
+          "kinds": [
+            "ghost_only",
+            "unattributable",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "coarse",
+      "strength": 0.4,
+      "engines": {
+        "marker": {
+          "fabricated": 2,
+          "tokens": [
+            "conception",
+            "can"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "notes",
+            "how",
+            "the",
+            "internet"
+          ],
+          "kinds": [
+            "ghost_only",
+            "unattributable",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed2",
+      "kind": "coarse",
+      "strength": 0.55,
+      "engines": {
+        "marker": {
+          "fabricated": 19,
+          "tokens": [
+            "pseudometric",
+            "correction",
+            "curve",
+            "was",
+            "used",
+            "same",
+            "pseudometer",
+            "found",
+            "to",
+            "be",
+            "systematic",
+            "rather",
+            "than",
+            "random",
+            "support",
+            "this",
+            "rating",
+            "was",
+            "support"
+          ],
+          "kinds": [
+            "unattributable",
+            "ghost_only",
+            "ghost_only",
+            "both",
+            "unattributable",
+            "unattributable",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "unattributable",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 9,
+            "page_only": 0,
+            "both": 3,
+            "near_miss": 0,
+            "unattributable": 7
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "notes",
+            "from",
+            "the",
+            "investments"
+          ],
+          "kinds": [
+            "ghost_only",
+            "page_only",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 1,
+            "page_only": 1,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 1
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "coarse",
+      "strength": 0.0,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "coarse",
+      "strength": 0.1,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "lowbisect",
+      "strength": 0.125,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "ebit",
+            "edit",
+            "to",
+            "anotherreado"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "lowbisect",
+      "strength": 0.15,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "ebit",
+            "edit",
+            "to",
+            "annotsvreado"
+          ],
+          "kinds": [
+            "unattributable",
+            "unattributable",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 1,
+            "near_miss": 0,
+            "unattributable": 3
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "lowbisect",
+      "strength": 0.175,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operations",
+            "to",
+            "the",
+            "topic"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "coarse",
+      "strength": 0.2,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operations",
+            "of",
+            "the",
+            "topic"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "bisect",
+      "strength": 0.225,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operations",
+            "of",
+            "the",
+            "topic"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "bisect",
+      "strength": 0.25,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operations",
+            "of",
+            "the",
+            "topic"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "bisect",
+      "strength": 0.275,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operations",
+            "of",
+            "the",
+            "topic"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "coarse",
+      "strength": 0.3,
+      "engines": {
+        "marker": {
+          "fabricated": 14,
+          "tokens": [
+            "tite",
+            "interruption",
+            "gaun",
+            "a",
+            "comparison",
+            "winter",
+            "series",
+            "with",
+            "consequent",
+            "series",
+            "from",
+            "the",
+            "the",
+            "the"
+          ],
+          "kinds": [
+            "near_miss",
+            "ghost_only",
+            "unattributable",
+            "both",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "ghost_only",
+            "unattributable",
+            "ghost_only",
+            "both",
+            "both",
+            "both",
+            "both"
+          ],
+          "buckets": {
+            "ghost_only": 6,
+            "page_only": 0,
+            "both": 5,
+            "near_miss": 1,
+            "unattributable": 2
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operations",
+            "of",
+            "the",
+            "title"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "coarse",
+      "strength": 0.4,
+      "engines": {
+        "marker": {
+          "fabricated": 1,
+          "tokens": [
+            "international"
+          ],
+          "kinds": [
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 1
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operation",
+            "of",
+            "the",
+            "title"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    },
+    {
+      "seed": "seed3",
+      "kind": "coarse",
+      "strength": 0.55,
+      "engines": {
+        "marker": {
+          "fabricated": 0,
+          "tokens": [],
+          "kinds": [],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 0,
+            "near_miss": 0,
+            "unattributable": 0
+          }
+        },
+        "mineru": {
+          "fabricated": 4,
+          "tokens": [
+            "operations",
+            "of",
+            "the",
+            "topic"
+          ],
+          "kinds": [
+            "unattributable",
+            "both",
+            "both",
+            "unattributable"
+          ],
+          "buckets": {
+            "ghost_only": 0,
+            "page_only": 0,
+            "both": 2,
+            "near_miss": 0,
+            "unattributable": 2
+          }
+        }
+      }
+    }
+  ],
+  "totals": {
+    "marker": {
+      "fabricated": 238,
+      "buckets": {
+        "ghost_only": 60,
+        "page_only": 13,
+        "both": 103,
+        "near_miss": 7,
+        "unattributable": 55
+      },
+      "unattributable_pct": 23.1
+    },
+    "mineru": {
+      "fabricated": 130,
+      "buckets": {
+        "ghost_only": 6,
+        "page_only": 1,
+        "both": 35,
+        "near_miss": 1,
+        "unattributable": 87
+      },
+      "unattributable_pct": 66.9
+    }
+  },
+  "per_row_spread": {
+    "marker": {
+      "fabricating_rows": 13,
+      "min_unattributable_pct": 5.0,
+      "max_unattributable_pct": 100.0,
+      "rows_majority_unattributable": 4,
+      "rows_with_no_unattributable": 0
+    },
+    "mineru": {
+      "fabricating_rows": 24,
+      "min_unattributable_pct": 25.0,
+      "max_unattributable_pct": 100.0,
+      "rows_majority_unattributable": 11,
+      "rows_with_no_unattributable": 0
+    }
+  },
+  "strengths_with_any_fabrication": [
+    0.125,
+    0.15,
+    0.175,
+    0.2,
+    0.225,
+    0.25,
+    0.275,
+    0.3,
+    0.4,
+    0.55
+  ]
+}

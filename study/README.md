@@ -432,9 +432,12 @@ MinerU's brackets and refuted the common onset outright.
   glyph-level garbage (`anotherreado`, `ebit`, `edit`, `to`), while from 0.175 up through
   0.55 they settle into the same recurring fluent fragment (`of`, `operations`, `the`,
   `topic`, with `title`/`operation` substituted at two strengths). A count-only view of
-  this curve looks flat across 0.125–0.55; the words say the engine crosses into noise
-  first and into plausible-looking invention afterwards. `tests/test_onset_summary.py`
-  re-derives both token sets from the committed captures so this stays a measurement.
+  this curve looks flat across 0.125–0.55; the words say that *on this pair* the engine
+  crosses into noise first and into plausible-looking invention afterwards.
+  `tests/test_onset_summary.py` re-derives both token sets from the committed captures so
+  this stays a measurement. (Scoped to seed 3 on 2026-08-19: the same extraction on seeds
+  1 and 2 shows the progression does not generalize — seed 1's onset fabrication is
+  ordinary English. See "What kind of word gets fabricated" below.)
 - **Marker stays clean at all three strengths, which is the check this run had to pass.**
   Seed 3's Marker onset is bracketed at (0.275, 0.30] by the other bisect, so any
   fabrication at 0.125–0.175 would have contradicted it. None appeared. The two bisects
@@ -525,6 +528,83 @@ What the computation says that the prose could not:
 - The pre-existing hand-typed cross-seed table in "Third-seed check" was checked against
   the computed values and matches exactly. No drift had accumulated — the guard is against
   the next edit, not a repair of this one.
+
+### What kind of word gets fabricated: invention, or ink from the wrong layer? (2026-08-19)
+
+Every sweep number above is a count, and counts cannot say what the words *were*. Read as
+counts, Marker at 0.30 on seed 1 (75 fabricated) looks roughly six times worse than MinerU
+on the same page (13). Reading the words says something close to the opposite.
+
+The bleed-through corpus can settle this without a dictionary or a judgement call, because
+we wrote both layers of every page. For any fabricated token there is an exact, checkable
+question: **does this word appear on the page at all — in the real passage or in the ghost
+passage bled through it?** A word from the ghost layer is a transcription error (real ink,
+wrong layer). A word in neither passage was invented: nothing on that page could have
+produced it. [sweep/fabricated_words.py](sweep/fabricated_words.py) recomputes the
+fabricated tokens themselves from all seven capture sets, classifies each one that way, and
+writes [sweep/fabricated_words.json](sweep/fabricated_words.json);
+`tests/test_fabricated_words.py` re-derives it.
+
+Three choices in how it computes, each refusing a looser shape:
+
+- **The token lists must explain the already-published counts.** Every page's extracted
+  list is checked against the `*_fabricated` number in the results JSON committed beside
+  it, and a mismatch raises instead of being written out. The extraction mirrors
+  `score.py`'s `bag_delta` exactly, so this is a decomposition of the published numbers,
+  not a second opinion about them.
+- **A word in both passages is credited to neither.** Function words (`the`, `of`, `in`)
+  are in every passage here; assigning them to the ghost would inflate the benign bucket
+  and assigning them to invention would inflate the damning one. They get their own column
+  below and sit out both claims, which is why "invented" and "ghost-layer only" together
+  account for well under half of Marker's total.
+- **No lexicality classifier.** Separating glyph noise (`zanmislaj`) from fluent invention
+  (`operations`) needs a lexicon, and the one thing available here — an orthographic proxy
+  built from the corpus's own character bigrams — misread about a quarter of the tokens in
+  each direction (`topic` and `know` came out anomalous, `summity` and `anotherreado` came
+  out clean). It was tried and dropped rather than shipped looking authoritative.
+
+| Engine | Fabricated | Invented (nothing on the page) | Ghost-layer only | In both passages | Page-word surplus | Near-miss |
+| --- | --- | --- | --- | --- | --- | --- |
+| Marker | 238 | 55 (23.1%) | 60 | 103 | 13 | 7 |
+| MinerU | 130 | 87 (66.9%) | 6 | 35 | 1 | 1 |
+
+- **The two engines are not doing the same thing.** 77% of Marker's fabrication is words
+  that exist somewhere on the page — mostly the ghost layer it has started to read, plus
+  function words shared by both passages. 67% of MinerU's is words that exist nowhere on
+  it. That reframes the whole sweep: Marker's larger number is mostly *the ghost text being
+  transcribed*, and MinerU's smaller number is mostly *invention*. For a verification tool
+  this is the ordering that matters — a ghost word is at least supported by ink the witness
+  can also see, and an invented word is supported by nothing.
+- **Neither engine is clean, and the difference is proportion rather than kind.** Both
+  invent at least one word at every strength where they fabricate at all — 13 fabricating
+  rows for Marker, 24 for MinerU, zero of them free of invention. What separates them is
+  how much: Marker's invented fraction runs 5%–100% per row and is the majority in 4 of 13,
+  MinerU's runs 25%–100% and is the majority in 11 of 24. MinerU's floor never drops to
+  Marker's, so this is not an artifact of the high-strength pages.
+- **Marker's inventions are few but not absent, including where it fabricates almost
+  nothing.** Seed 2's entire Marker fabrication at 0.20/0.30/0.40 is `conception` and
+  `can` — two words, both invented, repeated unchanged at three strengths. A count-based
+  view calls that seed Marker's best behaviour on the study; by kind it is Marker's worst.
+
+**Correction to the section above.** That section reported, from seed 3 alone, that MinerU
+"crosses into noise first and into plausible-looking invention afterwards." Extracting the
+same tokens on the other two seeds refutes the general form of it. All three seeds cross at
+0.125, and the words MinerU invents at that shared onset are:
+
+| Seed | Invented at MinerU's onset (0.125) |
+| --- | --- |
+| 1 | `true`, `version`, `create`, `results` |
+| 2 | `2115m12n1`, `3d1`, `noq1`, `29104` |
+| 3 | `ebit`, `edit`, `anotherreado` |
+
+Seed 2 replicates seed 3 — its onset fabrication is four digit-bearing strings, not words.
+Seed 1 refutes it: at the same engine, same strength, the invented words are ordinary
+English. Refuting a general claim needs no lexicality classifier, which is why this one
+survives the absence of the proxy above — `true version create results` is not glyph noise
+under any reading. So the noise-then-invention progression is a property of *some passage
+pairs*, not of MinerU, and it joins Marker's onset on the list of things this study has
+shown to be passage-dependent. The seed-3 measurement itself stands and its test still
+guards it, now named for the seed it actually covers.
 
 ## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
 
