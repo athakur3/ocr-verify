@@ -1,0 +1,629 @@
+{
+  "seeds": [
+    {
+      "id": "seed1",
+      "real_passage": "conclusions",
+      "ghost_passage": "survey",
+      "marker_mode": null,
+      "truth_words_per_page": 104,
+      "truth_words_inherited_by_bisect": true,
+      "sources": [
+        "sweep_results.json",
+        "bisect_results.json"
+      ],
+      "strengths": [
+        0.0,
+        0.1,
+        0.125,
+        0.15,
+        0.175,
+        0.2,
+        0.3,
+        0.4,
+        0.55
+      ],
+      "omission_unrecorded_at": {
+        "marker": [
+          0.125,
+          0.15,
+          0.175
+        ],
+        "mineru": [
+          0.125,
+          0.15,
+          0.175
+        ]
+      },
+      "onsets": {
+        "marker": {
+          "crossed": true,
+          "last_clean": 0.15,
+          "first_fabricating": 0.175,
+          "words_at_first_fabricating": 24,
+          "bracket_width": 0.025
+        },
+        "mineru": {
+          "crossed": true,
+          "last_clean": 0.1,
+          "first_fabricating": 0.125,
+          "words_at_first_fabricating": 5,
+          "bracket_width": 0.025
+        }
+      },
+      "rows": [
+        {
+          "strength": 0.0,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 4,
+          "mineru_fabricated": 0,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.1,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 4,
+          "mineru_fabricated": 0,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.125,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": null,
+          "mineru_fabricated": 5,
+          "mineru_omitted": null
+        },
+        {
+          "strength": 0.15,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": null,
+          "mineru_fabricated": 5,
+          "mineru_omitted": null
+        },
+        {
+          "strength": 0.175,
+          "source": "bisect",
+          "marker_fabricated": 24,
+          "marker_omitted": null,
+          "mineru_fabricated": 15,
+          "mineru_omitted": null
+        },
+        {
+          "strength": 0.2,
+          "source": "coarse",
+          "marker_fabricated": 20,
+          "marker_omitted": 12,
+          "mineru_fabricated": 15,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.3,
+          "source": "coarse",
+          "marker_fabricated": 75,
+          "marker_omitted": 23,
+          "mineru_fabricated": 13,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.4,
+          "source": "coarse",
+          "marker_fabricated": 20,
+          "marker_omitted": 13,
+          "mineru_fabricated": 5,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.55,
+          "source": "coarse",
+          "marker_fabricated": 55,
+          "marker_omitted": 10,
+          "mineru_fabricated": 5,
+          "mineru_omitted": 0
+        }
+      ]
+    },
+    {
+      "id": "seed2",
+      "real_passage": "tides",
+      "ghost_passage": "instruments",
+      "marker_mode": "fast",
+      "truth_words_per_page": 115,
+      "truth_words_inherited_by_bisect": false,
+      "sources": [
+        "sweep2_results.json",
+        "sweep2_bisect_results.json"
+      ],
+      "strengths": [
+        0.0,
+        0.1,
+        0.125,
+        0.15,
+        0.175,
+        0.2,
+        0.3,
+        0.4,
+        0.55
+      ],
+      "omission_unrecorded_at": {
+        "marker": [],
+        "mineru": []
+      },
+      "onsets": {
+        "marker": {
+          "crossed": true,
+          "last_clean": 0.125,
+          "first_fabricating": 0.15,
+          "words_at_first_fabricating": 2,
+          "bracket_width": 0.025
+        },
+        "mineru": {
+          "crossed": true,
+          "last_clean": 0.1,
+          "first_fabricating": 0.125,
+          "words_at_first_fabricating": 4,
+          "bracket_width": 0.025
+        }
+      },
+      "rows": [
+        {
+          "strength": 0.0,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 37,
+          "mineru_fabricated": 0,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.1,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 37,
+          "mineru_fabricated": 0,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.125,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.15,
+          "source": "bisect",
+          "marker_fabricated": 2,
+          "marker_omitted": 0,
+          "mineru_fabricated": 3,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.175,
+          "source": "bisect",
+          "marker_fabricated": 2,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.2,
+          "source": "coarse",
+          "marker_fabricated": 2,
+          "marker_omitted": 36,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.3,
+          "source": "coarse",
+          "marker_fabricated": 2,
+          "marker_omitted": 36,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.4,
+          "source": "coarse",
+          "marker_fabricated": 2,
+          "marker_omitted": 36,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.55,
+          "source": "coarse",
+          "marker_fabricated": 19,
+          "marker_omitted": 41,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        }
+      ]
+    },
+    {
+      "id": "seed3",
+      "real_passage": "survey",
+      "ghost_passage": "tides",
+      "marker_mode": "fast",
+      "truth_words_per_page": 124,
+      "truth_words_inherited_by_bisect": false,
+      "sources": [
+        "sweep3_results.json",
+        "sweep3_bisect_results.json"
+      ],
+      "strengths": [
+        0.0,
+        0.1,
+        0.2,
+        0.225,
+        0.25,
+        0.275,
+        0.3,
+        0.4,
+        0.55
+      ],
+      "omission_unrecorded_at": {
+        "marker": [],
+        "mineru": []
+      },
+      "onsets": {
+        "marker": {
+          "crossed": true,
+          "last_clean": 0.275,
+          "first_fabricating": 0.3,
+          "words_at_first_fabricating": 14,
+          "bracket_width": 0.025
+        },
+        "mineru": {
+          "crossed": true,
+          "last_clean": 0.1,
+          "first_fabricating": 0.2,
+          "words_at_first_fabricating": 4,
+          "bracket_width": 0.1
+        }
+      },
+      "rows": [
+        {
+          "strength": 0.0,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 39,
+          "mineru_fabricated": 0,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.1,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 39,
+          "mineru_fabricated": 0,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.2,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 39,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.225,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.25,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.275,
+          "source": "bisect",
+          "marker_fabricated": 0,
+          "marker_omitted": 0,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.3,
+          "source": "coarse",
+          "marker_fabricated": 14,
+          "marker_omitted": 3,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.4,
+          "source": "coarse",
+          "marker_fabricated": 1,
+          "marker_omitted": 39,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        },
+        {
+          "strength": 0.55,
+          "source": "coarse",
+          "marker_fabricated": 0,
+          "marker_omitted": 39,
+          "mineru_fabricated": 4,
+          "mineru_omitted": 0
+        }
+      ]
+    }
+  ],
+  "shared_strengths": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.55
+  ],
+  "cross_seed_spread": {
+    "0": {
+      "marker": {
+        "words": [
+          0,
+          0,
+          0
+        ],
+        "words_range": 0,
+        "percent_of_page": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "percent_range": 0.0
+      },
+      "mineru": {
+        "words": [
+          0,
+          0,
+          0
+        ],
+        "words_range": 0,
+        "percent_of_page": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "percent_range": 0.0
+      }
+    },
+    "0.1": {
+      "marker": {
+        "words": [
+          0,
+          0,
+          0
+        ],
+        "words_range": 0,
+        "percent_of_page": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "percent_range": 0.0
+      },
+      "mineru": {
+        "words": [
+          0,
+          0,
+          0
+        ],
+        "words_range": 0,
+        "percent_of_page": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "percent_range": 0.0
+      }
+    },
+    "0.2": {
+      "marker": {
+        "words": [
+          20,
+          2,
+          0
+        ],
+        "words_range": 20,
+        "percent_of_page": [
+          19.2,
+          1.7,
+          0.0
+        ],
+        "percent_range": 19.2
+      },
+      "mineru": {
+        "words": [
+          15,
+          4,
+          4
+        ],
+        "words_range": 11,
+        "percent_of_page": [
+          14.4,
+          3.5,
+          3.2
+        ],
+        "percent_range": 11.2
+      }
+    },
+    "0.3": {
+      "marker": {
+        "words": [
+          75,
+          2,
+          14
+        ],
+        "words_range": 73,
+        "percent_of_page": [
+          72.1,
+          1.7,
+          11.3
+        ],
+        "percent_range": 70.4
+      },
+      "mineru": {
+        "words": [
+          13,
+          4,
+          4
+        ],
+        "words_range": 9,
+        "percent_of_page": [
+          12.5,
+          3.5,
+          3.2
+        ],
+        "percent_range": 9.3
+      }
+    },
+    "0.4": {
+      "marker": {
+        "words": [
+          20,
+          2,
+          1
+        ],
+        "words_range": 19,
+        "percent_of_page": [
+          19.2,
+          1.7,
+          0.8
+        ],
+        "percent_range": 18.4
+      },
+      "mineru": {
+        "words": [
+          5,
+          4,
+          4
+        ],
+        "words_range": 1,
+        "percent_of_page": [
+          4.8,
+          3.5,
+          3.2
+        ],
+        "percent_range": 1.6
+      }
+    },
+    "0.55": {
+      "marker": {
+        "words": [
+          55,
+          19,
+          0
+        ],
+        "words_range": 55,
+        "percent_of_page": [
+          52.9,
+          16.5,
+          0.0
+        ],
+        "percent_range": 52.9
+      },
+      "mineru": {
+        "words": [
+          5,
+          4,
+          4
+        ],
+        "words_range": 1,
+        "percent_of_page": [
+          4.8,
+          3.5,
+          3.2
+        ],
+        "percent_range": 1.6
+      }
+    }
+  },
+  "onset_ordering": {
+    "per_seed": {
+      "seed1": "mineru_first",
+      "seed2": "mineru_first",
+      "seed3": "mineru_first"
+    },
+    "unanimous": true,
+    "verdict": "mineru_first"
+  },
+  "onset_consistency": {
+    "marker": {
+      "brackets": {
+        "seed1": [
+          0.15,
+          0.175
+        ],
+        "seed2": [
+          0.125,
+          0.15
+        ],
+        "seed3": [
+          0.275,
+          0.3
+        ]
+      },
+      "provably_different_seed_pairs": [
+        {
+          "seeds": [
+            "seed1",
+            "seed2"
+          ],
+          "marker_mode_matched": false
+        },
+        {
+          "seeds": [
+            "seed1",
+            "seed3"
+          ],
+          "marker_mode_matched": false
+        },
+        {
+          "seeds": [
+            "seed2",
+            "seed3"
+          ],
+          "marker_mode_matched": true
+        }
+      ],
+      "consistent_with_one_onset": false,
+      "provably_different_with_mode_matched": [
+        [
+          "seed2",
+          "seed3"
+        ]
+      ]
+    },
+    "mineru": {
+      "brackets": {
+        "seed1": [
+          0.1,
+          0.125
+        ],
+        "seed2": [
+          0.1,
+          0.125
+        ],
+        "seed3": [
+          0.1,
+          0.2
+        ]
+      },
+      "provably_different_seed_pairs": [],
+      "consistent_with_one_onset": true,
+      "provably_different_with_mode_matched": []
+    }
+  }
+}

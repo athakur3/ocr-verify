@@ -395,6 +395,74 @@ pair not yet bisected. A bisect corpus
   and scored as total content loss. All five scorers were re-run after the refactor and
   reproduce their committed results JSONs byte-for-byte.
 
+### Cross-seed characterization: the onset claims, computed (2026-08-19)
+
+The five sections above were written one run at a time, and their cross-seed table was
+typed by hand out of the results JSONs. That is fine for narrative and weak for a claim:
+a transcription slip is invisible, and raw word counts are not comparable across seeds in
+the first place — the three passages are 104, 115 and 124 words, so "20 fabricated" means
+19.2% of the page on seed 1 and 16.1% on seed 3. [sweep/summarize_onsets.py](sweep/summarize_onsets.py)
+recomputes the consolidation from all six committed results JSONs into
+[sweep/onset_summary.json](sweep/onset_summary.json); `tests/test_onset_summary.py`
+re-derives it and fails if it drifts from the captures.
+
+Three deliberate choices in how it computes, each refusing a more flattering shape:
+
+- **An onset is a bracket, not a point.** A sampled ladder can only say the crossing lies
+  above the last clean strength and at or below the first fabricating one, so that is what
+  is reported: `(last clean, first fabricating]`. Fabricating at the lowest strength tested
+  leaves the lower bound *unknown*, not 0.0.
+- **Unrecorded is unknown, not zero.** Seed 1's bisect scorer recorded fabrication only, so
+  omission at 0.125/0.15/0.175 is `null` — a missing measurement rendered as 0 would read
+  as "no content lost," the flattering direction.
+- **Ordering is decided by disjoint intervals or not at all.** Overlapping brackets return
+  `unresolved_at_this_resolution` rather than picking whichever engine's number came first.
+
+| Seed | Passages (real / ghost) | Marker mode | Page words | Marker onset | MinerU onset |
+| --- | --- | --- | --- | --- | --- |
+| 1 | conclusions / survey | unrecorded (confound) | 104 | (0.15, 0.175] | (0.10, 0.125] |
+| 2 | tides / instruments | fast | 115 | (0.125, 0.15] | (0.10, 0.125] |
+| 3 | survey / tides | fast | 124 | (0.275, 0.30] | (0.10, 0.20] |
+
+**Cross-seed spread, normalized** (seeds 1, 2, 3 at the six strengths all three share;
+percentages are of each seed's own page):
+
+| Ghost strength | Marker % of page | Marker range | MinerU % of page | MinerU range |
+| --- | --- | --- | --- | --- |
+| 0.00 | 0.0, 0.0, 0.0 | 0.0 | 0.0, 0.0, 0.0 | 0.0 |
+| 0.10 | 0.0, 0.0, 0.0 | 0.0 | 0.0, 0.0, 0.0 | 0.0 |
+| 0.20 | 19.2, 1.7, 0.0 | 19.2 | 14.4, 3.5, 3.2 | 11.2 |
+| 0.30 | 72.1, 1.7, 11.3 | 70.4 | 12.5, 3.5, 3.2 | 9.3 |
+| 0.40 | 19.2, 1.7, 0.8 | 18.4 | 4.8, 3.5, 3.2 | 1.6 |
+| 0.55 | 52.9, 16.5, 0.0 | 52.9 | 4.8, 3.5, 3.2 | 1.6 |
+
+What the computation says that the prose could not:
+
+- **The ordering claim survives being made mechanical.** All three seeds return
+  `mineru_first`, and each does so because the two brackets are disjoint — on seed 2 they
+  merely touch (MinerU crosses at 0.125, Marker's last clean strength *is* 0.125), which
+  is still decisive for half-open intervals but is the thinnest of the three margins. This
+  is the same conclusion the per-seed sections argued, now derived from the numbers rather
+  than read off them.
+- **Marker's onset is provably passage-dependent, and not because of the mode confound.**
+  All three pairs of Marker brackets are disjoint, so no single onset strength fits the
+  three seeds — but seed 1's Marker mode was never recorded, so only the seed 2 / seed 3
+  pair isolates passage from mode. That pair is disjoint on its own ((0.125, 0.15] vs
+  (0.275, 0.30]), which is what makes "passage content moves Marker's onset" a measurement
+  here rather than an inference about a confound.
+- **MinerU is *consistent with* one onset — which is weaker than having one.** Its three
+  brackets all overlap, so no seed refutes a single common onset somewhere in
+  (0.10, 0.125]. That is not the same as demonstrating one, and seed 3's bracket is the
+  wide (0.10, 0.20] only because that seed's bisect was placed around 0.20–0.30 to chase
+  Marker. Narrowing seed 3 in the 0.10–0.20 range is the run that would actually test it.
+- **Normalizing does not rescue Marker and does not change MinerU.** Marker's between-seed
+  spread at 0.30 is 70.4 percentage points of the page — the passage-sensitivity is not an
+  artifact of comparing differently-sized pages. MinerU's spread still tightens with
+  strength (11.2 → 1.6 points), the same shape the raw counts showed.
+- The pre-existing hand-typed cross-seed table in "Third-seed check" was checked against
+  the computed values and matches exactly. No drift had accumulated — the guard is against
+  the next edit, not a repair of this one.
+
 ## Degradation-mode regression corpus (`study/degradation_modes/`, added 2026-08-17)
 
 The real-archival wild hunt (`study/wild/`) found two failure modes the 24-page corpus
@@ -434,8 +502,10 @@ material exposed, not measuring engine fabrication.
 - The sweep and bisect run one seed and one engine pass per strength level, and the
   mechanism itself is fully deterministic (no randomness in the construction; the main
   study already confirmed byte-identical repeat runs), so "seed" here means passage pair,
-  not RNG draw. Three passage pairs now confirm MinerU's fabrication onset (clean at
-  0.10, fabricating by 0.20) is a real, narrow, passage-independent property. Marker's
+  not RNG draw. Three passage pairs are all *consistent with* a single narrow MinerU
+  fabrication onset (clean at 0.10, fabricating by 0.20) — their onset brackets overlap,
+  so none of them refutes one, which is weaker than the "passage-independent property"
+  this section previously claimed and is what the computed summary supports. Marker's
   onset location and magnitude are not — a third pair with mode explicitly matched to the
   second still produced a materially different curve (see "Third-seed check" above),
   which rules out mode as the hidden variable but leaves passage-sensitivity unexplained.
@@ -452,3 +522,8 @@ material exposed, not measuring engine fabrication.
   the coarse sweep's "ghost-independent" Marker content-loss (title and a paragraph
   dropped at every coarse strength) vanishes at the finer strengths in between —
   present at every strength actually sampled, but not a strength-independent constant.
+  Both the ordering verdict and the per-engine "is one onset consistent with every seed"
+  question are now computed from disjoint onset brackets rather than argued in prose —
+  see "Cross-seed characterization" above, which also records that Marker's
+  passage-sensitivity holds between the two seeds whose Marker mode matches, so it is not
+  the mode confound wearing a different hat.
