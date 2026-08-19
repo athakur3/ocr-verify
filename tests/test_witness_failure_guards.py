@@ -355,6 +355,67 @@ def test_misspelling_engine_cannot_buy_a_hedge():
 
 
 # ---------------------------------------------------------------------------
+# Guard 3: confidently-wrong short misreads (study/wild/, 2026-08-19)
+# ---------------------------------------------------------------------------
+
+SHORT_TRUTH = (
+    "the delegation argued that the territory mattered to China just as much as "
+    "the coastal provinces and the commission recorded that claim without comment"
+)
+
+
+def test_confident_short_misread_is_not_counted_against_the_engine():
+    """The `study/wild/` failure this rule was built for: Tesseract read 'as'
+    as 'ae' at 95.6% confidence — above every threshold in Settings, so no
+    witness-quality guard fires — and the old four-character floor meant the
+    two tokens were never even compared, so the engine's correct 'as' was
+    counted unsupported."""
+    misread = SHORT_TRUTH.replace("just as much as", "just ae much ae")
+    result = compare_page(witness(misread, conf=95.0), vlm(SHORT_TRUTH))
+    assert result.witness_quality == "ok"  # the guards genuinely cannot see this
+    assert result.vlm_only == 0
+    assert result.divergence == 0.0
+    assert not kinds(result) & ACCUSATORY_KINDS
+
+
+def test_inserted_short_fabrication_is_still_accused():
+    """The attack the position constraint exists to stop. A run of short
+    fabricated words is *inserted*, so it has no 1:1 replace region to hide in
+    — even on a page whose witness text is full of short words the pool would
+    happily have donated under a position-free version of this rule."""
+    fabrication = "and so it is as we do at the end"
+    result = compare_page(witness(SHORT_TRUTH, conf=95.0), vlm(SHORT_TRUTH + " " + fabrication))
+    assert kinds(result) & ACCUSATORY_KINDS
+    assert result.vlm_only >= 5
+
+
+def test_short_fold_does_not_reach_across_the_page():
+    """Position-free absorption stays refused: the engine's short words here
+    are a fabricated run at the end of the page and the witness's matching
+    short shapes sit in the body, so nothing may be consumed."""
+    engine = SHORT_TRUTH.replace("as much as", "as much as") + " ae ie ue oe ee"
+    result = compare_page(witness(SHORT_TRUTH, conf=95.0), vlm(engine))
+    assert result.vlm_only == 5
+    assert kinds(result) & ACCUSATORY_KINDS
+
+
+def test_uncurated_short_substitutions_are_still_unsupported():
+    """Only the curated confusable pair folds. A one-edit substitution outside
+    it ('to' -> 'do') stays a disagreement, because widening the pair set is
+    exactly how this rule would start absorbing real content."""
+    swapped = SHORT_TRUTH.replace("mattered to China", "mattered do China")
+    result = compare_page(witness(SHORT_TRUTH, conf=95.0), vlm(swapped))
+    assert result.vlm_only == 1
+
+
+def test_long_fabrication_is_unaffected_by_the_short_rule():
+    fabrication = "officials quietly reconstructed the vandalised gauge records afterwards"
+    result = compare_page(witness(SHORT_TRUTH, conf=95.0), vlm(SHORT_TRUTH + " " + fabrication))
+    assert kinds(result) & ACCUSATORY_KINDS
+    assert result.vlm_only >= 6
+
+
+# ---------------------------------------------------------------------------
 # Hedge severity / note sanity
 # ---------------------------------------------------------------------------
 

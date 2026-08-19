@@ -37,7 +37,7 @@ from .model import (
     WitnessPage,
     Word,
 )
-from .normalize import near_miss, tokenize
+from .normalize import SHORT_TOKEN_FLOOR, near_miss, short_misread, tokenize
 
 # Token classifications produced by the bag level.
 _SUPPORTED = "supported"  # matched in place
@@ -368,6 +368,25 @@ def _classify(
                 v_class[j1 + k] = _SUPPORTED
                 pairs.append((i1 + k, j1 + k))
 
+    # Short misreads, resolved *positionally* before the position-free pool
+    # below ever sees them. The pool refuses to near-miss anything under
+    # SHORT_TOKEN_FLOOR for a good reason — at two or three characters an
+    # edit-distance match would let a short fabricated word be absorbed by any
+    # unmatched short witness word anywhere on the page. Inside a 1:1 `replace`
+    # region the position constraint does that job instead: the two tokens are
+    # the same word slot in the same sentence, so a single confusable-glyph
+    # substitution is one recognizer misreading one word, not invented content.
+    # This is the fix for the confidently-wrong-witness case in study/wild/
+    # ('as' read as 'ae' at 95.6% confidence — above every threshold in
+    # Settings, and never even compared under the old floor).
+    for tag, i1, i2, j1, j2 in opcodes:
+        if tag != "replace" or (i2 - i1) != (j2 - j1):
+            continue
+        for k in range(i2 - i1):
+            if short_misread(w_norms[i1 + k], v_norms[j1 + k]):
+                w_class[i1 + k] = _NOISE
+                v_class[j1 + k] = _NOISE
+
     # Each side's remaining leftovers are matched against the other side's,
     # ignoring position entirely — this is the reordering-tolerant step.
     residual_w = Counter(w_norms[i] for i in range(len(w_norms)) if not w_class[i])
@@ -401,7 +420,7 @@ def _consume(tok: str, avail: Counter[str], buckets: dict[int, set[str]]) -> str
     if avail.get(tok, 0) > 0:
         _spend(tok, avail, buckets)
         return _DISPLACED
-    if len(tok) >= 4:
+    if len(tok) >= SHORT_TOKEN_FLOOR:
         # ±2 because a single m/rn fold shifts length by one, and a word can
         # carry two of them ('instrurnents', 'circurnstances').
         for length in range(len(tok) - 2, len(tok) + 3):

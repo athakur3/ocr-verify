@@ -299,6 +299,88 @@ This is real-archival document **2 of the ≥3** target in `GOALS.md`'s C1 check
 (2026-08-30). Both documents hand-verified at zero fabrication; one more needed to close
 that gate item.
 
+## Follow-up: witness fix (b) landed — a positional short-misread rule
+
+*2026-08-19. The other half of the (a)/(b) split above, and the case both previous
+follow-ups diagnosed and declined to fix: `"as"` read as `"ae"` at 95.6% confidence,
+excluded from comparison one step before any confidence gate could see it, because
+`near_miss()` refuses tokens under four characters.*
+
+**Why the obvious fix is wrong.** Simply lowering the floor makes every short word a
+near-miss of every other: at two characters, edit-distance-1 makes `as`, `at`, `an` and
+`is` mutually interchangeable. That matters because the place the floor is enforced —
+`_consume()` in `align.py` — matches *position-free*, out of a pool of every unmatched
+token on the page. A short fabricated word could then be absorbed by any unmatched short
+witness word anywhere on the page, which is a far worse failure than the false positive
+being fixed.
+
+**What was built instead.** The constraint the pool cannot supply is position, so the fix
+supplies it somewhere else. A new pass in `_classify()` walks the alignment's `replace`
+opcodes and considers only regions that are 1:1 (same token count on both sides). Inside
+such a region the two tokens at the same offset are literally the same word slot in the
+same sentence, so the position constraint does the work the length floor was doing. Such
+a pair folds to witness noise when `normalize.short_misread()` accepts it:
+
+- same length after `ocr_skeleton()` folding, both at least two characters (a
+  one-character token has nothing left to constrain the match, so it is refused);
+- exactly one differing character;
+- that character pair drawn from `_SHORT_CONFUSABLE`, which is **evidence-only**: a pair
+  goes in when a hand-verified document in this directory shows a witness making it,
+  never because it seems plausible. Today that set is one pair, `e`/`s`.
+
+The position-free pool is unchanged — it still refuses everything under the floor. Inserted
+text, reordered text, and any region where the two sides differ in length cannot reach the
+new rule at all.
+
+**Measured on this directory's two documents** (same PDFs, same Marker output, same DPI
+200, only the code differing):
+
+| | before | after |
+|---|---|---|
+| `what-about-tibet` page 2 | 13.4% divergence, 5 findings | 12.7%, 4 findings |
+| `what-about-tibet` page 3 | 10.7% divergence, 2 findings | 10.1%, 2 findings |
+| `what-about-tibet` overall | 126 of 956 unsupported (13.18%) | 122 of 956 (12.76%) |
+| `are-the-philippines-really-free` | 84 of 4,140 (2.03%) | unchanged, byte-identical |
+
+Four folds fired across the whole corpus, and instrumenting the rule shows every one of
+them is a genuine `e`/`s` confusion on real source text:
+
+```
+witness 'ae'  engine 'as'      witness 'hae' engine 'has'
+witness 'wae' engine 'was'     witness 'the' engine 'ths'
+```
+
+(The last is the mirror case — Marker wrote `ths`, Tesseract read `the` — and is folded
+for the same reason: one glyph, one slot, two recognizers.) The false-positive finding
+this whole thread started from, `"China.Just as much as"` against the witness's
+`"China just a much ae"`, is gone from
+[`what-about-tibet-findings.json`](what-about-tibet-findings.json); both report artifacts
+in this directory were regenerated against the new code.
+
+**Honest size of the win.** Four words out of 126 false positives on document 1 — a 3%
+reduction, and all four pages are still flagged. This fix does exactly what it was scoped
+to do and no more; the remaining 122 are other witness failure modes (the hand-lettered
+cover, split hyphenations, heavier mimeograph damage) that neither (a) nor (b) addresses.
+The value is that a named, reproduced, twice-diagnosed defect is now closed with a rule
+narrow enough to defend, rather than carried forward as a known-wrong number.
+
+**Red-team pass** (the backlog made this a condition of landing, since it is a
+matching-rule change). Five adversarial cases are pinned in
+`tests/test_witness_failure_guards.py` under "Guard 3": the motivating misread stops being
+an accusation; an *inserted* run of short fabricated words is still accused; short engine
+tokens cannot reach across the page to be absorbed by witness shapes elsewhere; a
+one-edit substitution outside the curated pair (`to` → `do`) stays unsupported; and a
+long fabrication is unaffected. `normalize.short_misread()` has its own eight unit tests.
+Gates: 132 tests green, both study scorers hold precision=1.00 recall=1.00 with
+`results-corpus.json`/`results-pages.json` byte-identical.
+
+One known and accepted cost, recorded rather than discovered later: because the rule is
+purely positional and lexical, an engine emitting `eat` in the exact slot where the
+witness read `sat` folds to noise. That is a single-word transcription disagreement, not
+invented content, and single-word substitutions already sit below the run threshold that
+builds a finding — but it is the shape of thing that widening `_SHORT_CONFUSABLE` would
+multiply, which is why the set is evidence-gated.
+
 ## Next steps (not done this block)
 
 - More wild documents, especially ones with confirmed bleed-through (the original target
@@ -310,10 +392,13 @@ that gate item.
   word-level scoring; no download spent, all screening was via archive.org's page-preview
   JPEGs) and ones with cleaner typefaces to isolate whether the false-positive driver here
   is specifically stylized/hand-lettered text, ink degradation, or both.
-- Witness fix (b): the `near_miss()` short-token floor relaxation for the confident-
-  short-misread case ("as"→"ae"). Riskier than (a) — the floor exists to stop short words
-  matching spuriously — and needs its own red-team pass, not just the existing
-  `tests/test_witness_failure_guards.py` suite.
+- ~~Witness fix (b): the `near_miss()` short-token floor relaxation.~~ **Done
+  2026-08-19** — see the follow-up section above. Landed as a positional rule rather than
+  a floor relaxation, precisely because relaxing the floor in the position-free pool was
+  the unsafe version.
+- Grow `_SHORT_CONFUSABLE` only from evidence: each further hand-verified document in this
+  directory should be checked for short misreads the rule does not yet cover, and pairs
+  added one at a time with the ablation re-run.
 - Pages 2–4's remaining unhedged false positives on this same document are not yet
   individually diagnosed; worth a look before assuming (a) and (b) are the whole story for
   this document.

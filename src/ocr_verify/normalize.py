@@ -117,6 +117,44 @@ def ocr_skeleton(tok: str) -> str:
     return tok.translate(_CONFUSABLE_CHARS)
 
 
+# Glyph pairs this project has actually observed a witness confuse on a
+# hand-verified real document, below the length where edit distance is safe.
+# Both entries come from `study/wild/`: Tesseract read "as" as "ae" (twice, at
+# 95.6% and 86.2% confidence) and "the" as "ths" on the mimeographed body pages
+# of the Tibet pamphlet. The set is deliberately evidence-only — a pair is added
+# when a hand-verified document shows it, never because it seems plausible,
+# because every pair widens what a short fabricated word can be absorbed by.
+_SHORT_CONFUSABLE = frozenset({frozenset("es")})
+
+# Below this length, `near_miss` refuses to compare: at two or three characters
+# edit-distance-1 makes 'as', 'at', 'an' and 'is' mutual near-misses, so any
+# short word could absorb any other out of the position-free residual pool.
+SHORT_TOKEN_FLOOR = 4
+
+
+def short_misread(a: str, b: str) -> bool:
+    """True if two *short* tokens differ by one confusable glyph.
+
+    The strict counterpart to `near_miss` for tokens under `SHORT_TOKEN_FLOOR`,
+    and only safe with a position constraint supplied by the caller (see
+    `align._classify`): same length, exactly one differing character, and that
+    character pair drawn from `_SHORT_CONFUSABLE`. Shape folds that
+    `ocr_skeleton` already performs are accepted at any length, since those
+    fold both readings onto one canonical form and cannot invent an agreement.
+    """
+    if a == b:
+        return False
+    if max(len(a), len(b)) >= SHORT_TOKEN_FLOOR or min(len(a), len(b)) < 2:
+        return False
+    skel_a, skel_b = ocr_skeleton(a), ocr_skeleton(b)
+    if skel_a == skel_b:
+        return True
+    if len(skel_a) != len(skel_b):
+        return False
+    diffs = [frozenset((x, y)) for x, y in zip(skel_a, skel_b) if x != y]
+    return len(diffs) == 1 and diffs[0] in _SHORT_CONFUSABLE
+
+
 def near_miss(a: str, b: str) -> bool:
     """True if two normalized tokens differ only as OCR noise, not as content.
 
@@ -131,7 +169,7 @@ def near_miss(a: str, b: str) -> bool:
         return True
     if abs(len(skel_a) - len(skel_b)) > 1:
         return False
-    if max(len(a), len(b)) < 4:
+    if max(len(a), len(b)) < SHORT_TOKEN_FLOOR:
         return False
     return _edit_distance_within_1(skel_a, skel_b)
 

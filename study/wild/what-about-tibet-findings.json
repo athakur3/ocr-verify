@@ -1,7 +1,7 @@
 {
   "tool": "ocr-verify",
   "version": "0.1.0",
-  "generated": "2026-08-17 13:32 UTC",
+  "generated": "2026-08-19 00:36 UTC",
   "pdf": "study/wild/downloads/what-about-tibet.pdf",
   "engine_output": "study/wild/marker_out/what-about-tibet/what-about-tibet.md",
   "engine_label": "marker",
@@ -65,11 +65,11 @@
     },
     {
       "page": 2,
-      "divergence": 0.133758,
+      "divergence": 0.127389,
       "vlm_words": 314,
       "witness_words": 287,
-      "unsupported_words": 42,
-      "dropped_words": 15,
+      "unsupported_words": 40,
+      "dropped_words": 13,
       "ink_ratio": 0.129728,
       "witness_quality": "ok",
       "verified": true,
@@ -121,20 +121,6 @@
           "severity": 0.4,
           "tokens": 3,
           "bbox": [
-            39,
-            287,
-            1466,
-            455
-          ],
-          "vlm_text": "China.Just as much as",
-          "witness_text": "China just a much ae",
-          "note": ""
-        },
-        {
-          "kind": "unsupported_text",
-          "severity": 0.4,
-          "tokens": 3,
-          "bbox": [
             31,
             1344,
             1396,
@@ -148,11 +134,11 @@
     },
     {
       "page": 3,
-      "divergence": 0.107463,
+      "divergence": 0.101493,
       "vlm_words": 335,
       "witness_words": 316,
-      "unsupported_words": 36,
-      "dropped_words": 17,
+      "unsupported_words": 34,
+      "dropped_words": 15,
       "ink_ratio": 0.145128,
       "witness_quality": "ok",
       "verified": true,

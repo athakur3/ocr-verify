@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from ocr_verify.normalize import (
     near_miss,
+    short_misread,
     normalize_token,
     ocr_skeleton,
     split_pages,
@@ -81,6 +82,50 @@ class TestNearMiss:
     def test_skeleton_is_symmetric_and_stable(self):
         assert ocr_skeleton("barorneter") == ocr_skeleton("barometer")
         assert ocr_skeleton("plain") == ocr_skeleton("plain")
+
+
+class TestShortMisread:
+    """The under-the-floor rule. Safe only because `align._classify` calls it
+    with a position constraint; everything here is about how narrow it is."""
+
+    def test_the_wild_corpus_cases(self):
+        # study/wild/: Tesseract read "as" as "ae" at 95.6% confidence, and
+        # "the" as "ths", on the mimeographed body pages.
+        assert short_misread("as", "ae")
+        assert short_misread("the", "ths")
+
+    def test_only_curated_glyph_pairs_count(self):
+        # One edit apart, but s/t and n/s are not confusable pairs — folding
+        # these would make every short function word interchangeable.
+        assert not short_misread("as", "at")
+        assert not short_misread("an", "as")
+        assert not short_misread("to", "do")
+        assert not short_misread("cat", "car")
+
+    def test_two_differences_never_count(self):
+        assert not short_misread("as", "ee")
+
+    def test_single_characters_are_refused(self):
+        # 'a' vs 'e' is one edit in a one-character word: nothing is left to
+        # constrain the match, so the rule declines.
+        assert not short_misread("a", "e")
+        assert not short_misread("i", "l")
+
+    def test_length_must_match(self):
+        assert not short_misread("as", "a")
+        assert not short_misread("the", "th")
+
+    def test_floor_is_an_upper_bound_here(self):
+        # Four characters and up is `near_miss`'s territory, not this rule's.
+        assert not short_misread("hats", "hate")
+        assert near_miss("affairs", "affaire")
+
+    def test_skeleton_folds_still_apply(self):
+        assert short_misread("0n", "on")
+        assert short_misread("1s", "is")
+
+    def test_identical_tokens_are_not_a_misread(self):
+        assert not short_misread("as", "as")
 
 
 class TestSplitPages:
